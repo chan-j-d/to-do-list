@@ -3,6 +3,8 @@ import java.util.List;
 
 public class TaskBlock {
 
+    public static final String TITLE_SEPARATOR = "=============";
+
     private String blockName;
     private List<Task> tasks;
 
@@ -17,7 +19,7 @@ public class TaskBlock {
 
     @Override
     public String toString() {
-        return blockName +
+        return blockName + "\n" + TITLE_SEPARATOR +
                 tasks.stream().reduce("",
                         (x, y) -> x + "\n" + y,
                         (x, y) -> x + "\n" + y);
