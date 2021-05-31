@@ -11,6 +11,10 @@ public class TaskBlock {
         tasks = new ArrayList<>();
     }
 
+    public void addTask(String task) {
+        this.tasks.add(new Task(task));
+    }
+
     @Override
     public String toString() {
         return blockName +

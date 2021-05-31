@@ -16,6 +16,10 @@ public class TaskList {
         }
     }
 
+    public void addTask(String day, String task) {
+        blocks.get(day).addTask(task);
+    }
+
     @Override
     public String toString() {
         return blocks.values().stream().reduce("", (x, y) -> x + "\n" + y, (x, y) -> x + "\n" + y);
