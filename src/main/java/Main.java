@@ -13,8 +13,9 @@ public class Main {
         while (!input.equals("exit")) {
             String[] details = input.replaceAll("\\s+", " ").split(" ");
             String day = details[0];
-            String task = String.join(" ", Arrays.copyOfRange(details, 1, details.length));
-            taskList.addTask(day, task);
+            String taskString = String.join(" ", Arrays.copyOfRange(details, 1, details.length));
+            taskList.addTask(day, taskString);
+            System.out.println(taskList);
             input = scanner.next();
         }
 
