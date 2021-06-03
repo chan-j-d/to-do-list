@@ -15,6 +15,12 @@ public class TaskBlock {
         tasks = new ArrayList<>();
     }
 
+    public TaskBlock(String blockName, List<Task> tasks) {
+        this.blockName = blockName;
+        this.tasks = new ArrayList<>();
+        this.tasks.addAll(tasks);
+    }
+
     public void addTask(String task) {
         this.tasks.add(new Task(task));
     }

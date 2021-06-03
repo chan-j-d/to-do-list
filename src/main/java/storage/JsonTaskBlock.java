@@ -6,6 +6,7 @@ import task.TaskBlock;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class JsonTaskBlock {
 
@@ -21,7 +22,8 @@ public class JsonTaskBlock {
     }
 
     public TaskBlock toJavaType() {
-        return new TaskBlock(blockHeader, tasks);
+        return new TaskBlock(blockHeader,
+                tasks.stream().map(jsonTask -> jsonTask.toJavaType()).collect(Collectors.toList()));
     }
 
 }
