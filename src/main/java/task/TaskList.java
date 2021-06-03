@@ -6,14 +6,21 @@ import java.util.Map;
 
 public class TaskList {
 
-    Map<String, TaskBlock> blocks;
+    private final Map<String, TaskBlock> blocks;
 
-    List<String> days = List.of("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
+    private static final List<String> DAYS = List.of("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
 
     public TaskList() {
         blocks = new LinkedHashMap<>();
-        for (String day : days) {
+        for (String day : DAYS) {
             blocks.put(day, new TaskBlock(day));
+        }
+    }
+
+    public TaskList(Map<String, TaskBlock> blocks) {
+        this.blocks = new LinkedHashMap<>();
+        for (String key : blocks.keySet()) {
+            this.blocks.put(key, blocks.get(key));
         }
     }
 
