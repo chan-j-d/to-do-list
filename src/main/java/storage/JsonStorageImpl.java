@@ -1,5 +1,7 @@
 package storage;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import task.TaskList;
 
@@ -14,6 +16,7 @@ public class JsonStorageImpl implements Storage {
 
     public JsonStorageImpl() {
         objectMapper = new ObjectMapper();
+        objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
     }
 
     public boolean save(TaskList list, Path path) {
@@ -25,18 +28,19 @@ public class JsonStorageImpl implements Storage {
             isSaved = true;
         } catch (IOException ioe) {
             isSaved = false;
-            System.err.println(ioe);
+            ioe.printStackTrace();
         }
         return isSaved;
     }
 
     public Optional<TaskList> load(Path path) {
-        Optional<TaskList> optionalTaskList = Optional.empty();
+        Optional<TaskList> optionalTaskList;
         try {
             JsonTaskList jsonTaskList = objectMapper.readValue(Paths.get(path.toString()).toFile(), JsonTaskList.class);
             optionalTaskList = Optional.of(jsonTaskList.toJavaType());
         } catch (IOException ioe) {
-            System.err.println(ioe);
+            ioe.printStackTrace();
+            optionalTaskList = Optional.empty();
         }
         return optionalTaskList;
     }

@@ -13,7 +13,6 @@ import java.util.Scanner;
 
 public class ToDoList {
 
-    private static final String MESSAGE_ERROR_HEADER = "Error: ";
     private static final String SAVEFILE_NAME = "todolist-save";
     private static final Path DEFAULT_PATH = Paths.get(SAVEFILE_NAME);
 
@@ -38,14 +37,16 @@ public class ToDoList {
         try {
             Pair<String, String> inputPair = parser.parse(input);
             taskList.addTask(inputPair.getFirst(), inputPair.getSecond());
+            storage.save(taskList, saveDirectory);
             System.out.println(taskList);
         } catch (ParseException pe){
-            System.err.println(MESSAGE_ERROR_HEADER + pe.getMessage());
+            pe.printStackTrace();
         }
     }
 
     public static void main(String[] args) {
         ToDoList toDoList = new ToDoList();
+        System.out.println(toDoList.taskList);
         Scanner scanner = new Scanner(System.in);
         scanner.useDelimiter("\n");
         String input = scanner.next();
