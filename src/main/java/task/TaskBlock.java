@@ -25,6 +25,14 @@ public class TaskBlock {
         this.tasks.add(new Task(task));
     }
 
+    public String getBlockName() {
+        return blockName;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
     @Override
     public String toString() {
         return blockName + "\n" + TITLE_SEPARATOR +

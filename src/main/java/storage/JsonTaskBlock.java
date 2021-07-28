@@ -26,4 +26,9 @@ public class JsonTaskBlock {
                 tasks.stream().map(jsonTask -> jsonTask.toJavaType()).collect(Collectors.toList()));
     }
 
+    public static JsonTaskBlock convertToJson(TaskBlock taskBlock) {
+        return new JsonTaskBlock(taskBlock.getBlockName(),
+                taskBlock.getTasks().stream().map(task -> JsonTask.convertToJson(task)).collect(Collectors.toList()));
+    }
+
 }

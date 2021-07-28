@@ -17,4 +17,8 @@ public class JsonTask {
         return new Task(description);
     }
 
+    public static JsonTask convertToJson(Task task) {
+        return new JsonTask(task.getDescription());
+    }
+
 }
