@@ -18,7 +18,7 @@ public class JsonTaskBlock {
             @JsonProperty("tasks") List<JsonTask> tasks) {
         this.blockHeader = blockHeader;
         this.tasks = new ArrayList<>();
-        tasks.addAll(tasks);
+        this.tasks.addAll(tasks);
     }
 
     public TaskBlock toJavaType() {
@@ -29,6 +29,11 @@ public class JsonTaskBlock {
     public static JsonTaskBlock convertToJson(TaskBlock taskBlock) {
         return new JsonTaskBlock(taskBlock.getBlockName(),
                 taskBlock.getTasks().stream().map(task -> JsonTask.convertToJson(task)).collect(Collectors.toList()));
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Json Task Block (%s): %s", blockHeader, tasks);
     }
 
 }

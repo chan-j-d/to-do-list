@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import task.TaskBlock;
 import task.TaskList;
 
-import java.util.AbstractMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -33,6 +32,9 @@ public class JsonTaskList {
                 .collect(Collectors.toMap(Map.Entry::getKey, entry -> JsonTaskBlock.convertToJson(entry.getValue()))));
     }
 
-
+    @Override
+    public String toString() {
+        return "Json Task List: \n" + blocks;
+    }
 
 }

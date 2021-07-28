@@ -1,6 +1,5 @@
 package storage;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import task.Task;
 
@@ -8,7 +7,6 @@ public class JsonTask {
 
     private final String description;
 
-    @JsonCreator
     public JsonTask(@JsonProperty("description") String description) {
         this.description = description;
     }
@@ -19,6 +17,11 @@ public class JsonTask {
 
     public static JsonTask convertToJson(Task task) {
         return new JsonTask(task.getDescription());
+    }
+
+    @Override
+    public String toString() {
+        return "Json Task: " + description;
     }
 
 }
