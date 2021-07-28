@@ -8,7 +8,7 @@ public class TaskList {
 
     private final Map<String, TaskBlock> blocks;
 
-    private static final List<String> DAYS = List.of("Monday", "Tuesday", "Wednesday", "Thursday",
+    public static final List<String> DAYS = List.of("Monday", "Tuesday", "Wednesday", "Thursday",
             "Friday", "Saturday", "Sunday");
 
     public TaskList() {

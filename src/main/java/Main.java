@@ -13,9 +13,6 @@ public class Main {
         scanner.useDelimiter("\n");
         String input = scanner.next();
         while (!input.equals("exit")) {
-            String[] details = input.replaceAll("\\s+", " ").split(" ");
-            String day = details[0];
-            String taskString = String.join(" ", Arrays.copyOfRange(details, 1, details.length));
             taskList.addTask(day, taskString);
             System.out.println(taskList);
             input = scanner.next();
