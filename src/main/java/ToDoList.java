@@ -11,8 +11,8 @@ import java.util.Scanner;
 
 public class ToDoList {
 
-    private static final String SAVE_FILE_NAME = "todolist-save";
-    private static final Path DEFAULT_PATH = Paths.get(SAVE_FILE_NAME);
+    private static final String SAVEFILE_NAME = "todolist-save";
+    private static final Path DEFAULT_PATH = Paths.get(SAVEFILE_NAME);
 
     private final Storage storage;
     private final Parser parser;
