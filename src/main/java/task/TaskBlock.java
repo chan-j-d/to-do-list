@@ -6,6 +6,7 @@ import java.util.List;
 public class TaskBlock {
 
     public static final String TITLE_SEPARATOR = "=============";
+    private static final int STARTING_COUNT = 1;
 
     private String blockName;
     private List<Task> tasks;
@@ -33,12 +34,39 @@ public class TaskBlock {
         return tasks;
     }
 
+    public Task getTask(int index) {
+        return tasks.get(adjustIndex(index));
+    }
+
+    public void completeTask(int index) {
+        getTask(index).markDone();
+    }
+
+    public void uncompleteTask(int index) {
+        getTask(index).markUndone();
+    }
+
+    public boolean deleteTask(int index) {
+        if (index < STARTING_COUNT || index >= tasks.size()) {
+            return false;
+        }
+        tasks.remove(adjustIndex(index));
+        return true;
+    }
+
+    private static int adjustIndex(int index) {
+        return index - 1;
+    }
+
     @Override
     public String toString() {
-        return blockName + "\n" + TITLE_SEPARATOR +
-                tasks.stream().reduce("",
-                        (x, y) -> x + "\n" + y,
-                        (x, y) -> x + "\n" + y);
+        StringBuilder sb = new StringBuilder();
+        sb.append(blockName + "\n" + TITLE_SEPARATOR);
+        int count = STARTING_COUNT;
+        for (Task task : tasks) {
+            sb.append("\n" + count + ": " + task);
+        }
+        return sb.toString();
     }
 
 }
