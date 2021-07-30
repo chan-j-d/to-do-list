@@ -1,3 +1,5 @@
+import command.Command;
+import command.EmptyCommand;
 import parser.ParseException;
 import parser.Parser;
 import storage.JsonStorageImpl;
@@ -31,15 +33,22 @@ public class ToDoList {
         this.saveDirectory = path;
     }
 
-    public void readInput(String input) {
+    public Command<TaskList> readInput(String input) {
         try {
-            Pair<String, String> inputPair = parser.parse(input);
-            taskList.addTask(inputPair.getFirst(), inputPair.getSecond());
-            storage.save(taskList, saveDirectory);
-            System.out.println(taskList);
+            return parser.parse(input);
         } catch (ParseException pe){
             pe.printStackTrace();
         }
+        return new EmptyCommand();
+    }
+
+    public void runCommand(Command<TaskList> command) {
+        command.run(taskList);
+        storage.save(taskList, saveDirectory);
+    }
+
+    public void displayOutput() {
+        System.out.println(taskList);
     }
 
     public static void main(String[] args) {
@@ -49,7 +58,9 @@ public class ToDoList {
         scanner.useDelimiter("\n");
         String input = scanner.next();
         while (!input.equals("exit")) {
-            toDoList.readInput(input);
+            Command<TaskList> command = toDoList.readInput(input);
+            toDoList.runCommand(command);
+            toDoList.displayOutput();
             input = scanner.next();
         }
     }
