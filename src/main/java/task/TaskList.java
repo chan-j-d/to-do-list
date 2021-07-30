@@ -8,12 +8,10 @@ public class TaskList {
 
     private final Map<String, TaskBlock> blocks;
 
-    public static final List<String> DAYS = List.of("monday", "tuesday", "wednesday", "thursday",
-            "friday", "saturday", "sunday");
 
     public TaskList() {
         blocks = new LinkedHashMap<>();
-        for (String day : DAYS) {
+        for (String day : BlockNames.BLOCK_NAMES) {
             blocks.put(day, new TaskBlock(day));
         }
     }
