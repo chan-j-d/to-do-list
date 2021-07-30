@@ -47,10 +47,6 @@ public class Parser {
         }
     }
 
-    private boolean isValidCommandType(String command) {
-        return CommandTypes.isValidCommandType(command);
-    }
-
     private boolean isValidBlockName(String blockName) {
         return BlockNames.isValidBlockName(blockName);
     }
