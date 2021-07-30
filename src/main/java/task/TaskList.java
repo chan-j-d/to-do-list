@@ -29,6 +29,18 @@ public class TaskList {
         blocks.get(day).addTask(task);
     }
 
+    public void completeTask(String blockName, int index) {
+        blocks.get(blockName).completeTask(index);
+    }
+
+    public void uncompleteTask(String blockName, int index) {
+        blocks.get(blockName).uncompleteTask(index);
+    }
+
+    public void deleteTask(String blockName, int index) {
+        blocks.get(blockName).deleteTask(index);
+    }
+
     public Map<String, TaskBlock> getBlocksMap() {
         return this.blocks;
     }
