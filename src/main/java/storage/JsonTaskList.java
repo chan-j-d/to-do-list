@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static task.TaskList.DAYS;
+import static task.BlockNames.BLOCK_NAMES;
 
 public class JsonTaskList {
 
@@ -23,7 +23,7 @@ public class JsonTaskList {
 
     public TaskList toJavaType() {
         Map<String, TaskBlock> nonJsonBlocks = new LinkedHashMap<>();
-        for (String day : DAYS) {
+        for (String day : BLOCK_NAMES) {
             nonJsonBlocks.put(day, blocks.get(day).toJavaType());
         }
         return new TaskList(nonJsonBlocks);

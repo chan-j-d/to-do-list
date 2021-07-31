@@ -47,14 +47,14 @@ public class TaskBlock {
     }
 
     public boolean deleteTask(int index) {
-        if (index < STARTING_COUNT || index >= tasks.size()) {
-            return false;
-        }
-        tasks.remove(adjustIndex(index));
-        return true;
+        Task taskToRemove = getTask(index);
+        return tasks.remove(taskToRemove);
     }
 
-    private static int adjustIndex(int index) {
+    private int adjustIndex(int index) {
+        if (index < STARTING_COUNT || index > tasks.size()) {
+            throw new IndexOutOfBoundsException("Index is out of bounds!");
+        }
         return index - 1;
     }
 
