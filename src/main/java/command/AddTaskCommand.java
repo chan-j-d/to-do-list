@@ -16,4 +16,13 @@ public class AddTaskCommand implements Command<TaskList> {
         list.addTask(day, taskDescription);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof AddTaskCommand)) {
+            return false;
+        }
+        AddTaskCommand other = (AddTaskCommand) o;
+        return day.equals(other.day)
+                && taskDescription.equals(other.taskDescription);
+    }
 }

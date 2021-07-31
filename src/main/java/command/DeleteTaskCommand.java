@@ -16,4 +16,13 @@ public class DeleteTaskCommand implements Command<TaskList> {
         taskList.deleteTask(day, index);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof DeleteTaskCommand)) {
+            return false;
+        }
+        DeleteTaskCommand other = (DeleteTaskCommand) o;
+        return index == other.index
+                && day.equals(other.day);
+    }
 }
