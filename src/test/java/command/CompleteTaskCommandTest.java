@@ -21,9 +21,10 @@ public class CompleteTaskCommandTest extends CommandTestTemplate {
     }
 
     @Test
-    public void run_indexAlreadyCompletene_noChange() {
+    public void run_indexAlreadyComplete_noChange() {
         CompleteTaskCommand command = new CompleteTaskCommand("tuesday", 1);
         Task expectedTask = new Task(STRING_DESCRIPTION_THREE);
+        expectedTask.markDone();
 
         command.run(modelTaskList);
         Assertions.assertEquals(expectedTask, modelTaskList.getTask("tuesday", 1));
