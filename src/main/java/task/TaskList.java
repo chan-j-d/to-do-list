@@ -1,7 +1,6 @@
 package task;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 public class TaskList {
@@ -39,13 +38,31 @@ public class TaskList {
         blocks.get(blockName).deleteTask(index);
     }
 
+    public Task getTask(String blockName, int index) {
+        return blocks.get(blockName).getTask(index);
+    }
+
     public Map<String, TaskBlock> getBlocksMap() {
         return this.blocks;
+    }
+
+    public int getNumTasksInBlock(String blockName) {
+        return blocks.get(blockName).getNumTasks();
     }
 
     @Override
     public String toString() {
         return blocks.values().stream().reduce("", (x, y) -> x + "\n\n" + y, (x, y) -> x + "\n\n" + y);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof TaskList)) {
+            return false;
+        }
+
+        TaskList list = (TaskList) o;
+        return blocks.equals(list.blocks);
     }
 
 }

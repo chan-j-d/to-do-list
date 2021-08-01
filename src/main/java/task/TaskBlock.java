@@ -1,6 +1,7 @@
 package task;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TaskBlock {
@@ -51,6 +52,10 @@ public class TaskBlock {
         return tasks.remove(taskToRemove);
     }
 
+    public int getNumTasks() {
+        return tasks.size();
+    }
+
     private int adjustIndex(int index) {
         if (index < STARTING_COUNT || index > tasks.size()) {
             throw new IndexOutOfBoundsException("Index is out of bounds!");
@@ -69,4 +74,19 @@ public class TaskBlock {
         return sb.toString();
     }
 
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(new Object[] {blockName, tasks});
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof TaskBlock)) {
+            return false;
+        }
+
+        TaskBlock tb = (TaskBlock) o;
+        return blockName.equals(tb.blockName)
+                && tasks.equals(tb.tasks);
+    }
 }

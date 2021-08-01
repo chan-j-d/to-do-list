@@ -27,6 +27,10 @@ public class Task {
         isDone = false;
     }
 
+    public boolean isDone() {
+        return isDone;
+    }
+
     private char getCompletionSymbol() {
         return isDone ? '\u2713' : '\u2717';
     }
@@ -34,6 +38,22 @@ public class Task {
     @Override
     public String toString() {
         return description + String.format(" [%c]", getCompletionSymbol());
+    }
+
+    @Override
+    public int hashCode() {
+        return description.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Task)) {
+            return false;
+        }
+
+        Task t = (Task) o;
+        return description.equals(t.getDescription())
+                && isDone == t.isDone();
     }
 
 }

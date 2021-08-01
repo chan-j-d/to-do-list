@@ -15,4 +15,14 @@ public class UndoTaskCommand implements Command<TaskList> {
     public void run(TaskList taskList) {
         taskList.uncompleteTask(day, index);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof UndoTaskCommand)) {
+            return false;
+        }
+        UndoTaskCommand other = (UndoTaskCommand) o;
+        return index == other.index
+                && day.equals(other.day);
+    }
 }

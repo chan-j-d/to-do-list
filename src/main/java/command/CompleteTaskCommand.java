@@ -15,4 +15,14 @@ public class CompleteTaskCommand implements Command<TaskList> {
     public void run(TaskList list) {
         list.completeTask(day, index);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof CompleteTaskCommand)) {
+            return false;
+        }
+        CompleteTaskCommand other = (CompleteTaskCommand) o;
+        return index == other.index
+                && day.equals(other.day);
+    }
 }
