@@ -39,8 +39,16 @@ public class TaskList {
         blocks.get(blockName).deleteTask(index);
     }
 
+    public Task getTask(String blockName, int index) {
+        return blocks.get(blockName).getTask(index);
+    }
+
     public Map<String, TaskBlock> getBlocksMap() {
         return this.blocks;
+    }
+
+    public int getNumTasksInBlock(String blockName) {
+        return blocks.get(blockName).getNumTasks();
     }
 
     @Override

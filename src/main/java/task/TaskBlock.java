@@ -51,6 +51,10 @@ public class TaskBlock {
         return tasks.remove(taskToRemove);
     }
 
+    public int getNumTasks() {
+        return tasks.size();
+    }
+
     private int adjustIndex(int index) {
         if (index < STARTING_COUNT || index > tasks.size()) {
             throw new IndexOutOfBoundsException("Index is out of bounds!");
