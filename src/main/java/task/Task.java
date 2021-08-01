@@ -41,6 +41,11 @@ public class Task {
     }
 
     @Override
+    public int hashCode() {
+        return description.hashCode();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (!(o instanceof Task)) {
             return false;

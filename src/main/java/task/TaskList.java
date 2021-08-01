@@ -1,7 +1,6 @@
 package task;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 public class TaskList {
@@ -54,6 +53,16 @@ public class TaskList {
     @Override
     public String toString() {
         return blocks.values().stream().reduce("", (x, y) -> x + "\n\n" + y, (x, y) -> x + "\n\n" + y);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof TaskList)) {
+            return false;
+        }
+
+        TaskList list = (TaskList) o;
+        return blocks.equals(list.blocks);
     }
 
 }
