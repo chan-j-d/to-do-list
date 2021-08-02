@@ -5,4 +5,4 @@ gradlew.bat
 /build/*
 
 todolist-save
-/.idea/
+/.idea/*
