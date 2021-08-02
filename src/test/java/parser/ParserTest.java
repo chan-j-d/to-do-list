@@ -13,6 +13,7 @@ public class ParserTest {
     private static final String STRING_NOT_ENOUGH_ARGS = "do monday   ";
     private static final String STRING_INVALID_COMMAND_TYPE = "abcde monday 12345";
     private static final String STRING_INVALID_BLOCKNAME = "do abcde 12345";
+    private static final String STRING_INVALID_INDEX = "do monday abcde";
 
     private static final String STRING_VALID_DO_COMMAND = "do monday 3";
     private static final Command<TaskList> EXPECTED_COMMAND_VALID_DO = new CompleteTaskCommand("monday", 3);
@@ -35,6 +36,9 @@ public class ParserTest {
 
         // invalid blockname type
         Assertions.assertThrows(ParseException.class, () -> parser.parse(STRING_INVALID_BLOCKNAME));
+
+        // invalid number format
+        Assertions.assertThrows(ParseException.class, () -> parser.parse(STRING_INVALID_INDEX));
     }
 
     @Test
