@@ -10,10 +10,7 @@ jobs:
 
     steps:
       - name: checkout repo
-        uses: actions/checkout@master
-
-      - name: checkout new commit
-        run: git checkout --progress --force ${{ github.sha }}
+        uses: actions/checkout@v2
 
       - name: validate gradle wrapper
         uses: gradle/wrapper-validation-action@v1
