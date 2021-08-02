@@ -12,8 +12,12 @@ public class DeleteTaskCommand implements Command<TaskList> {
         this.index = index;
     }
 
-    public void run(TaskList taskList) {
-        taskList.deleteTask(day, index);
+    public void run(TaskList taskList) throws CommandException {
+        try {
+            taskList.deleteTask(day, index);
+        } catch (IndexOutOfBoundsException ioobe) {
+            throw new CommandException(ioobe.getMessage());
+        }
     }
 
     @Override
