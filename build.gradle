@@ -5,6 +5,7 @@ plugins {
     id 'java'
     id 'maven-publish'
     id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.10'
 }
 
 mainClassName = 'ToDoList'
@@ -22,6 +23,10 @@ repositories {
 
 test {
     useJUnitPlatform()
+}
+
+javafx {
+    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.graphics']
 }
 
 dependencies {
