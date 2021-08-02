@@ -1,0 +1,22 @@
+on: [pull_request, push]
+
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-19.04, ubuntu-20.04, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@master
+
+      - name: checkout new commit
+        run: git checkout --progress --force ${{ github.sha }}
+
+      - name: validate gradle wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: build gradle
+        run: ./gradlew build
