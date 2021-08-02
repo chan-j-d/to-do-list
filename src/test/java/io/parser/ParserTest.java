@@ -1,4 +1,4 @@
-package parser;
+package io.parser;
 
 import command.AddTaskCommand;
 import command.Command;
