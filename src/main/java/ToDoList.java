@@ -1,4 +1,5 @@
 import command.Command;
+import command.CommandException;
 import command.EmptyCommand;
 import parser.ParseException;
 import parser.Parser;
@@ -42,7 +43,7 @@ public class ToDoList {
         return new EmptyCommand();
     }
 
-    public void runCommand(Command<TaskList> command) {
+    public void runCommand(Command<TaskList> command) throws CommandException {
         command.run(taskList);
         storage.save(taskList, saveDirectory);
     }
@@ -59,7 +60,11 @@ public class ToDoList {
         String input = scanner.next();
         while (!input.equals("exit")) {
             Command<TaskList> command = toDoList.readInput(input);
-            toDoList.runCommand(command);
+            try {
+                toDoList.runCommand(command);
+            } catch (CommandException ce) {
+                ce.printStackTrace();
+            }
             toDoList.displayOutput();
             input = scanner.next();
         }
