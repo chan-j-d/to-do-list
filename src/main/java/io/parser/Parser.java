@@ -65,7 +65,7 @@ public class Parser implements IOInterface {
         scanner.close();
     }
 
-    private Command<TaskList> parse(String input) throws ParseException {
+    public Command<TaskList> parse(String input) throws ParseException {
         String[] details = input.replaceAll("\\s+", " ").split(" ", 3);
         details = Arrays.stream(details)
                 .filter(x -> !x.isEmpty())
