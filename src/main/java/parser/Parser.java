@@ -1,12 +1,21 @@
 package parser;
 
-import command.*;
+import command.AddTaskCommand;
+import command.Command;
+import command.CompleteTaskCommand;
+import command.DeleteTaskCommand;
+import command.EditTaskCommand;
+import command.UndoTaskCommand;
 import task.BlockNames;
 import task.TaskList;
 
 import java.util.Arrays;
 
-import static command.CommandTypes.*;
+import static command.CommandTypes.COMMAND_ADD;
+import static command.CommandTypes.COMMAND_COMPLETE;
+import static command.CommandTypes.COMMAND_DELETE;
+import static command.CommandTypes.COMMAND_EDIT;
+import static command.CommandTypes.COMMAND_UNDO;
 
 public class Parser {
 
