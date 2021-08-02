@@ -29,6 +29,7 @@ public class Parser {
         String[] details = input.replaceAll("\\s+", " ").split(" ", 3);
         details = Arrays.stream(details)
                 .filter(x -> !x.isEmpty())
+                .map(s -> s.strip())
                 .toArray(String[]::new);
 
         if (details.length != 3) {
