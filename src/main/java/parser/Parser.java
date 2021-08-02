@@ -3,7 +3,6 @@ package parser;
 import command.*;
 import task.BlockNames;
 import task.TaskList;
-import util.Pair;
 
 import java.util.Arrays;
 
@@ -14,6 +13,7 @@ public class Parser {
     private static final String MESSAGE_TOO_FEW_ARGS = "Input has too few arguments.";
     private static final String MESSAGE_INVALID_DAY = "Invalid day argument.";
     private static final String MESSAGE_INVALID_COMMAND_TYPE = "Invalid command type.";
+    private static final String MESSAGE_INVALID_NUMBER_FORMAT = "Number argument is not a valid number.";
 
     public Command<TaskList> parse(String input) throws ParseException {
         String[] details = input.replaceAll("\\s+", " ").split(" ", 3);
@@ -51,8 +51,12 @@ public class Parser {
         return BlockNames.isValidBlockName(blockName);
     }
 
-    private int convertToInt(String indexString) {
-        return Integer.parseInt(indexString);
+    private int convertToInt(String indexString) throws ParseException {
+        try {
+            return Integer.parseInt(indexString);
+        } catch (NumberFormatException nfe) {
+            throw new ParseException(MESSAGE_INVALID_NUMBER_FORMAT);
+        }
     }
 
 }
