@@ -14,7 +14,7 @@ public class EditTaskCommandTest extends CommandTestTemplate {
     private final String EDIT_DESCRIPTION_TWO = "edit to this two";
 
     @Test
-    public void run_validEditCommand_success() {
+    public void run_validEditCommand_success() throws CommandException {
         EditTaskCommand command1 = new EditTaskCommand("monday", 2, EDIT_DESCRIPTION_ONE);
         EditTaskCommand command2 = new EditTaskCommand("tuesday", 1, EDIT_DESCRIPTION_TWO);
         Task expectedTask1 = new Task(EDIT_DESCRIPTION_ONE);
@@ -36,11 +36,11 @@ public class EditTaskCommandTest extends CommandTestTemplate {
         EditTaskCommand command4 = new EditTaskCommand("tuesday", 0, EDIT_DESCRIPTION_ONE);
         EditTaskCommand command5 = new EditTaskCommand("wednesday", 1, EDIT_DESCRIPTION_TWO);
 
-        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> command1.run(modelTaskList));
-        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> command2.run(modelTaskList));
-        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> command3.run(modelTaskList));
-        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> command4.run(modelTaskList));
-        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> command5.run(modelTaskList));
+        Assertions.assertThrows(CommandException.class, () -> command1.run(modelTaskList));
+        Assertions.assertThrows(CommandException.class, () -> command2.run(modelTaskList));
+        Assertions.assertThrows(CommandException.class, () -> command3.run(modelTaskList));
+        Assertions.assertThrows(CommandException.class, () -> command4.run(modelTaskList));
+        Assertions.assertThrows(CommandException.class, () -> command5.run(modelTaskList));
     }
 
 }

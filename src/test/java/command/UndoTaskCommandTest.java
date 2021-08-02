@@ -11,7 +11,7 @@ import static template.TaskListTemplate.STRING_DESCRIPTION_THREE;
 public class UndoTaskCommandTest extends CommandTestTemplate {
 
     @Test
-    public void run_validUndoCommand_success() {
+    public void run_validUndoCommand_success() throws CommandException {
         UndoTaskCommand command = new UndoTaskCommand("tuesday", 1);
         Task expectedTask = new Task(STRING_DESCRIPTION_THREE);
         expectedTask.markUndone();
@@ -21,7 +21,7 @@ public class UndoTaskCommandTest extends CommandTestTemplate {
     }
 
     @Test
-    public void run_indexAlreadyUndone_noChange() {
+    public void run_indexAlreadyUndone_noChange() throws CommandException {
         UndoTaskCommand command = new UndoTaskCommand("monday", 1);
         Task expectedTask = new Task(STRING_DESCRIPTION_ONE);
 
@@ -37,11 +37,11 @@ public class UndoTaskCommandTest extends CommandTestTemplate {
         UndoTaskCommand command4 = new UndoTaskCommand("tuesday", 0);
         UndoTaskCommand command5 = new UndoTaskCommand("wednesday", 1);
 
-        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> command1.run(modelTaskList));
-        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> command2.run(modelTaskList));
-        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> command3.run(modelTaskList));
-        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> command4.run(modelTaskList));
-        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> command5.run(modelTaskList));
+        Assertions.assertThrows(CommandException.class, () -> command1.run(modelTaskList));
+        Assertions.assertThrows(CommandException.class, () -> command2.run(modelTaskList));
+        Assertions.assertThrows(CommandException.class, () -> command3.run(modelTaskList));
+        Assertions.assertThrows(CommandException.class, () -> command4.run(modelTaskList));
+        Assertions.assertThrows(CommandException.class, () -> command5.run(modelTaskList));
     }
 
 }

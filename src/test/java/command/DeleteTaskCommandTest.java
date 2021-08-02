@@ -7,7 +7,7 @@ import template.CommandTestTemplate;
 public class DeleteTaskCommandTest extends CommandTestTemplate {
 
     @Test
-    public void run_validDeleteCommand_success() {
+    public void run_validDeleteCommand_success() throws CommandException {
         DeleteTaskCommand command1 = new DeleteTaskCommand("monday", 2);
         DeleteTaskCommand command2 = new DeleteTaskCommand("tuesday", 1);
         DeleteTaskCommand command3 = new DeleteTaskCommand("monday", 1);
@@ -39,11 +39,11 @@ public class DeleteTaskCommandTest extends CommandTestTemplate {
         DeleteTaskCommand command4 = new DeleteTaskCommand("tuesday", 0);
         DeleteTaskCommand command5 = new DeleteTaskCommand("wednesday", 1);
 
-        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> command1.run(modelTaskList));
-        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> command2.run(modelTaskList));
-        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> command3.run(modelTaskList));
-        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> command4.run(modelTaskList));
-        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> command5.run(modelTaskList));
+        Assertions.assertThrows(CommandException.class, () -> command1.run(modelTaskList));
+        Assertions.assertThrows(CommandException.class, () -> command2.run(modelTaskList));
+        Assertions.assertThrows(CommandException.class, () -> command3.run(modelTaskList));
+        Assertions.assertThrows(CommandException.class, () -> command4.run(modelTaskList));
+        Assertions.assertThrows(CommandException.class, () -> command5.run(modelTaskList));
     }
 
 }
