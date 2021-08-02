@@ -12,8 +12,12 @@ public class CompleteTaskCommand implements Command<TaskList> {
         this.index = index;
     }
 
-    public void run(TaskList list) {
-        list.completeTask(day, index);
+    public void run(TaskList list) throws CommandException {
+        try {
+            list.completeTask(day, index);
+        } catch (IndexOutOfBoundsException ioobe) {
+            throw new CommandException(ioobe.getMessage());
+        }
     }
 
     @Override
