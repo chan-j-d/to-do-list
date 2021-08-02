@@ -12,8 +12,12 @@ public class UndoTaskCommand implements Command<TaskList> {
         this.index = index;
     }
 
-    public void run(TaskList taskList) {
-        taskList.uncompleteTask(day, index);
+    public void run(TaskList taskList) throws CommandException {
+        try {
+            taskList.uncompleteTask(day, index);
+        } catch (IndexOutOfBoundsException ioobe) {
+            throw new CommandException(ioobe.getMessage());
+        }
     }
 
     @Override

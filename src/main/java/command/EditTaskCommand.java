@@ -16,12 +16,15 @@ public class EditTaskCommand implements Command<TaskList> {
     }
 
     @Override
-    public void run(TaskList taskList) {
-        Task oldTask = taskList.getTask(blockName, index);
-        boolean isDone = oldTask.isDone();
-
-        taskList.addTask(blockName, newDescription, isDone, index);
-        taskList.deleteTask(blockName, index + 1);
+    public void run(TaskList taskList) throws CommandException {
+        try {
+            Task oldTask = taskList.getTask(blockName, index);
+            boolean isDone = oldTask.isDone();
+            taskList.addTask(blockName, newDescription, isDone, index);
+            taskList.deleteTask(blockName, index + 1);
+        } catch (IndexOutOfBoundsException ioobe) {
+            throw new CommandException(ioobe.getMessage());
+        }
     }
 
     @Override
