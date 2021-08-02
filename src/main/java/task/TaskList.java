@@ -26,6 +26,17 @@ public class TaskList {
         blocks.get(day).addTask(task);
     }
 
+    public void addTask(String day, String task, boolean isDone) {
+        blocks.get(day).addTask(task, isDone);
+    }
+
+    public void addTask(String day, String task, int index) {
+        blocks.get(day).addTask(task, index);
+    }
+
+    public void addTask(String day, String task, boolean isDone, int index) {
+        blocks.get(day).addTask(task, isDone, index);
+    }
     public void completeTask(String blockName, int index) {
         blocks.get(blockName).completeTask(index);
     }
