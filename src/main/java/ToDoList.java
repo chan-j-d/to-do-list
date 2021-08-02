@@ -1,5 +1,5 @@
 import command.Command;
-import command.EmptyCommand;
+import command.ExitCommand;
 import io.parser.ParseException;
 import io.parser.Parser;
 import storage.JsonStorageImpl;
@@ -38,7 +38,7 @@ public class ToDoList {
         } catch (ParseException pe){
             pe.printStackTrace();
         }
-        return new EmptyCommand();
+        return new ExitCommand();
     }
 
     public void runCommand(Command<TaskList> command) {
