@@ -42,6 +42,9 @@ public class Parser {
                 return new UndoTaskCommand(blockName, convertToInt(taskDetails));
             case COMMAND_DELETE:
                 return new DeleteTaskCommand(blockName, convertToInt(taskDetails));
+            case COMMAND_EDIT:
+                Pair<Integer, String> editDetailsPair = parseEditDetails(taskDetails);
+                return new EditTaskCommand(blockName, editDetailsPair.getFirst(), editDetailsPair.getSecond());
             default:
                 throw new ParseException(MESSAGE_INVALID_COMMAND_TYPE);
         }
@@ -57,6 +60,15 @@ public class Parser {
         } catch (NumberFormatException nfe) {
             throw new ParseException(MESSAGE_INVALID_NUMBER_FORMAT);
         }
+    }
+
+    private Pair<Integer, String> parseEditDetails(String editDetails) {
+        String[] details = editDetails.replaceAll("\\s+", " ").split(" ", 2);
+        details = Arrays.stream(details)
+                .filter(x -> !x.isEmpty())
+                .toArray(String[]::new);
+
+        return new Pair<>(Integer.parseInt(details[0]), details[1]);
     }
 
 }
