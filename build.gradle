@@ -4,6 +4,13 @@
 plugins {
     id 'java'
     id 'maven-publish'
+    id 'application'
+}
+
+mainClassName = 'ToDoList'
+
+run {
+    standardInput = System.in
 }
 
 repositories {
