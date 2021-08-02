@@ -1,4 +1,4 @@
-package parser;
+package io.parser;
 
 import command.AddTaskCommand;
 import command.Command;
@@ -6,11 +6,14 @@ import command.CompleteTaskCommand;
 import command.DeleteTaskCommand;
 import command.EditTaskCommand;
 import command.UndoTaskCommand;
+import io.IOInterface;
+import io.InputException;
 import task.BlockNames;
 import task.TaskList;
 import util.Pair;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 import static command.CommandTypes.COMMAND_ADD;
 import static command.CommandTypes.COMMAND_COMPLETE;
@@ -18,14 +21,51 @@ import static command.CommandTypes.COMMAND_DELETE;
 import static command.CommandTypes.COMMAND_EDIT;
 import static command.CommandTypes.COMMAND_UNDO;
 
-public class Parser {
+public class Parser implements IOInterface {
 
     private static final String MESSAGE_TOO_FEW_ARGS = "Input has too few arguments.";
     private static final String MESSAGE_INVALID_DAY = "Invalid day argument.";
     private static final String MESSAGE_INVALID_COMMAND_TYPE = "Invalid command type.";
     private static final String MESSAGE_INVALID_NUMBER_FORMAT = "Number argument is not a valid number.";
 
-    public Command<TaskList> parse(String input) throws ParseException {
+    private final Scanner scanner;
+
+    public Parser() {
+        scanner = new Scanner(System.in);
+        scanner.useDelimiter("\n");
+    }
+
+    @Override
+    public void displayOnStartup(TaskList taskList) {
+        System.out.println(taskList);
+    }
+
+    @Override
+    public Command<TaskList> getUserInput() throws InputException {
+        String userInput = scanner.next();
+        try {
+            return parse(userInput);
+        } catch (ParseException pe) {
+            throw new InputException(pe.getMessage());
+        }
+    }
+
+    @Override
+    public void displayErrorMessage(String message) {
+        System.err.println(message);
+    }
+
+    @Override
+    public void updateUser(TaskList taskList) {
+        System.out.println(taskList);
+    }
+
+    @Override
+    public void exit() {
+        scanner.close();
+    }
+
+    private Command<TaskList> parse(String input) throws ParseException {
         String[] details = input.replaceAll("\\s+", " ").split(" ", 3);
         details = Arrays.stream(details)
                 .filter(x -> !x.isEmpty())
