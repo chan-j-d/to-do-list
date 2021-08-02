@@ -24,7 +24,19 @@ public class TaskBlock {
     }
 
     public void addTask(String task) {
-        this.tasks.add(new Task(task));
+        tasks.add(new Task(task));
+    }
+
+    public void addTask(String task, boolean isDone) {
+        tasks.add(new Task(task, isDone));
+    }
+
+    public void addTask(String task, int index) {
+        tasks.add(adjustIndex(index), new Task(task));
+    }
+
+    public void addTask(String task, boolean isDone, int index) {
+        tasks.add(adjustIndex(index), new Task(task, isDone));
     }
 
     public String getBlockName() {
