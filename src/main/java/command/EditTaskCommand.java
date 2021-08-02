@@ -24,4 +24,16 @@ public class EditTaskCommand implements Command<TaskList> {
         taskList.addTask(blockName, newDescription, isDone, index);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof EditTaskCommand)) {
+            return false;
+        }
+
+        EditTaskCommand other = (EditTaskCommand) o;
+        return blockName.equals(other.blockName)
+                && index == other.index
+                && newDescription.equals(other.newDescription);
+    }
+
 }

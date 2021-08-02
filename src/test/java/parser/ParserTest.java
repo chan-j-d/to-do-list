@@ -3,6 +3,7 @@ package parser;
 import command.AddTaskCommand;
 import command.Command;
 import command.CompleteTaskCommand;
+import command.EditTaskCommand;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import task.TaskList;
@@ -20,6 +21,9 @@ public class ParserTest {
     private static final String STRING_VALID_ADD_COMMAND = "add sunday abcde fghj asdads123";
     private static final Command<TaskList> EXPECTED_COMMAND_VALID_ADD = new AddTaskCommand("sunday",
             "abcde fghj asdads123");
+    private static final String STRING_VALID_EDIT_COMMAND = "edit monday  5 new edit description";
+    private static final Command<TaskList> EXPECTED_COMMAND_VALID_EDIT = new EditTaskCommand("monday",
+            5, "new edit description");
 
     private final Parser parser = new Parser();
 
@@ -48,6 +52,9 @@ public class ParserTest {
 
         actualCommand = parser.parse(STRING_VALID_ADD_COMMAND);
         Assertions.assertEquals(EXPECTED_COMMAND_VALID_ADD, actualCommand);
+
+        actualCommand = parser.parse(STRING_VALID_EDIT_COMMAND);
+        Assertions.assertEquals(EXPECTED_COMMAND_VALID_EDIT, actualCommand);
     }
 
 }
