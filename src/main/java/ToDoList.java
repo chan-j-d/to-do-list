@@ -33,7 +33,7 @@ public class ToDoList {
         this.saveDirectory = path;
     }
 
-    public void runCommand(Command<TaskList> command) {
+    public void runCommand(Command<TaskList> command) throws CommandException {
         command.run(taskList);
         storage.save(taskList, saveDirectory);
     }
@@ -49,8 +49,12 @@ public class ToDoList {
                 continue;
             }
 
-            runCommand(command);
-            ioInterface.updateUser(taskList);
+            try {
+                runCommand(command);
+                ioInterface.updateUser(taskList);
+            } catch (CommandException ce) {
+                ioInterface.displayErrorMessage(ce.getMessage());
+            }
         }
     }
 
