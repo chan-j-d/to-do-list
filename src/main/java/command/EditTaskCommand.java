@@ -17,10 +17,9 @@ public class EditTaskCommand implements Command<TaskList> {
 
     @Override
     public void run(TaskList taskList) throws CommandException {
-        Task oldTask = taskList.getTask(blockName, index);
-        boolean isDone = oldTask.isDone();
-
         try {
+            Task oldTask = taskList.getTask(blockName, index);
+            boolean isDone = oldTask.isDone();
             taskList.addTask(blockName, newDescription, isDone, index);
             taskList.deleteTask(blockName, index + 1);
         } catch (IndexOutOfBoundsException ioobe) {
