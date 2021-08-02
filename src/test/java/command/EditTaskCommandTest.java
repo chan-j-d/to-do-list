@@ -14,7 +14,7 @@ public class EditTaskCommandTest extends CommandTestTemplate {
     private final String EDIT_DESCRIPTION_TWO = "edit to this two";
 
     @Test
-    public void run_validCompleteCommand_success() {
+    public void run_validEditCommand_success() {
         EditTaskCommand command1 = new EditTaskCommand("monday", 2, EDIT_DESCRIPTION_ONE);
         EditTaskCommand command2 = new EditTaskCommand("tuesday", 1, EDIT_DESCRIPTION_TWO);
         Task expectedTask1 = new Task(EDIT_DESCRIPTION_ONE);
@@ -29,7 +29,7 @@ public class EditTaskCommandTest extends CommandTestTemplate {
 
 
     @Test
-    public void run_invalidIndexCompleteCommand_exceptionThrown() {
+    public void run_invalidIndexEditCommand_exceptionThrown() {
         EditTaskCommand command1 = new EditTaskCommand("monday", -1, EDIT_DESCRIPTION_ONE);
         EditTaskCommand command2 = new EditTaskCommand("monday", 3, EDIT_DESCRIPTION_ONE);
         EditTaskCommand command3 = new EditTaskCommand("tuesday", 10, EDIT_DESCRIPTION_ONE);

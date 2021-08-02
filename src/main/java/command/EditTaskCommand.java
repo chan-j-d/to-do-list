@@ -20,8 +20,8 @@ public class EditTaskCommand implements Command<TaskList> {
         Task oldTask = taskList.getTask(blockName, index);
         boolean isDone = oldTask.isDone();
 
-        taskList.deleteTask(blockName, index);
         taskList.addTask(blockName, newDescription, isDone, index);
+        taskList.deleteTask(blockName, index + 1);
     }
 
     @Override

@@ -32,11 +32,11 @@ public class TaskBlock {
     }
 
     public void addTask(String task, int index) {
-        tasks.add(index, new Task(task));
+        tasks.add(adjustIndex(index), new Task(task));
     }
 
     public void addTask(String task, boolean isDone, int index) {
-        tasks.add(index, new Task(task, isDone));
+        tasks.add(adjustIndex(index), new Task(task, isDone));
     }
 
     public String getBlockName() {
