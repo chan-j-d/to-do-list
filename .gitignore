@@ -1,7 +1,5 @@
 /target/
 .gradle/
-gradlew
-gradlew.bat
 /build/*
 
 todolist-save
