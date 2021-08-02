@@ -1,6 +1,7 @@
 import command.Command;
 import command.ExitCommand;
-import io.parser.ParseException;
+import io.IOInterface;
+import io.InputException;
 import io.parser.Parser;
 import storage.JsonStorageImpl;
 import storage.Storage;
@@ -8,7 +9,6 @@ import task.TaskList;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Scanner;
 
 public class ToDoList {
 
@@ -16,13 +16,13 @@ public class ToDoList {
     private static final Path DEFAULT_PATH = Paths.get(SAVEFILE_NAME);
 
     private final Storage storage;
-    private final Parser parser;
+    private final IOInterface ioInterface;
     private final TaskList taskList;
     private Path saveDirectory;
 
     public ToDoList() {
         storage = new JsonStorageImpl();
-        parser = new Parser();
+        ioInterface = new Parser();
         saveDirectory = DEFAULT_PATH;
         taskList = storage.load(saveDirectory)
                 .orElse(new TaskList());
@@ -32,36 +32,34 @@ public class ToDoList {
         this.saveDirectory = path;
     }
 
-    public Command<TaskList> readInput(String input) {
-        try {
-            return parser.parse(input);
-        } catch (ParseException pe){
-            pe.printStackTrace();
-        }
-        return new ExitCommand();
-    }
-
     public void runCommand(Command<TaskList> command) {
         command.run(taskList);
         storage.save(taskList, saveDirectory);
     }
 
-    public void displayOutput() {
-        System.out.println(taskList);
+    public void run() {
+        ioInterface.displayOnStartup(taskList);
+        Command<TaskList> command = null;
+        while (!isExitCommand(command)) {
+            try {
+                command = ioInterface.getUserInput();
+            } catch (InputException ie) {
+                ioInterface.displayErrorMessage(ie.getMessage());
+                continue;
+            }
+
+            runCommand(command);
+            ioInterface.updateUser(taskList);
+        }
+    }
+
+    private boolean isExitCommand(Command<TaskList> command) {
+        return command instanceof ExitCommand;
     }
 
     public static void main(String[] args) {
         ToDoList toDoList = new ToDoList();
-        System.out.println(toDoList.taskList);
-        Scanner scanner = new Scanner(System.in);
-        scanner.useDelimiter("\n");
-        String input = scanner.next();
-        while (!input.equals("exit")) {
-            Command<TaskList> command = toDoList.readInput(input);
-            toDoList.runCommand(command);
-            toDoList.displayOutput();
-            input = scanner.next();
-        }
+        toDoList.run();
     }
 
 }
