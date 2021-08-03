@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<?import javafx.scene.control.TextField?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="gui.MainWindow"
+            prefHeight="400.0" prefWidth="600.0"
+            minHeight="400.0" minWidth="400.0"
+            border="5.0">
+    <fx:define>
+        <Double fx:id="BORDER_SPACING" fx:value="5.0"/>
+    </fx:define>
+    <VBox AnchorPane.topAnchor="$BORDER_SPACING" AnchorPane.bottomAnchor="$BORDER_SPACING"
+            AnchorPane.leftAnchor="$BORDER_SPACING" AnchorPane.rightAnchor="$BORDER_SPACING">
+        <TextField>
+            text="HELLO WORLD"
+        </TextField>
+
+    </VBox>
+
+</AnchorPane>

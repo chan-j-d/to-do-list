@@ -9,7 +9,7 @@ public class GuiComponent {
 
     private final FXMLLoader fxmlLoader = new FXMLLoader();
 
-    public GuiComponent(String resource, Parent root) {
+    public GuiComponent(String resource, Object root) {
         fxmlLoader.setLocation(getClass().getResource(resource));
         fxmlLoader.setController(this);
         fxmlLoader.setRoot(root);
