@@ -8,7 +8,9 @@ public class MainApplication extends Application {
 
      @Override
      public void start(Stage stage) {
-         MainWindow root = new MainWindow(stage);
+         MainWindow mainWindow = new MainWindow();
+         Scene scene = new Scene(mainWindow.getRoot());
+         stage.setScene(scene);
          stage.setMinHeight(400.0);
          stage.setMinWidth(400.0);
          stage.show();

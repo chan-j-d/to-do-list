@@ -16,10 +16,8 @@ public class MainWindow extends GuiComponent<AnchorPane> {
     @FXML
     private VBox vBox;
 
-    public MainWindow(Stage stage) {
+    public MainWindow() {
         super(FXML_RESOURCE);
-        Scene scene = new Scene(getRoot());
-        stage.setScene(scene);
     }
 
 }
