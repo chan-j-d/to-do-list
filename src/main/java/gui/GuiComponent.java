@@ -11,7 +11,6 @@ public class GuiComponent<T> {
 
     public GuiComponent(String resource) {
         fxmlLoader.setLocation(getClass().getResource(resource));
-        fxmlLoader.setController(this);
         T temp = null;
         try {
             temp = fxmlLoader.load();
