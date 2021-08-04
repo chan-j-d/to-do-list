@@ -1,11 +1,9 @@
 package gui;
 
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 public class MainWindow extends GuiComponent<AnchorPane> {
 
@@ -14,7 +12,7 @@ public class MainWindow extends GuiComponent<AnchorPane> {
     @FXML
     private AnchorPane mainPane;
     @FXML
-    private VBox vBox;
+    private ScrollPane scrollPane;
 
     public MainWindow() {
         super(FXML_RESOURCE);

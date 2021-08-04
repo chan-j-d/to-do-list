@@ -16,12 +16,8 @@
     <fx:define>
         <Double fx:id="BORDER_SPACING" fx:value="5.0"/>
     </fx:define>
-    <ScrollPane fx:id="vBox" AnchorPane.topAnchor="$BORDER_SPACING" AnchorPane.bottomAnchor="$BORDER_SPACING"
+    <ScrollPane fx:id="scrollPane" AnchorPane.topAnchor="$BORDER_SPACING" AnchorPane.bottomAnchor="$BORDER_SPACING"
             AnchorPane.leftAnchor="$BORDER_SPACING" AnchorPane.rightAnchor="$BORDER_SPACING">
-        <TextField>
-            text="HELLO WORLD"
-        </TextField>
-
     </ScrollPane>
 
 </AnchorPane>
