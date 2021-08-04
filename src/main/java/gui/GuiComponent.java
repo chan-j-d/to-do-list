@@ -1,23 +1,28 @@
 package gui;
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 
 import java.io.IOException;
 
-public class GuiComponent {
+public class GuiComponent<T> {
 
     private final FXMLLoader fxmlLoader = new FXMLLoader();
+    private final T root;
 
-    public GuiComponent(String resource, Object root) {
+    public GuiComponent(String resource) {
         fxmlLoader.setLocation(getClass().getResource(resource));
         fxmlLoader.setController(this);
-        fxmlLoader.setRoot(root);
+        T temp = null;
         try {
-            fxmlLoader.load();
+            temp = fxmlLoader.load();
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
+        root = temp;
+    }
+
+    public T getRoot() {
+        return root;
     }
 
 }
