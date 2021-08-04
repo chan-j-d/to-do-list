@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.shape.Line?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:id="block"
+      fx:controller="gui.TaskBlockGui"
+      prefHeight="50.0" prefWidth="600.0">
+    <Text>
+        <fx:reference source="$blockHeader"/>
+    </Text>
+    <Line/>
+</VBox>
