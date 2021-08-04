@@ -16,8 +16,9 @@
     <fx:define>
         <Double fx:id="BORDER_SPACING" fx:value="5.0"/>
     </fx:define>
-    <ScrollPane fx:id="scrollPane" AnchorPane.topAnchor="$BORDER_SPACING" AnchorPane.bottomAnchor="$BORDER_SPACING"
+    <ScrollPane AnchorPane.topAnchor="$BORDER_SPACING" AnchorPane.bottomAnchor="$BORDER_SPACING"
             AnchorPane.leftAnchor="$BORDER_SPACING" AnchorPane.rightAnchor="$BORDER_SPACING">
+        <VBox fx:id="taskListGui"/>
     </ScrollPane>
 
 </AnchorPane>

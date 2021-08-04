@@ -4,7 +4,7 @@ import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
 
-public class GuiComponent<T> {
+public abstract class GuiComponent<T> {
 
     private final FXMLLoader fxmlLoader = new FXMLLoader();
     private final T root;
@@ -18,10 +18,13 @@ public class GuiComponent<T> {
             ioe.printStackTrace();
         }
         root = temp;
+        init();
     }
 
     public T getRoot() {
         return root;
     }
+
+    public abstract void init();
 
 }

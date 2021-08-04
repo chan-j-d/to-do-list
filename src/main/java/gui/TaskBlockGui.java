@@ -14,16 +14,17 @@ public class TaskBlockGui extends GuiComponent<VBox> {
     private VBox block;
     @FXML
     private String blockHeader;
+
     private final TaskBlock taskBlock;
 
     public TaskBlockGui(TaskBlock taskBlock) {
         super(FXML_RESOURCE);
         blockHeader = taskBlock.getBlockName();
         this.taskBlock = taskBlock;
-        init();
     }
 
-    private void init() {
+    @Override
+    public void init() {
         for (Task task : taskBlock.getTasks()) {
             block.getChildren().add(new Text(task.getDescription()));
         }
