@@ -1,3 +1,5 @@
+package core;
+
 import command.Command;
 import command.ExitCommand;
 import io.IOInterface;
@@ -56,6 +58,10 @@ public class ToDoList {
                 ioInterface.displayErrorMessage(ce.getMessage());
             }
         }
+    }
+
+    public TaskList getTaskList() {
+        return taskList;
     }
 
     private boolean isExitCommand(Command<TaskList> command) {
