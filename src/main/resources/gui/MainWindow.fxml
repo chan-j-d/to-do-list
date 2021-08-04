@@ -6,6 +6,7 @@
 
 <?import javafx.scene.control.TextField?>
 
+<?import javafx.scene.control.ScrollPane?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:id="mainPane"
@@ -14,12 +15,12 @@
     <fx:define>
         <Double fx:id="BORDER_SPACING" fx:value="5.0"/>
     </fx:define>
-    <VBox fx:id="vBox" AnchorPane.topAnchor="$BORDER_SPACING" AnchorPane.bottomAnchor="$BORDER_SPACING"
+    <ScrollPane fx:id="vBox" AnchorPane.topAnchor="$BORDER_SPACING" AnchorPane.bottomAnchor="$BORDER_SPACING"
             AnchorPane.leftAnchor="$BORDER_SPACING" AnchorPane.rightAnchor="$BORDER_SPACING">
         <TextField>
             text="HELLO WORLD"
         </TextField>
 
-    </VBox>
+    </ScrollPane>
 
 </AnchorPane>
