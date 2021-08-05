@@ -6,7 +6,8 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:id="block"
-      prefHeight="50.0" prefWidth="600.0">
-    <Label fx:id="blockHeaderLabel" />
-    <Region stylesheets="@horizontal-region.css" styleClass="horizontal-region" />
+      prefHeight="50.0" prefWidth="600.0"
+      stylesheets="@TaskBlock.css">
+    <Label fx:id="blockHeaderLabel" styleClass="label-header" />
+    <Region styleClass="horizontal-line" />
 </VBox>
