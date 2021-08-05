@@ -1,6 +1,7 @@
 package gui;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import task.Task;
@@ -13,18 +14,20 @@ public class TaskBlockGui extends GuiComponent<VBox> {
     @FXML
     private VBox block;
     @FXML
-    private String blockHeader;
+    private Label blockHeaderLabel;
 
+    private String blockHeader;
     private final TaskBlock taskBlock;
 
     public TaskBlockGui(TaskBlock taskBlock) {
         super(FXML_RESOURCE);
         blockHeader = taskBlock.getBlockName();
         this.taskBlock = taskBlock;
+        init();
     }
 
-    @Override
     public void init() {
+        blockHeaderLabel.setText(blockHeader);
         for (Task task : taskBlock.getTasks()) {
             block.getChildren().add(new Text(task.getDescription()));
         }

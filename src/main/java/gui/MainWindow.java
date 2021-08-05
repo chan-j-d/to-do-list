@@ -25,10 +25,11 @@ public class MainWindow extends GuiComponent<AnchorPane> {
     public MainWindow(TaskList taskList) {
         super(FXML_RESOURCE);
         this.taskList = taskList;
+        init();
     }
 
-    @Override
     public void init() {
+        System.out.println(taskList);
         Map<String, TaskBlock> blockMap = taskList.getBlocksMap();
         for (String blockName : BLOCK_NAMES) {
             TaskBlock currentBlock = blockMap.get(blockName);
