@@ -7,7 +7,8 @@
       xmlns:fx="http://javafx.com/fxml"
       fx:id="block"
       prefHeight="50.0" prefWidth="600.0"
-      stylesheets="@TaskBlock.css">
+      stylesheets="@TaskBlock.css"
+      styleClass="box-layout">
     <Label fx:id="blockHeaderLabel" styleClass="label-header" />
     <Region styleClass="horizontal-line" />
 </VBox>

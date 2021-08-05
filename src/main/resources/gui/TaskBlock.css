@@ -1,8 +1,14 @@
 .label-header {
         -fx-font-size: 12pt;
         -fx-font-family: "Helvetica";
-        -fx-text-fill: black;
+        -fx-text-fill: slategray;
         -fx-opacity: 1;
+}
+
+.box-layout {
+        -fx-padding: 5;
+        -fx-border-color: slategray;
+        -fx-border-width: 2px;
 }
 
 /*
@@ -10,7 +16,7 @@ Taken from https://stackoverflow.com/questions/48426831/javafx-padding-line
 */
 .horizontal-line {
         -fx-background-color: slategray;
-        -fx-background-insets: 2 5 2 5;
+        -fx-background-insets: 2 0 2 0;
 
         -fx-padding: 3 0 2 0;
 }
