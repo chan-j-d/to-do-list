@@ -6,7 +6,6 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:id="block"
-      prefHeight="50.0" prefWidth="600.0"
       stylesheets="@TaskBlock.css"
       styleClass="box-layout">
     <Label fx:id="blockHeaderLabel" styleClass="label-header" />
