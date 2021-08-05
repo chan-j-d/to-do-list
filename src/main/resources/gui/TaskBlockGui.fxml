@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.shape.Line?>
 
 <?import javafx.scene.control.Label?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:id="block"
       prefHeight="50.0" prefWidth="600.0">
-    <Label fx:id="blockHeaderLabel">
-    </Label>
-    <Line/>
+    <Label fx:id="blockHeaderLabel" />
+    <Region stylesheets="@horizontal-region.css" styleClass="horizontal-region" />
 </VBox>
