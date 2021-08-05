@@ -14,7 +14,7 @@
     </fx:define>
     <ScrollPane AnchorPane.topAnchor="$BORDER_SPACING" AnchorPane.bottomAnchor="$BORDER_SPACING"
             AnchorPane.leftAnchor="$BORDER_SPACING" AnchorPane.rightAnchor="$BORDER_SPACING">
-        <VBox fx:id="taskListGui"/>
+        <VBox fx:id="taskListGui" spacing="-2.0"/>
     </ScrollPane>
 
 </AnchorPane>
