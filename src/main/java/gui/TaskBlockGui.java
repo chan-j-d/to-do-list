@@ -27,10 +27,14 @@ public class TaskBlockGui extends GuiComponent<VBox> {
     }
 
     public void init() {
-        blockHeaderLabel.setText(blockHeader);
+        blockHeaderLabel.setText(capitalizeString(blockHeader));
         for (Task task : taskBlock.getTasks()) {
             block.getChildren().add(new Text(task.getDescription()));
         }
+    }
+
+    private String capitalizeString(String string) {
+        return string.substring(0, 1).toUpperCase() + string.substring(1);
     }
 
 
