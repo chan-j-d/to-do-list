@@ -10,9 +10,6 @@ import task.TaskBlock;
 public class TaskBlockGui extends GuiComponent<VBox> {
 
     private static final String FXML_RESOURCE = "TaskBlockGui.fxml";
-    private static final double DEFAULT_HEADER_SIZE = 40.0;
-    private static final double DEFAULT_TASK_SIZE = 30.0;
-
 
     @FXML
     private VBox block;
@@ -34,16 +31,11 @@ public class TaskBlockGui extends GuiComponent<VBox> {
         for (Task task : taskBlock.getTasks()) {
             block.getChildren().add(new Text(task.getDescription()));
         }
-        getRoot().setPrefHeight(calculatePrefHeight());
+        block.getChildren().add(new AddTaskBlockGui().getRoot());
     }
 
     private String capitalizeString(String string) {
         return string.substring(0, 1).toUpperCase() + string.substring(1);
-    }
-
-    private double calculatePrefHeight() {
-        return DEFAULT_HEADER_SIZE + (taskBlock.getNumTasks() == 0 ? DEFAULT_TASK_SIZE
-                : taskBlock.getNumTasks() * DEFAULT_TASK_SIZE);
     }
 
 }

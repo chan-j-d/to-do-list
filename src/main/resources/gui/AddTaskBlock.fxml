@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns="http://javafx.com/javafx"
+            prefHeight="30.0"
+            stylesheets="@AddButton.css">
+    <Button styleClass="add-button">
+
+    </Button>
+
+</HBox>
