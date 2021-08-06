@@ -4,10 +4,12 @@
 <?import javafx.scene.layout.*?>
 
 <HBox xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:id="block"
             prefHeight="30.0"
             stylesheets="@AddButton.css">
-    <Button styleClass="add-button">
-
+    <Button styleClass="add-button"
+                onMousePressed="#createTextField">
     </Button>
 
 </HBox>
