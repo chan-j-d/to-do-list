@@ -31,7 +31,7 @@ public class TaskBlockGui extends GuiComponent<VBox> {
         for (Task task : taskBlock.getTasks()) {
             block.getChildren().add(new Text(task.getDescription()));
         }
-        block.getChildren().add(new AddTaskBlockGui().getRoot());
+        block.getChildren().add(new AddTaskBlockGui(blockHeader).getRoot());
     }
 
     private String capitalizeString(String string) {

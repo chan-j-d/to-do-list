@@ -17,7 +17,7 @@ public class CommandSync implements CommandMessenger {
 
     public Command<TaskList> getUserCommand() {
         try {
-            semaphore.wait();
+            semaphore.acquire();
         } catch (InterruptedException ie) {
             ie.printStackTrace();
         }
