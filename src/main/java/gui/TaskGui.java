@@ -1,9 +1,11 @@
 package gui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
 public class TaskGui extends GuiComponent<HBox> {
@@ -11,7 +13,7 @@ public class TaskGui extends GuiComponent<HBox> {
     private static final String FXML_RESOURCE = "TaskGui.fxml";
 
     @FXML
-    private HBox hBox;
+    private BorderPane box;
     @FXML
     private Label taskDescriptionLabel;
     @FXML
@@ -19,11 +21,8 @@ public class TaskGui extends GuiComponent<HBox> {
     @FXML
     private Button deleteButton;
 
-    private final String taskDescription;
-
     public TaskGui(String taskDescription) {
         super(FXML_RESOURCE);
-        this.taskDescription = taskDescription;
         taskDescriptionLabel.setText(taskDescription);
     }
 

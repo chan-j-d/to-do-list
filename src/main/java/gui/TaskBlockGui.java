@@ -29,7 +29,8 @@ public class TaskBlockGui extends GuiComponent<VBox> {
     public void init() {
         blockHeaderLabel.setText(capitalizeString(blockHeader));
         for (Task task : taskBlock.getTasks()) {
-            block.getChildren().add(new Text(task.getDescription()));
+            block.getChildren().add(new TaskGui(task.getDescription()).getRoot());
+            //block.getChildren().add(new Text(task.getDescription()));
         }
         block.getChildren().add(new AddTaskBlockGui(blockHeader).getRoot());
     }
