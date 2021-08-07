@@ -1,5 +1,6 @@
 package gui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
@@ -35,8 +36,9 @@ public class MainWindow extends GuiComponent<AnchorPane> {
                 .map(TaskBlockGui::new)
                 .map(GuiComponent::getRoot)
                 .collect(Collectors.toList());
-        taskListGui.getChildren().clear();
-        taskListGui.getChildren().addAll(nodeList);
+        Platform.runLater(() -> {
+            taskListGui.getChildren().clear();
+            taskListGui.getChildren().addAll(nodeList); });
     }
 
 

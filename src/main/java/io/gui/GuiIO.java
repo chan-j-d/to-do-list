@@ -34,6 +34,7 @@ public class GuiIO implements IOInterface {
 
     @Override
     public void displayErrorMessage(String message) {
+        System.out.println("Error: " + message);
         //TODO
     }
 
