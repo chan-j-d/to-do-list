@@ -11,8 +11,8 @@ public class GuiIO implements IOInterface {
     private final MainWindow mainWindow;
     private final CommandSync commandSync;
 
-    public GuiIO() {
-        mainWindow = new MainWindow();
+    public GuiIO(MainWindow mainWindow) {
+        this.mainWindow = mainWindow;
         commandSync = new CommandSync();
     }
 

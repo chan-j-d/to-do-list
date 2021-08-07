@@ -4,7 +4,7 @@ import command.Command;
 import command.ExitCommand;
 import io.IOInterface;
 import io.InputException;
-import io.parser.Parser;
+import io.gui.GuiIO;
 import command.CommandException;
 import storage.JsonStorageImpl;
 import storage.Storage;
@@ -23,9 +23,9 @@ public class ToDoList {
     private final TaskList taskList;
     private Path saveDirectory;
 
-    public ToDoList() {
+    public ToDoList(IOInterface ioInterface) {
         storage = new JsonStorageImpl();
-        ioInterface = new Parser();
+        this.ioInterface = ioInterface;
         saveDirectory = DEFAULT_PATH;
         taskList = storage.load(saveDirectory)
                 .orElse(new TaskList());
@@ -66,11 +66,6 @@ public class ToDoList {
 
     private boolean isExitCommand(Command<TaskList> command) {
         return command instanceof ExitCommand;
-    }
-
-    public static void main(String[] args) {
-        ToDoList toDoList = new ToDoList();
-        toDoList.run();
     }
 
 }
