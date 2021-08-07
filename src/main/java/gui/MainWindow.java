@@ -20,16 +20,12 @@ public class MainWindow extends GuiComponent<AnchorPane> {
     @FXML
     private VBox taskListGui;
 
-    private final TaskList taskList;
 
-    public MainWindow(TaskList taskList) {
+    public MainWindow() {
         super(FXML_RESOURCE);
-        this.taskList = taskList;
-        init();
     }
 
-    public void init() {
-        System.out.println(taskList);
+    public void init(TaskList taskList) {
         Map<String, TaskBlock> blockMap = taskList.getBlocksMap();
         for (String blockName : BLOCK_NAMES) {
             TaskBlock currentBlock = blockMap.get(blockName);
@@ -37,5 +33,7 @@ public class MainWindow extends GuiComponent<AnchorPane> {
             taskListGui.getChildren().add(currentGuiBlock.getRoot());
         }
     }
+
+
 
 }
