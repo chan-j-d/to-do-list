@@ -14,6 +14,7 @@ public class GuiIO implements IOInterface {
     public GuiIO(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
         commandSync = new CommandSync();
+        mainWindow.setCommandMessenger(commandSync);
     }
 
     @Override

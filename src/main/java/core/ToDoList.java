@@ -4,7 +4,6 @@ import command.Command;
 import command.ExitCommand;
 import io.IOInterface;
 import io.InputException;
-import io.gui.GuiIO;
 import command.CommandException;
 import storage.JsonStorageImpl;
 import storage.Storage;
