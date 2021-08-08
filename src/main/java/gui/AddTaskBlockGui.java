@@ -10,6 +10,8 @@ import javafx.scene.layout.HBox;
 public class AddTaskBlockGui extends GuiComponent<HBox> {
 
     private static final String FXML_RESOURCE = "AddTaskBlock.fxml";
+    private static boolean HAS_EXISTING_DISPLAYED_TEXTFIELD = false;
+    private static TextField EXISTING_DISPLAYED_TEXTFIELD = null;
 
     @FXML
     private HBox block;
@@ -25,7 +27,12 @@ public class AddTaskBlockGui extends GuiComponent<HBox> {
 
     @FXML
     private void createTextField() {
+        if (HAS_EXISTING_DISPLAYED_TEXTFIELD) {
+            EXISTING_DISPLAYED_TEXTFIELD.setVisible(false);
+        }
         textField.setVisible(true);
+        EXISTING_DISPLAYED_TEXTFIELD = textField;
+        HAS_EXISTING_DISPLAYED_TEXTFIELD = true;
         textField.requestFocus();
     }
 
@@ -43,11 +50,13 @@ public class AddTaskBlockGui extends GuiComponent<HBox> {
         AddTaskCommand addTaskCommand = new AddTaskCommand(blockName, textField.getText());
         runUserCommand(addTaskCommand);
         textField.setVisible(false);
+        HAS_EXISTING_DISPLAYED_TEXTFIELD = false;
         textField.clear();
     }
 
     private void handleEscKey() {
         textField.setVisible(false);
+        HAS_EXISTING_DISPLAYED_TEXTFIELD = false;
         textField.clear();
     }
 
