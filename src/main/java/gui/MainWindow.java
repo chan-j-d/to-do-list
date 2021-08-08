@@ -23,13 +23,15 @@ public class MainWindow extends GuiComponent<AnchorPane> {
     private AnchorPane mainPane;
     @FXML
     private VBox taskListGui;
-
+    @FXML
+    private ScrollPane scrollPane;
 
     public MainWindow() {
         super(FXML_RESOURCE);
     }
 
     public void updateWindow(TaskList taskList) {
+        double currentVValue = scrollPane.getVvalue();
         Map<String, TaskBlock> blockMap = taskList.getBlocksMap();
         List<Node> nodeList = BLOCK_NAMES.stream()
                 .map(blockMap::get)
@@ -38,7 +40,9 @@ public class MainWindow extends GuiComponent<AnchorPane> {
                 .collect(Collectors.toList());
         Platform.runLater(() -> {
             taskListGui.getChildren().clear();
-            taskListGui.getChildren().addAll(nodeList); });
+            taskListGui.getChildren().addAll(nodeList);
+            scrollPane.requestFocus();
+            scrollPane.setVvalue(currentVValue);});
     }
 
 

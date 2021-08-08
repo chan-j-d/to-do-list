@@ -14,6 +14,7 @@
             >
     <left>
         <ToggleButton fx:id="doneButton"
+                    focusTraversable="false"
                     onMousePressed="#registerToggle"/>
     </left>
     <center>
@@ -27,6 +28,7 @@
     </center>
     <right>
         <Button fx:id="deleteButton"
+                    focusTraversable="false"
                     onMousePressed="#registerDelete"/>
     </right>
 
