@@ -3,9 +3,10 @@ package gui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import task.Task;
 import task.TaskBlock;
+
+import static task.TaskBlock.STARTING_COUNT;
 
 public class TaskBlockGui extends GuiComponent<VBox> {
 
@@ -28,9 +29,9 @@ public class TaskBlockGui extends GuiComponent<VBox> {
 
     public void init() {
         blockHeaderLabel.setText(capitalizeString(blockHeader));
+        int index = STARTING_COUNT;
         for (Task task : taskBlock.getTasks()) {
-            block.getChildren().add(new TaskGui(task.getDescription()).getRoot());
-            //block.getChildren().add(new Text(task.getDescription()));
+            block.getChildren().add(new TaskGui(blockHeader, index++, task).getRoot());
         }
         block.getChildren().add(new AddTaskBlockGui(blockHeader).getRoot());
     }

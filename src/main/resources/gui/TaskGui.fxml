@@ -13,7 +13,8 @@
             prefHeight="30.0"
             >
     <left>
-        <ToggleButton fx:id="doneButton" />
+        <ToggleButton fx:id="doneButton"
+                    onMousePressed="#registerToggle"/>
     </left>
     <center>
         <Label fx:id="taskDescriptionLabel"
@@ -25,7 +26,8 @@
         </Label>
     </center>
     <right>
-        <Button fx:id="deleteButton" />
+        <Button fx:id="deleteButton"
+                    onMousePressed="#registerDelete"/>
     </right>
 
 </BorderPane>

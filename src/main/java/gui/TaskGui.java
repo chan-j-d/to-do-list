@@ -1,5 +1,8 @@
 package gui;
 
+import command.CompleteTaskCommand;
+import command.DeleteTaskCommand;
+import command.UndoTaskCommand;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import task.Task;
 
 public class TaskGui extends GuiComponent<HBox> {
 
@@ -21,9 +25,29 @@ public class TaskGui extends GuiComponent<HBox> {
     @FXML
     private Button deleteButton;
 
-    public TaskGui(String taskDescription) {
+    private final String taskBlockName;
+    private final int index;
+
+    public TaskGui(String taskBlockName, int index, Task task) {
         super(FXML_RESOURCE);
-        taskDescriptionLabel.setText(taskDescription);
+        this.taskBlockName = taskBlockName;
+        this.index = index;
+        taskDescriptionLabel.setText(task.getDescription());
+        doneButton.setSelected(task.isDone());
+    }
+
+    @FXML
+    private void registerToggle() {
+        if (!doneButton.isSelected()) {
+            runUserCommand(new CompleteTaskCommand(taskBlockName, index));
+        } else {
+            runUserCommand(new UndoTaskCommand(taskBlockName, index));
+        }
+    }
+
+    @FXML
+    private void registerDelete() {
+        runUserCommand(new DeleteTaskCommand(taskBlockName, index));
     }
 
 
