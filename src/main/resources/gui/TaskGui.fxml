@@ -10,21 +10,27 @@
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:id="box"
-            prefHeight="30.0"
-            >
+            prefHeight="30.0">
     <left>
         <ToggleButton fx:id="doneButton"
                     focusTraversable="false"
                     onMousePressed="#registerToggle"/>
     </left>
     <center>
-        <Label fx:id="taskDescriptionLabel"
-                BorderPane.alignment="CENTER_LEFT"
-                wrapText="true">
+        <StackPane>
+            <Label fx:id="taskDescriptionLabel"
+                        wrapText="true"
+                        StackPane.alignment="CENTER_LEFT"
+                        onMousePressed="#registerEditSignal" />
+            <TextField fx:id="editField"
+                       stylesheets="@TextBox.css"
+                       styleClass="text-field"
+                       visible="false"
+                       onKeyPressed="#registerEdit" />
             <BorderPane.margin>
                 <Insets left="5.0" right="5.0" />
             </BorderPane.margin>
-        </Label>
+        </StackPane>
     </center>
     <right>
         <Button fx:id="deleteButton"
