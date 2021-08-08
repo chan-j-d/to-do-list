@@ -13,6 +13,7 @@
                 onMousePressed="#createTextField" />
     <TextField fx:id="textField"
                 visible="false"
+                styleClass="text-field"
                 onKeyPressed="#respondToKeyPress" />
 
 </HBox>
