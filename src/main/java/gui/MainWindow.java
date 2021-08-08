@@ -41,8 +41,9 @@ public class MainWindow extends GuiComponent<AnchorPane> {
         Platform.runLater(() -> {
             taskListGui.getChildren().clear();
             taskListGui.getChildren().addAll(nodeList);
+            scrollPane.setVvalue(currentVValue);
             scrollPane.requestFocus();
-            scrollPane.setVvalue(currentVValue);});
+        });
     }
 
 

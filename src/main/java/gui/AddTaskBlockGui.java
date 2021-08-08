@@ -49,12 +49,14 @@ public class AddTaskBlockGui extends GuiComponent<HBox> {
     private void handleEnterKey() {
         AddTaskCommand addTaskCommand = new AddTaskCommand(blockName, textField.getText());
         runUserCommand(addTaskCommand);
+        getRoot().getParent().requestFocus();
         textField.setVisible(false);
         HAS_EXISTING_DISPLAYED_TEXTFIELD = false;
         textField.clear();
     }
 
     private void handleEscKey() {
+        getRoot().getParent().requestFocus();
         textField.setVisible(false);
         HAS_EXISTING_DISPLAYED_TEXTFIELD = false;
         textField.clear();
