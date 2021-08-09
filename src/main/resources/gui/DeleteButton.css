@@ -1,6 +1,6 @@
 .delete-button {
         -fx-background-image: url(../images/delete-button.png);
-        -fx-background-size: 15px 17px;
+        -fx-background-size: 15px 15px;
         -fx-background-position: center;
         -fx-background-repeat: no-repeat;
         -fx-background-color: transparent;
@@ -8,8 +8,8 @@
 }
 
 .delete-button:hover {
-        -fx-background-image: url(../images/delete-button-hover.png);
-        -fx-background-size: 15px 22px;
+        -fx-background-image: url(../images/delete-button.png);
+        -fx-background-size: 17px 17px;
         -fx-background-position: center;
         -fx-background-repeat: no-repeat;
         -fx-background-color: transparent;
