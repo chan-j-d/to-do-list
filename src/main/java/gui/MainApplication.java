@@ -13,13 +13,14 @@ import java.util.concurrent.CompletableFuture;
 public class MainApplication extends Application {
 
     private MainWindow mainWindow;
+    private CompletableFuture<Void> toDoListRunner;
 
      @Override
      public void start(Stage stage) {
          mainWindow = new MainWindow();
          IOInterface ioInterface = new GuiIO(mainWindow);
          ToDoList toDoList = new ToDoList(ioInterface);
-         CompletableFuture.runAsync(toDoList::run);
+         toDoListRunner = CompletableFuture.runAsync(toDoList::run);
          Scene scene = new Scene(mainWindow.getRoot());
          stage.setScene(scene);
          stage.setTitle("To-Do-List");
@@ -31,6 +32,7 @@ public class MainApplication extends Application {
      @Override
      public void stop() {
          mainWindow.runUserCommand(new ExitCommand());
+         toDoListRunner.join();
      }
 
 }

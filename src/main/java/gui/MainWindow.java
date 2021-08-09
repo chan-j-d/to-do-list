@@ -45,6 +45,4 @@ public class MainWindow extends GuiComponent<AnchorPane> {
             scrollPane.requestFocus();
         });
     }
-
-
 }
