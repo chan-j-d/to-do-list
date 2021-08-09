@@ -6,6 +6,7 @@ plugins {
     id 'maven-publish'
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.10'
+    id "com.github.johnrengelman.shadow" version "7.0.0"
 }
 
 mainClassName = 'gui.MainApplication'
