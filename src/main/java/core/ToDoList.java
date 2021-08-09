@@ -16,6 +16,7 @@ public class ToDoList {
 
     private static final String SAVEFILE_NAME = "todolist-save";
     private static final Path DEFAULT_PATH = Paths.get(SAVEFILE_NAME);
+    private static final String MESSAGE_NOT_SAVED = "Not saved properly.";
 
     private final Storage storage;
     private final IOInterface ioInterface;
@@ -36,7 +37,10 @@ public class ToDoList {
 
     public void runCommand(Command<TaskList> command) throws CommandException {
         command.run(taskList);
-        storage.save(taskList, saveDirectory);
+        boolean isSaved = storage.save(taskList, saveDirectory);
+        if (!isSaved) {
+            throw new CommandException(MESSAGE_NOT_SAVED);
+        }
     }
 
     public void run() {

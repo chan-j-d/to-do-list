@@ -37,6 +37,7 @@ public class JsonStorageImpl implements Storage {
         Optional<TaskList> optionalTaskList;
         try {
             JsonTaskList jsonTaskList = objectMapper.readValue(Paths.get(path.toString()).toFile(), JsonTaskList.class);
+            objectMapper.writeValue(Paths.get(path.toString()).toFile(), jsonTaskList);
             optionalTaskList = Optional.of(jsonTaskList.toJavaType());
         } catch (IOException ioe) {
             ioe.printStackTrace();
