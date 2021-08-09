@@ -15,6 +15,7 @@
                 visible="false"
                 stylesheets="@TextBox.css"
                 styleClass="text-field"
+                HBox.hgrow="ALWAYS"
                 onKeyPressed="#respondToKeyPress" />
 
 </HBox>
