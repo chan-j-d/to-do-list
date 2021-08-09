@@ -19,6 +19,7 @@ public class MainApplication extends Application {
          CompletableFuture<Void> future = CompletableFuture.runAsync(() -> toDoList.run());
          Scene scene = new Scene(mainWindow.getRoot());
          stage.setScene(scene);
+         stage.setTitle("To-Do-List");
          stage.setMinHeight(400.0);
          stage.setMinWidth(400.0);
          stage.show();
