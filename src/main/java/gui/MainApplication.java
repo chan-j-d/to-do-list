@@ -33,8 +33,4 @@ public class MainApplication extends Application {
          mainWindow.runUserCommand(new ExitCommand());
      }
 
-     public static void main(String[] args) {
-         Application.launch(MainApplication.class, args);
-     }
-
 }
