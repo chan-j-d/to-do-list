@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.Label?>
+<VBox xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:id="block"
+            stylesheets="@TaskBlock.css"
+            styleClass="box-layout">
+    <Label fx:id="blockHeaderLabel" styleClass="label-header" />
+    <Region styleClass="horizontal-line" />
+</VBox>

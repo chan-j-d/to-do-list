@@ -1,0 +1,45 @@
+package io.gui;
+
+import command.Command;
+import gui.MainWindow;
+import io.IOInterface;
+import io.InputException;
+import task.TaskList;
+
+public class GuiIO implements IOInterface {
+
+    private final MainWindow mainWindow;
+    private final CommandSync commandSync;
+
+    public GuiIO(MainWindow mainWindow) {
+        this.mainWindow = mainWindow;
+        commandSync = new CommandSync();
+        mainWindow.setCommandMessenger(commandSync);
+    }
+
+    @Override
+    public Command<TaskList> getUserInput() throws InputException {
+        return commandSync.getUserCommand();
+    }
+
+    @Override
+    public void updateUser(TaskList taskList) {
+        mainWindow.updateWindow(taskList);
+    }
+
+    @Override
+    public void displayOnStartup(TaskList taskList) {
+        mainWindow.updateWindow(taskList);
+    }
+
+    @Override
+    public void displayErrorMessage(String message) {
+        System.out.println("Error: " + message);
+        //TODO
+    }
+
+    @Override
+    public void exit() {
+        //TODO
+    }
+}

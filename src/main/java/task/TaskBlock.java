@@ -7,7 +7,7 @@ import java.util.List;
 public class TaskBlock {
 
     public static final String TITLE_SEPARATOR = "=============";
-    private static final int STARTING_COUNT = 1;
+    public static final int STARTING_COUNT = 1;
 
     private String blockName;
     private List<Task> tasks;

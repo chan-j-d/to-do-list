@@ -1,0 +1,24 @@
+.add-button {
+        -fx-background-image: url(../images/plus-button.png);
+        -fx-background-size: 15px 15px;
+        -fx-background-position: center;
+        -fx-background-repeat: no-repeat;
+        -fx-background-color: transparent;
+
+}
+
+.add-button:hover {
+        -fx-background-image: url('../images/plus-button.png');
+        -fx-background-size: 17px 17px;
+        -fx-background-position: center;
+        -fx-background-repeat: no-repeat;
+        -fx-background-color: transparent;
+}
+
+.add-button:pressed {
+        -fx-background-image: url('../images/plus-button.png');
+        -fx-background-size: 15px 15px;
+        -fx-background-position: center;
+        -fx-background-repeat: no-repeat;
+        -fx-background-color: transparent;
+}

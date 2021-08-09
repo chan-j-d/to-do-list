@@ -1,4 +1,4 @@
-package parser;
+package io.parser;
 
 public class ParseException extends Exception {
 

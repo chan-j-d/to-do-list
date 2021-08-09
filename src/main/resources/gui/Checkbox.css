@@ -1,0 +1,31 @@
+.checkbox {
+        -fx-background-image: url(../images/checkbox-unticked.png);
+        -fx-background-size: 15px 15px;
+        -fx-background-position: center;
+        -fx-background-repeat: no-repeat;
+        -fx-background-color: transparent
+}
+
+.checkbox:hover {
+        -fx-background-image: url(../images/checkbox-unticked.png);
+        -fx-background-size: 15.5px 15.5px;
+        -fx-background-position: center;
+        -fx-background-repeat: no-repeat;
+        -fx-background-color: transparent
+}
+
+.checkbox:selected {
+        -fx-background-image: url(../images/checkbox-ticked.png);
+        -fx-background-size: 15px 15px;
+        -fx-background-position: center;
+        -fx-background-repeat: no-repeat;
+        -fx-background-color: transparent
+}
+
+.checkbox:selected:hover {
+        -fx-background-image: url(../images/checkbox-ticked.png);
+        -fx-background-size: 15.5px 15.5px;
+        -fx-background-position: center;
+        -fx-background-repeat: no-repeat;
+        -fx-background-color: transparent
+}
