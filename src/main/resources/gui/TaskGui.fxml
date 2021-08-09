@@ -35,6 +35,8 @@
     <right>
         <Button fx:id="deleteButton"
                     focusTraversable="false"
+                    stylesheets="@DeleteButton.css"
+                    styleClass="delete-button"
                     onMousePressed="#registerDelete"/>
     </right>
 
