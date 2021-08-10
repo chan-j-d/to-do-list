@@ -30,13 +30,15 @@ public class TaskGui extends GuiComponent<BorderPane> {
     private TextField editField;
 
     private final String taskBlockName;
+    private String currentDescription;
     private final int index;
 
     public TaskGui(String taskBlockName, int index, Task task) {
         super(FXML_RESOURCE);
         this.taskBlockName = taskBlockName;
         this.index = index;
-        taskDescriptionLabel.setText(task.getDescription());
+        currentDescription = task.getDescription();
+        taskDescriptionLabel.setText(currentDescription);
         doneButton.setSelected(task.isDone());
     }
 
@@ -61,8 +63,13 @@ public class TaskGui extends GuiComponent<BorderPane> {
         }
         HAS_EXISTING_DISPLAYED_TEXTFIELD = true;
         CURRENTLY_EDITING_TASK = this;
+        editField.setText(currentDescription);
         switchToTextField();
-        Platform.runLater(() -> editField.requestFocus());
+        Platform.runLater(() -> {
+            editField.requestFocus();
+            editField.positionCaret(currentDescription.length());
+            editField.selectAll();
+        });
     }
 
     @FXML
