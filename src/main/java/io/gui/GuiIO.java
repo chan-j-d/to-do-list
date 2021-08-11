@@ -2,15 +2,18 @@ package io.gui;
 
 import command.Command;
 import gui.MainWindow;
-import io.IOInterface;
 import io.InputException;
+import io.IoInterface;
 import task.TaskList;
 
-public class GuiIO implements IOInterface {
+public class GuiIO implements IoInterface {
 
     private final MainWindow mainWindow;
     private final CommandSync commandSync;
 
+    /**
+     * Creates a new IoInterface for the given {@code mainWindow} to communicate with {@code ToDoList}.
+     */
     public GuiIO(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
         commandSync = new CommandSync();

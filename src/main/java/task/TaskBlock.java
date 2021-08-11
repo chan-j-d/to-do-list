@@ -17,6 +17,10 @@ public class TaskBlock {
         tasks = new ArrayList<>();
     }
 
+    /**
+     * Creates a new {@code TaskBlock} with the given {@code blockName} and a
+     * list of {@code tasks}.
+     */
     public TaskBlock(String blockName, List<Task> tasks) {
         this.blockName = blockName;
         this.tasks = new ArrayList<>();

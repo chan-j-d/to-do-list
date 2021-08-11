@@ -1,16 +1,16 @@
 package core;
 
 import command.Command;
-import command.ExitCommand;
-import io.IOInterface;
-import io.InputException;
 import command.CommandException;
+import command.ExitCommand;
+import io.InputException;
+import io.IoInterface;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import storage.JsonStorageImpl;
 import storage.Storage;
 import task.TaskList;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class ToDoList {
 
@@ -20,11 +20,15 @@ public class ToDoList {
     private static final String MESSAGE_NOT_SAVED = "Not saved properly.";
 
     private final Storage storage;
-    private final IOInterface ioInterface;
+    private final IoInterface ioInterface;
     private final TaskList taskList;
     private Path saveDirectory;
 
-    public ToDoList(IOInterface ioInterface) {
+    /**
+     * Creates a new {@code ToDoList} instance which utilizes the provided
+     * {@code ioInterface} to communicate with the user.
+     */
+    public ToDoList(IoInterface ioInterface) {
         storage = new JsonStorageImpl();
         this.ioInterface = ioInterface;
         saveDirectory = DEFAULT_PATH;
@@ -32,10 +36,16 @@ public class ToDoList {
                 .orElse(new TaskList());
     }
 
+    /**
+     * Sets the save path of the list to {@code path}.
+     */
     public void setSavePath(Path path) {
         this.saveDirectory = path;
     }
 
+    /**
+     * Runs the given {@code command} on its {@code taskList}.
+     */
     public void runCommand(Command<TaskList> command) throws CommandException {
         command.run(taskList);
         boolean isSaved = storage.save(taskList, saveDirectory);
@@ -44,6 +54,10 @@ public class ToDoList {
         }
     }
 
+    /**
+     * Runs the program to constantly query for user commands until an
+     * {@code ExitCommand} is given.
+     */
     public void run() {
         ioInterface.displayOnStartup(taskList);
         Command<TaskList> command = null;

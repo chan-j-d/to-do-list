@@ -3,14 +3,12 @@ package storage;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import task.TaskList;
-
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
+import task.TaskList;
 
 public class JsonStorageImpl implements Storage {
 
@@ -21,6 +19,7 @@ public class JsonStorageImpl implements Storage {
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
     }
 
+    @Override
     public boolean save(TaskList list, Path path) {
         JsonTaskList jsonTaskList = JsonTaskList.convertToJson(list);
 
@@ -47,6 +46,7 @@ public class JsonStorageImpl implements Storage {
         return isSaved;
     }
 
+    @Override
     public Optional<TaskList> load(Path path) {
         Optional<TaskList> optionalTaskList;
         try {

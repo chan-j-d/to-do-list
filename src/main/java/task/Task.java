@@ -32,7 +32,7 @@ public class Task {
     }
 
     private char getCompletionSymbol() {
-        return isDone ? '\u2713' : '\u2717';
+        return isDone ? '1' : '0';
     }
 
     @Override

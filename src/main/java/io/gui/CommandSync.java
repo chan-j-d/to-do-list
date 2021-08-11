@@ -1,9 +1,8 @@
 package io.gui;
 
 import command.Command;
-import task.TaskList;
-
 import java.util.concurrent.Semaphore;
+import task.TaskList;
 
 public class CommandSync implements CommandMessenger {
 
@@ -15,6 +14,9 @@ public class CommandSync implements CommandMessenger {
         semaphore = new Semaphore(0);
     }
 
+    /**
+     * Retrieves the next command from the user.
+     */
     public Command<TaskList> getUserCommand() {
         try {
             semaphore.acquire();

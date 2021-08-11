@@ -7,7 +7,9 @@ public class TaskList {
 
     private final Map<String, TaskBlock> blocks;
 
-
+    /**
+     * Creates a new empty {@code TaskList}.
+     */
     public TaskList() {
         blocks = new LinkedHashMap<>();
         for (String day : BlockNames.BLOCK_NAMES) {
@@ -15,6 +17,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Creates a new {@code TaskList} object with the given {@code blocks} mapping
+     * of blocknames to {@code TaskBlock}s.
+     */
     public TaskList(Map<String, TaskBlock> blocks) {
         this.blocks = new LinkedHashMap<>();
         for (String key : blocks.keySet()) {
@@ -37,6 +43,7 @@ public class TaskList {
     public void addTask(String day, String task, boolean isDone, int index) {
         blocks.get(day).addTask(task, isDone, index);
     }
+
     public void completeTask(String blockName, int index) {
         blocks.get(blockName).completeTask(index);
     }

@@ -2,17 +2,19 @@ package storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import task.TaskBlock;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import task.TaskBlock;
 
 public class JsonTaskBlock {
 
     private final String blockHeader;
     private final List<JsonTask> tasks;
 
+    /**
+     * Creates a JSON equivalent object of a {@code TaskBlock} for saving.
+     */
     @JsonCreator
     public JsonTaskBlock(@JsonProperty("blockHeader") String blockHeader,
             @JsonProperty("tasks") List<JsonTask> tasks) {
