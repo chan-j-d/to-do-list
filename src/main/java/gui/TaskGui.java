@@ -1,6 +1,9 @@
 package gui;
 
-import command.*;
+import command.CompleteTaskCommand;
+import command.DeleteTaskCommand;
+import command.EditTaskCommand;
+import command.UndoTaskCommand;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -33,6 +36,10 @@ public class TaskGui extends GuiComponent<BorderPane> {
     private String currentDescription;
     private final int index;
 
+    /**
+     * Creates a new gui node for a specific task.
+     * It contains information about its parent {@code taskBlockName} and current {@code index}.
+     */
     public TaskGui(String taskBlockName, int index, Task task) {
         super(FXML_RESOURCE);
         this.taskBlockName = taskBlockName;

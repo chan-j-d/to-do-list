@@ -1,26 +1,32 @@
 package storage;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import task.TaskBlock;
-import task.TaskList;
+import static task.BlockNames.BLOCK_NAMES;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import static task.BlockNames.BLOCK_NAMES;
+import task.TaskBlock;
+import task.TaskList;
 
 public class JsonTaskList {
 
     private final Map<String, JsonTaskBlock> blocks;
 
-    public JsonTaskList (@JsonProperty("blocks") Map<String, JsonTaskBlock> blocks) {
+
+    /**
+     * Creates a JSON equivalent object of a {@code TaskList} for saving.
+     */
+    public JsonTaskList(@JsonProperty("blocks") Map<String, JsonTaskBlock> blocks) {
         this.blocks = new LinkedHashMap<>();
         for (String key : blocks.keySet()) {
             this.blocks.put(key, blocks.get(key));
         }
     }
 
+    /**
+     * Returns the Java equivalent {@code TaskList} of itself.
+     */
     public TaskList toJavaType() {
         Map<String, TaskBlock> nonJsonBlocks = new LinkedHashMap<>();
         for (String day : BLOCK_NAMES) {

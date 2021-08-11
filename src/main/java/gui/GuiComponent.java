@@ -2,16 +2,18 @@ package gui;
 
 import command.Command;
 import io.gui.CommandMessenger;
+import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import task.TaskList;
-
-import java.io.IOException;
 
 public abstract class GuiComponent<T> {
 
     private final FXMLLoader fxmlLoader = new FXMLLoader();
     private static CommandMessenger COMMAND_MESSENGER;
 
+    /**
+     * Creates a new gui component loaded from an {@code resource}.
+     */
     public GuiComponent(String resource) {
         fxmlLoader.setLocation(getClass().getResource(resource));
         fxmlLoader.setController(this);

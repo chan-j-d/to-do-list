@@ -9,6 +9,10 @@ public class EditTaskCommand implements Command<TaskList> {
     private final int index;
     private final String newDescription;
 
+    /**
+     * Creates a new command that edits the task in {@code blockName} at {@code index}
+     * to the new {@code newDescription}.
+     */
     public EditTaskCommand(String blockName, int index, String newDescription) {
         this.blockName = blockName;
         this.index = index;

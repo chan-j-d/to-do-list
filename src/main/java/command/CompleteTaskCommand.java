@@ -12,6 +12,7 @@ public class CompleteTaskCommand implements Command<TaskList> {
         this.index = index;
     }
 
+    @Override
     public void run(TaskList list) throws CommandException {
         try {
             list.completeTask(day, index);

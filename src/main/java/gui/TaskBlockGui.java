@@ -1,12 +1,12 @@
 package gui;
 
+import static task.TaskBlock.STARTING_COUNT;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import task.Task;
 import task.TaskBlock;
-
-import static task.TaskBlock.STARTING_COUNT;
 
 public class TaskBlockGui extends GuiComponent<VBox> {
 
@@ -20,6 +20,9 @@ public class TaskBlockGui extends GuiComponent<VBox> {
     private String blockHeader;
     private final TaskBlock taskBlock;
 
+    /**
+     * Creates a singular task block gui from the given {@code taskBlock}.
+     */
     public TaskBlockGui(TaskBlock taskBlock) {
         super(FXML_RESOURCE);
         blockHeader = taskBlock.getBlockName();
@@ -27,6 +30,10 @@ public class TaskBlockGui extends GuiComponent<VBox> {
         init();
     }
 
+    /**
+     * Initialises the necessary values that cannot be done in the FXML file easily.
+     * Sets block-header and fills up block with existing tasks in the task block.
+     */
     public void init() {
         blockHeaderLabel.setText(capitalizeString(blockHeader));
         int index = STARTING_COUNT;

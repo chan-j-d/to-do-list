@@ -12,6 +12,7 @@ public class DeleteTaskCommand implements Command<TaskList> {
         this.index = index;
     }
 
+    @Override
     public void run(TaskList taskList) throws CommandException {
         try {
             taskList.deleteTask(day, index);
