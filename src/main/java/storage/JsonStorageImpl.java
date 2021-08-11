@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import task.TaskList;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
@@ -21,6 +23,18 @@ public class JsonStorageImpl implements Storage {
 
     public boolean save(TaskList list, Path path) {
         JsonTaskList jsonTaskList = JsonTaskList.convertToJson(list);
+
+        boolean doesFileExist = Files.exists(path);
+        Path parentDirectory = path.getParent();
+        boolean doesParentDirectoryExist = Files.exists(parentDirectory);
+        if (!doesFileExist && !doesParentDirectoryExist) {
+            try {
+                Files.createDirectory(parentDirectory);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
 
         boolean isSaved;
         try {

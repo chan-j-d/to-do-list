@@ -14,8 +14,9 @@ import java.nio.file.Paths;
 
 public class ToDoList {
 
+    private static final String SAVEFILE_DIRECTORY = "to-do-list";
     private static final String SAVEFILE_NAME = "todolist-save";
-    private static final Path DEFAULT_PATH = Paths.get(SAVEFILE_NAME);
+    private static final Path DEFAULT_PATH = Paths.get(SAVEFILE_DIRECTORY, SAVEFILE_NAME);
     private static final String MESSAGE_NOT_SAVED = "Not saved properly.";
 
     private final Storage storage;
