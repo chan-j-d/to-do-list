@@ -8,26 +8,25 @@ public class DeleteTaskCommandTest extends CommandTestTemplate {
 
     @Test
     public void run_validDeleteCommand_success() throws CommandException {
+        int expectedNumberOnMondayFirst = 1;
         DeleteTaskCommand command1 = new DeleteTaskCommand("monday", 2);
-        DeleteTaskCommand command2 = new DeleteTaskCommand("tuesday", 1);
-        DeleteTaskCommand command3 = new DeleteTaskCommand("monday", 1);
-        int COUNT_EXPECTED_NUMBER_ON_MONDAY_FIRST = 1;
-        int COUNT_EXPECTED_NUMBER_ON_MONDAY_SECOND = 0;
-        int COUNT_EXPECTED_NUMBER_ON_TUESDAY = 0;
-
         command1.run(modelTaskList);
-        Assertions.assertEquals(COUNT_EXPECTED_NUMBER_ON_MONDAY_FIRST,
+        Assertions.assertEquals(expectedNumberOnMondayFirst,
                 modelTaskList.getNumTasksInBlock("monday"));
 
+        int expectedNumberOnTuesday = 0;
+        DeleteTaskCommand command2 = new DeleteTaskCommand("tuesday", 1);
         command2.run(modelTaskList);
-        Assertions.assertEquals(COUNT_EXPECTED_NUMBER_ON_TUESDAY,
+        Assertions.assertEquals(expectedNumberOnTuesday,
                 modelTaskList.getNumTasksInBlock("tuesday"));
         // ensure monday has not changed
-        Assertions.assertEquals(COUNT_EXPECTED_NUMBER_ON_MONDAY_FIRST,
+        Assertions.assertEquals(expectedNumberOnMondayFirst,
                 modelTaskList.getNumTasksInBlock("monday"));
 
+        int expectedNumberOnMondaySecond = 0;
+        DeleteTaskCommand command3 = new DeleteTaskCommand("monday", 1);
         command3.run(modelTaskList);
-        Assertions.assertEquals(COUNT_EXPECTED_NUMBER_ON_MONDAY_SECOND,
+        Assertions.assertEquals(expectedNumberOnMondaySecond,
                 modelTaskList.getNumTasksInBlock("monday"));
     }
 

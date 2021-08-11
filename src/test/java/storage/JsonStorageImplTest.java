@@ -1,14 +1,13 @@
 package storage;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import task.TaskList;
 import template.TaskListTemplate;
 import util.FileUtil;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Optional;
 
 public class JsonStorageImplTest {
 

@@ -1,12 +1,12 @@
 package command;
 
+import static template.TaskListTemplate.STRING_DESCRIPTION_ONE;
+import static template.TaskListTemplate.STRING_DESCRIPTION_THREE;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import task.Task;
 import template.CommandTestTemplate;
-
-import static template.TaskListTemplate.STRING_DESCRIPTION_ONE;
-import static template.TaskListTemplate.STRING_DESCRIPTION_THREE;
 
 public class UndoTaskCommandTest extends CommandTestTemplate {
 
