@@ -35,11 +35,18 @@
         </StackPane>
     </center>
     <right>
-        <Button fx:id="deleteButton"
-                    focusTraversable="false"
-                    stylesheets="@DeleteButton.css"
-                    styleClass="delete-button"
-                    onMousePressed="#registerDelete"/>
+        <HBox spacing="5.0">
+            <Button fx:id="pushNextDayButton"
+                        focusTraversable="false"
+                        onMousePressed="#registerMoveNextDay"
+                        stylesheets="@MoveButton.css"
+                        styleClass="move-button" />
+            <Button fx:id="deleteButton"
+                        focusTraversable="false"
+                        stylesheets="@DeleteButton.css"
+                        styleClass="delete-button"
+                        onMousePressed="#registerDelete" />
+        </HBox>
     </right>
 
 </BorderPane>

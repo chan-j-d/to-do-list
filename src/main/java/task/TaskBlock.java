@@ -63,9 +63,8 @@ public class TaskBlock {
         getTask(index).markUndone();
     }
 
-    public boolean deleteTask(int index) {
-        Task taskToRemove = getTask(index);
-        return tasks.remove(taskToRemove);
+    public Task deleteTask(int index) {
+        return tasks.remove(adjustIndex(index));
     }
 
     public int getNumTasks() {
