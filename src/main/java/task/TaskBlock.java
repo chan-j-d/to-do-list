@@ -64,7 +64,7 @@ public class TaskBlock {
     }
 
     public Task deleteTask(int index) {
-        return tasks.remove(index);
+        return tasks.remove(adjustIndex(index));
     }
 
     public int getNumTasks() {

@@ -17,8 +17,12 @@ public class MoveTaskCommand implements Command<TaskList> {
 
     @Override
     public void run(TaskList taskList) throws CommandException {
-        Task taskToMove = taskList.deleteTask(fromBlockName, index);
-        taskList.addTask(toBlockName, taskToMove.getDescription(), taskToMove.isDone());
+        try {
+            Task taskToMove = taskList.deleteTask(fromBlockName, index);
+            taskList.addTask(toBlockName, taskToMove.getDescription(), taskToMove.isDone());
+        } catch (IndexOutOfBoundsException ioobe) {
+            throw new CommandException(ioobe.getMessage());
+        }
     }
 
     @Override
