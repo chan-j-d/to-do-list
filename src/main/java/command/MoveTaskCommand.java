@@ -9,6 +9,10 @@ public class MoveTaskCommand implements Command<TaskList> {
     private final int index;
     private final String toBlockName;
 
+    /**
+     * Creates a new command that moves the task in {@code fromBlockName} at {@code index}
+     * to {@code toBlockName}.
+     */
     public MoveTaskCommand(String fromBlockName, int index, String toBlockName) {
         this.fromBlockName = fromBlockName;
         this.index = index;
