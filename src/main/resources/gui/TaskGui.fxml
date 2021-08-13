@@ -38,12 +38,14 @@
         <HBox spacing="5.0">
             <Button fx:id="pushNextDayButton"
                         focusTraversable="false"
-                        onMousePressed="#registerMoveNextDay"/>
+                        onMousePressed="#registerMoveNextDay"
+                        stylesheets="@MoveButton.css"
+                        styleClass="move-button" />
             <Button fx:id="deleteButton"
                         focusTraversable="false"
                         stylesheets="@DeleteButton.css"
                         styleClass="delete-button"
-                        onMousePressed="#registerDelete"/>
+                        onMousePressed="#registerDelete" />
         </HBox>
     </right>
 
