@@ -1,12 +1,11 @@
 import gui.MainApplication;
-import javafx.application.Application;
-import logging.LogsManager;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Application;
+import logging.LogsManager;
 
 public class Main {
 
@@ -15,8 +14,11 @@ public class Main {
     private static final Path DEFAULT_LOG_PATH = Paths.get(SAVEFILE_DIRECTORY, LOGFILE_NAME);
     private static final String ERROR_LAUNCHING_GUI = "Error launching gui for application.";
 
-    private static Logger LOGGER ;
+    private static Logger LOGGER;
 
+    /**
+     * Launches the main GUI application. Sets the logfile path before launching.
+     */
     public static void main(String[] args) {
         try {
             LogsManager.setLogFilePath(DEFAULT_LOG_PATH.toString());

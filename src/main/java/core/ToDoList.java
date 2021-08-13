@@ -5,13 +5,10 @@ import command.CommandException;
 import command.ExitCommand;
 import io.InputException;
 import io.IoInterface;
-
-import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import logging.LogsManager;
 import storage.JsonStorageImpl;
 import storage.SaveException;
@@ -93,7 +90,7 @@ public class ToDoList {
                 runCommand(command);
                 ioInterface.updateUser(taskList);
             } catch (CommandException ce) {
-                logger.log(Level.WARNING, String.format(ERROR_COMMAND_RUN, command) ,ce);
+                logger.log(Level.WARNING, String.format(ERROR_COMMAND_RUN, command), ce);
                 ioInterface.displayErrorMessage(ce.getMessage());
             } catch (SaveException se) {
                 logger.log(Level.SEVERE, String.format(ERROR_SAVING, saveDirectory), se);

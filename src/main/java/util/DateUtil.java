@@ -8,6 +8,9 @@ public class DateUtil {
             "friday", "saturday", "sunday");
     public static final int NUM_DAYS_IN_WEEK = 7;
 
+    /**
+     * Returns the day after the given {@code day}.
+     */
     public static String getNextDay(String day) {
         int currentIndex = DAY_NAMES.indexOf(day);
 

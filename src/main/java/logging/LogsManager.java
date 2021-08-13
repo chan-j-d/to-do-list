@@ -1,8 +1,6 @@
 package logging;
 
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.FileHandler;
@@ -19,6 +17,9 @@ public class LogsManager {
 
     private static Handler FILE_HANDLER;
 
+    /**
+     * Returns a logger associated with the given {@code loggerName}.
+     */
     public static Logger getLogger(String loggerName) {
         Logger logger = Logger.getLogger(loggerName);
         logger.setUseParentHandlers(false);
@@ -32,6 +33,9 @@ public class LogsManager {
         return getLogger(clazz.getSimpleName());
     }
 
+    /**
+     * Sets the filepath for the logging output. Also sets it to all existing loggers.
+     */
     public static void setLogFilePath(String logFilePath) throws IOException {
         FILE_HANDLER = new FileHandler(logFilePath,
                 LIMIT,
