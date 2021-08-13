@@ -3,12 +3,14 @@ package io;
 import command.Command;
 import task.TaskList;
 
+import java.util.List;
+
 public interface IoInterface {
 
     /**
      * Returns the current user request in the form of a {@code Command<TaskList>}.
      */
-    public Command<TaskList> getUserInput() throws InputException;
+    public List<Command<TaskList>> getUserInput() throws InputException;
 
     /**
      * Updates the user's view with the change in {@code taskList}.

@@ -5,13 +5,16 @@ import command.CommandException;
 import command.ExitCommand;
 import io.InputException;
 import io.IoInterface;
+
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import logging.LogsManager;
 import storage.JsonStorageImpl;
-import storage.SaveException;
 import storage.Storage;
 import task.TaskList;
 
@@ -21,13 +24,13 @@ public class ToDoList {
     private static final String SAVEFILE_DIRECTORY = "to-do-list";
     private static final String SAVEFILE_NAME = "todolist-save";
     private static final Path DEFAULT_SAVE_PATH = Paths.get(SAVEFILE_DIRECTORY, SAVEFILE_NAME);
-    private static final String LOGFILE_NAME = "todolist-logs";
-    private static final Path DEFAULT_LOG_PATH = Paths.get(SAVEFILE_DIRECTORY, LOGFILE_NAME);
     private static final String MESSAGE_NOT_SAVED = "Not saved properly.";
 
     private static final String ERROR_GETTING_INPUT = "Error encountered when retrieving user input.";
     private static final String ERROR_COMMAND_RUN = "Unable to run command: %s";
     private static final String ERROR_SAVING = "Unable to save to %s.";
+    private static final String ERROR_UNEXPECTED_EXCEPTION =
+            "Unexpected error encountered. Command was not run properly.";
 
     private final Storage storage;
     private final IoInterface ioInterface;
@@ -42,10 +45,20 @@ public class ToDoList {
     public ToDoList(IoInterface ioInterface) {
         storage = new JsonStorageImpl();
         this.ioInterface = ioInterface;
-        saveDirectory = DEFAULT_SAVE_PATH;
-        taskList = storage.load(saveDirectory)
-                .orElse(new TaskList());
         logger = LogsManager.getLogger(this.getClass());
+        saveDirectory = DEFAULT_SAVE_PATH;
+        taskList = loadTaskList(DEFAULT_SAVE_PATH)
+                .orElse(new TaskList());
+    }
+
+    private Optional<TaskList> loadTaskList(Path path) {
+        try {
+            return Optional.of(storage.load(path));
+        } catch (IOException ie) {
+            logger.log(Level.WARNING, MESSAGE_NOT_SAVED, ie);
+            ioInterface.displayErrorMessage(MESSAGE_NOT_SAVED);
+        }
+        return Optional.empty();
     }
 
     /**
@@ -62,11 +75,19 @@ public class ToDoList {
     /**
      * Runs the given {@code command} on its {@code taskList}.
      */
-    public void runCommand(Command<TaskList> command) throws SaveException, CommandException {
-        command.run(taskList);
-        boolean isSaved = storage.save(taskList, saveDirectory);
-        if (!isSaved) {
-            throw new SaveException(MESSAGE_NOT_SAVED);
+    public void runCommand(Command<TaskList> command) {
+        try {
+            command.run(taskList);
+            storage.save(taskList, saveDirectory);
+        } catch (IOException ie) {
+            logger.log(Level.WARNING, ERROR_SAVING, ie);
+            ioInterface.displayErrorMessage(ERROR_SAVING);
+        } catch (CommandException ce) {
+            logger.log(Level.WARNING, String.format(ERROR_COMMAND_RUN, command), ce);
+            ioInterface.displayErrorMessage(ce.getMessage());
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, ERROR_UNEXPECTED_EXCEPTION, e);
+            ioInterface.displayErrorMessage(ERROR_UNEXPECTED_EXCEPTION);
         }
     }
 
@@ -76,25 +97,23 @@ public class ToDoList {
      */
     public void run() {
         ioInterface.displayOnStartup(taskList);
-        Command<TaskList> command = null;
-        while (!isExitCommand(command)) {
+        List<Command<TaskList>> commands = null;
+        boolean isExitCommand = false;
+        while (!isExitCommand) {
             try {
-                command = ioInterface.getUserInput();
+                commands = ioInterface.getUserInput();
             } catch (InputException ie) {
                 logger.log(Level.WARNING, ERROR_GETTING_INPUT, ie);
                 ioInterface.displayErrorMessage(ie.getMessage());
                 continue;
             }
 
-            try {
+            for (Command<TaskList> command : commands) {
                 runCommand(command);
                 ioInterface.updateUser(taskList);
-            } catch (CommandException ce) {
-                logger.log(Level.WARNING, String.format(ERROR_COMMAND_RUN, command), ce);
-                ioInterface.displayErrorMessage(ce.getMessage());
-            } catch (SaveException se) {
-                logger.log(Level.SEVERE, String.format(ERROR_SAVING, saveDirectory), se);
-                ioInterface.displayErrorMessage(se.getMessage());
+                if (isExitCommand(command)) {
+                    isExitCommand = true;
+                }
             }
         }
     }

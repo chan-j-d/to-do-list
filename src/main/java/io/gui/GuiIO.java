@@ -6,6 +6,8 @@ import io.InputException;
 import io.IoInterface;
 import task.TaskList;
 
+import java.util.List;
+
 public class GuiIO implements IoInterface {
 
     private final MainWindow mainWindow;
@@ -21,7 +23,7 @@ public class GuiIO implements IoInterface {
     }
 
     @Override
-    public Command<TaskList> getUserInput() throws InputException {
+    public List<Command<TaskList>> getUserInput() throws InputException {
         return commandSync.getUserCommand();
     }
 

@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Optional;
 import task.TaskList;
 
 public class JsonStorageImpl implements Storage {
@@ -20,43 +19,24 @@ public class JsonStorageImpl implements Storage {
     }
 
     @Override
-    public boolean save(TaskList list, Path path) {
+    public boolean save(TaskList list, Path path) throws IOException {
         JsonTaskList jsonTaskList = JsonTaskList.convertToJson(list);
 
         boolean doesFileExist = Files.exists(path);
         Path parentDirectory = path.getParent();
         boolean doesParentDirectoryExist = Files.exists(parentDirectory);
         if (!doesFileExist && !doesParentDirectoryExist) {
-            try {
-                Files.createDirectory(parentDirectory);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return false;
-            }
+            Files.createDirectory(parentDirectory);
         }
 
-        boolean isSaved;
-        try {
-            objectMapper.writeValue(Paths.get(path.toString()).toFile(), jsonTaskList);
-            isSaved = true;
-        } catch (IOException ioe) {
-            isSaved = false;
-            ioe.printStackTrace();
-        }
-        return isSaved;
+        objectMapper.writeValue(Paths.get(path.toString()).toFile(), jsonTaskList);
+        return true;
     }
 
     @Override
-    public Optional<TaskList> load(Path path) {
-        Optional<TaskList> optionalTaskList;
-        try {
-            JsonTaskList jsonTaskList = objectMapper.readValue(Paths.get(path.toString()).toFile(), JsonTaskList.class);
-            optionalTaskList = Optional.of(jsonTaskList.toJavaType());
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-            optionalTaskList = Optional.empty();
-        }
-        return optionalTaskList;
+    public TaskList load(Path path) throws IOException {
+        JsonTaskList jsonTaskList = objectMapper.readValue(Paths.get(path.toString()).toFile(), JsonTaskList.class);
+        return jsonTaskList.toJavaType();
     }
 
 }

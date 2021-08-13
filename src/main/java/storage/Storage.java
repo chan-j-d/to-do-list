@@ -1,5 +1,6 @@
 package storage;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 import task.TaskList;
@@ -11,12 +12,11 @@ public interface Storage {
      * If {@code path} does not exist, creates a new save file.
      * If {@code path} exists, overwrites current file.
      */
-    public boolean save(TaskList list, Path path);
+    public boolean save(TaskList list, Path path) throws IOException;
 
     /**
      * Loads the task list from the given {@code path}.
-     * If no available save file is found, returns an empty {@code Optional}.
      */
-    public Optional<TaskList> load(Path path);
+    public TaskList load(Path path) throws IOException;
 
 }
