@@ -29,6 +29,8 @@ public class ToDoList {
     private static final String ERROR_GETTING_INPUT = "Error encountered when retrieving user input.";
     private static final String ERROR_COMMAND_RUN = "Unable to run command: %s";
     private static final String ERROR_SAVING = "Unable to save to %s.";
+    private static final String ERROR_UNEXPECTED_EXCEPTION =
+            "Unexpected error encountered. Command was not run properly.";
 
     private final Storage storage;
     private final IoInterface ioInterface;
@@ -83,6 +85,9 @@ public class ToDoList {
         } catch (CommandException ce) {
             logger.log(Level.WARNING, String.format(ERROR_COMMAND_RUN, command), ce);
             ioInterface.displayErrorMessage(ce.getMessage());
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, ERROR_UNEXPECTED_EXCEPTION, e);
+            ioInterface.displayErrorMessage(ERROR_UNEXPECTED_EXCEPTION);
         }
     }
 
