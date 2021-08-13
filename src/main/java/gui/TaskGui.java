@@ -3,6 +3,7 @@ package gui;
 import command.CompleteTaskCommand;
 import command.DeleteTaskCommand;
 import command.EditTaskCommand;
+import command.MoveTaskCommand;
 import command.UndoTaskCommand;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import task.Task;
+import util.DateUtil;
 
 public class TaskGui extends GuiComponent<BorderPane> {
 
@@ -27,6 +29,8 @@ public class TaskGui extends GuiComponent<BorderPane> {
     private Label taskDescriptionLabel;
     @FXML
     private ToggleButton doneButton;
+    @FXML
+    private Button pushNextDayButton;
     @FXML
     private Button deleteButton;
     @FXML
@@ -116,6 +120,12 @@ public class TaskGui extends GuiComponent<BorderPane> {
     private void switchToLabel() {
         editField.setVisible(false);
         taskDescriptionLabel.setVisible(true);
+    }
+
+    @FXML
+    private void registerMoveNextDay() {
+        MoveTaskCommand moveTaskCommand = new MoveTaskCommand(taskBlockName, index, DateUtil.getNextDay(taskBlockName));
+        runUserCommand(moveTaskCommand);
     }
 
 }
