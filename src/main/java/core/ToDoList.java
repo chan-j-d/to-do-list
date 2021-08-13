@@ -5,9 +5,16 @@ import command.CommandException;
 import command.ExitCommand;
 import io.InputException;
 import io.IoInterface;
+
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import logging.LogsManager;
 import storage.JsonStorageImpl;
+import storage.SaveException;
 import storage.Storage;
 import task.TaskList;
 
@@ -16,12 +23,19 @@ public class ToDoList {
 
     private static final String SAVEFILE_DIRECTORY = "to-do-list";
     private static final String SAVEFILE_NAME = "todolist-save";
-    private static final Path DEFAULT_PATH = Paths.get(SAVEFILE_DIRECTORY, SAVEFILE_NAME);
+    private static final Path DEFAULT_SAVE_PATH = Paths.get(SAVEFILE_DIRECTORY, SAVEFILE_NAME);
+    private static final String LOGFILE_NAME = "todolist-logs";
+    private static final Path DEFAULT_LOG_PATH = Paths.get(SAVEFILE_DIRECTORY, LOGFILE_NAME);
     private static final String MESSAGE_NOT_SAVED = "Not saved properly.";
+
+    private static final String ERROR_GETTING_INPUT = "Error encountered when retrieving user input.";
+    private static final String ERROR_COMMAND_RUN = "Unable to run command: %s";
+    private static final String ERROR_SAVING = "Unable to save to %s.";
 
     private final Storage storage;
     private final IoInterface ioInterface;
     private final TaskList taskList;
+    private final Logger logger;
     private Path saveDirectory;
 
     /**
@@ -31,9 +45,10 @@ public class ToDoList {
     public ToDoList(IoInterface ioInterface) {
         storage = new JsonStorageImpl();
         this.ioInterface = ioInterface;
-        saveDirectory = DEFAULT_PATH;
+        saveDirectory = DEFAULT_SAVE_PATH;
         taskList = storage.load(saveDirectory)
                 .orElse(new TaskList());
+        logger = LogsManager.getLogger(this.getClass());
     }
 
     /**
@@ -43,14 +58,18 @@ public class ToDoList {
         this.saveDirectory = path;
     }
 
+    public Path getSavePath() {
+        return saveDirectory;
+    }
+
     /**
      * Runs the given {@code command} on its {@code taskList}.
      */
-    public void runCommand(Command<TaskList> command) throws CommandException {
+    public void runCommand(Command<TaskList> command) throws SaveException, CommandException {
         command.run(taskList);
         boolean isSaved = storage.save(taskList, saveDirectory);
         if (!isSaved) {
-            throw new CommandException(MESSAGE_NOT_SAVED);
+            throw new SaveException(MESSAGE_NOT_SAVED);
         }
     }
 
@@ -65,6 +84,7 @@ public class ToDoList {
             try {
                 command = ioInterface.getUserInput();
             } catch (InputException ie) {
+                logger.log(Level.WARNING, ERROR_GETTING_INPUT, ie);
                 ioInterface.displayErrorMessage(ie.getMessage());
                 continue;
             }
@@ -73,7 +93,11 @@ public class ToDoList {
                 runCommand(command);
                 ioInterface.updateUser(taskList);
             } catch (CommandException ce) {
+                logger.log(Level.WARNING, String.format(ERROR_COMMAND_RUN, command) ,ce);
                 ioInterface.displayErrorMessage(ce.getMessage());
+            } catch (SaveException se) {
+                logger.log(Level.SEVERE, String.format(ERROR_SAVING, saveDirectory), se);
+                ioInterface.displayErrorMessage(se.getMessage());
             }
         }
     }
