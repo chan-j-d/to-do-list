@@ -48,12 +48,6 @@ public class ToDoList {
         saveDirectory = DEFAULT_SAVE_PATH;
         taskList = storage.load(saveDirectory)
                 .orElse(new TaskList());
-
-        try {
-            LogsManager.setLogFilePath(DEFAULT_LOG_PATH.toString());
-        } catch (IOException ioe) {
-            this.ioInterface.displayErrorMessage(ioe.getMessage());
-        }
         logger = LogsManager.getLogger(this.getClass());
     }
 
