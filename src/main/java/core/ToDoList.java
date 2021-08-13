@@ -5,8 +5,13 @@ import command.CommandException;
 import command.ExitCommand;
 import io.InputException;
 import io.IoInterface;
+
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.logging.Logger;
+
+import logging.LogsManager;
 import storage.JsonStorageImpl;
 import storage.Storage;
 import task.TaskList;
@@ -16,8 +21,12 @@ public class ToDoList {
 
     private static final String SAVEFILE_DIRECTORY = "to-do-list";
     private static final String SAVEFILE_NAME = "todolist-save";
-    private static final Path DEFAULT_PATH = Paths.get(SAVEFILE_DIRECTORY, SAVEFILE_NAME);
+    private static final Path DEFAULT_SAVE_PATH = Paths.get(SAVEFILE_DIRECTORY, SAVEFILE_NAME);
+    private static final String LOGFILE_NAME = "todolist-logs";
+    private static final Path DEFAULT_LOG_PATH = Paths.get(SAVEFILE_DIRECTORY, LOGFILE_NAME);
     private static final String MESSAGE_NOT_SAVED = "Not saved properly.";
+
+    private static Logger LOGGER;
 
     private final Storage storage;
     private final IoInterface ioInterface;
@@ -31,9 +40,16 @@ public class ToDoList {
     public ToDoList(IoInterface ioInterface) {
         storage = new JsonStorageImpl();
         this.ioInterface = ioInterface;
-        saveDirectory = DEFAULT_PATH;
+        saveDirectory = DEFAULT_SAVE_PATH;
         taskList = storage.load(saveDirectory)
                 .orElse(new TaskList());
+
+        try {
+            LogsManager.setLogFilePath(DEFAULT_LOG_PATH.toString());
+        } catch (IOException ioe) {
+            this.ioInterface.displayErrorMessage(ioe.getMessage());
+        }
+        LOGGER = LogsManager.getLogger(this.getClass());
     }
 
     /**

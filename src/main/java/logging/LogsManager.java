@@ -14,7 +14,7 @@ public class LogsManager {
 
     private static Handler FILE_HANDLER;
 
-    public Logger getLogger(String loggerName) {
+    public static Logger getLogger(String loggerName) {
         Logger logger = Logger.getLogger(loggerName);
         logger.setUseParentHandlers(false);
 
@@ -22,7 +22,11 @@ public class LogsManager {
         return logger;
     }
 
-    public void setLogFilePath(String logFilePath) throws IOException {
+    public static <T> Logger getLogger(Class<T> clazz) {
+        return getLogger(clazz.getSimpleName());
+    }
+
+    public static void setLogFilePath(String logFilePath) throws IOException {
         FILE_HANDLER = new FileHandler(logFilePath,
                 LIMIT,
                 FILE_COUNT,
