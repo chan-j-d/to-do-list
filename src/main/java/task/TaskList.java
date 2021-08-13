@@ -52,8 +52,8 @@ public class TaskList {
         blocks.get(blockName).uncompleteTask(index);
     }
 
-    public void deleteTask(String blockName, int index) {
-        blocks.get(blockName).deleteTask(index);
+    public Task deleteTask(String blockName, int index) {
+        return blocks.get(blockName).deleteTask(index);
     }
 
     public Task getTask(String blockName, int index) {
