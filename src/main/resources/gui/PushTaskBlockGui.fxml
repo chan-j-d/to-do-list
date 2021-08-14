@@ -8,10 +8,11 @@
 
 <?import javafx.geometry.Insets?>
 <VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:id="block"
-      stylesheets="@TaskBlock.css"
-      styleClass="box-layout">
+            xmlns:fx="http://javafx.com/fxml"
+            fx:id="block"
+            stylesheets="@TaskBlock.css"
+            styleClass="box-layout"
+            alignment="CENTER">
     <BorderPane>
         <left>
             <Label fx:id="blockHeaderLabel" styleClass="label-header">

@@ -13,6 +13,7 @@ import java.util.List;
 public class PushTaskBlockGui extends GuiComponent<VBox> {
 
     private static final String FXML_RESOURCE = "PushTaskBlockGui.fxml";
+    private static final String NO_TASKS_MESSAGE = "No tasks found";
 
     @FXML
     private VBox block;
@@ -39,6 +40,11 @@ public class PushTaskBlockGui extends GuiComponent<VBox> {
     }
 
     public void init() {
+        if (tasks.size() == 0) {
+            block.getChildren().add(new Label(NO_TASKS_MESSAGE));
+            return;
+        }
+
         tasks.forEach(task -> taskGuis.add(new PushTaskGui(
                 selectButton.isSelected(),
                 task,
