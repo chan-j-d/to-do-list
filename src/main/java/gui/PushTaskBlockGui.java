@@ -13,7 +13,6 @@ import java.util.List;
 public class PushTaskBlockGui extends GuiComponent<VBox> {
 
     private static final String FXML_RESOURCE = "PushTaskBlockGui.fxml";
-    private static final boolean DEFAULT_BOOLEAN = true;
 
     @FXML
     private VBox block;
@@ -28,18 +27,19 @@ public class PushTaskBlockGui extends GuiComponent<VBox> {
             x -> registerUnselect();
     private boolean isSelected;
 
-    public PushTaskBlockGui(String blockName, List<Task> tasks) {
+    public PushTaskBlockGui(String blockName, List<Task> tasks, boolean isSelectedByDefault) {
         super(FXML_RESOURCE);
         blockLabelHeader.setText(blockName);
         this.tasks = tasks;
-        isSelected = DEFAULT_BOOLEAN;
+        isSelected = isSelectedByDefault;
         selectButton.setSelected(isSelected);
         taskGuis = new ArrayList<>();
         init();
     }
 
     public void init() {
-        tasks.forEach(task -> taskGuis.add(new PushTaskGui(DEFAULT_BOOLEAN,
+        tasks.forEach(task -> taskGuis.add(new PushTaskGui(
+                isSelected,
                 task,
                 INVALIDATION_LISTENER)));
         taskGuis.forEach(taskGui -> block.getChildren().add(taskGui.getRoot()));
