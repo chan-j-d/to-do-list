@@ -65,6 +65,7 @@ public class MainApplication extends Application {
         stage.setResizable(false);
         stage.setMinHeight(100.0);
         stage.setMinWidth(100.0);
+        stage.setTitle("Yesterday's tasks");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
