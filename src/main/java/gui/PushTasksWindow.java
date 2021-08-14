@@ -52,11 +52,11 @@ public class PushTasksWindow extends GuiComponent<AnchorPane> {
         int completedNewIndex = 0;
         int incompleteNewIndex = 0;
         for (Task task : tasks) {
-            if (task.isDone()) {
-                completedTasks.add(task);
+            if (!task.isDone()) {
+                incompleteTasks.add(task);
                 originalIndexToPushIndexMap.put(originalListIndex++, completedNewIndex++);
             } else {
-                incompleteTasks.add(task);
+                completedTasks.add(task);
                 originalIndexToDeleteIndexMap.put(originalListIndex++, incompleteNewIndex++);
             }
         }
@@ -71,13 +71,20 @@ public class PushTasksWindow extends GuiComponent<AnchorPane> {
     private void registerMove() {
         List<Command<TaskList>> commands = new ArrayList<>();
 
-        List<Integer> listToMove = getIndicesToMove();
-        listToMove.sort(Comparator.reverseOrder());
-        listToMove.forEach(index -> commands.add(new MoveTaskCommand(prevDay, index, currentDay)));
+        List<Integer> indicesToMove = getIndicesToMove();
+        List<Integer> indicesToDelete = getIndicesToDelete();
+        List<Integer> allIndices = new ArrayList<>();
+        allIndices.addAll(indicesToMove);
+        allIndices.addAll(indicesToDelete);
+        allIndices.sort(Comparator.reverseOrder());
 
-        List<Integer> listToDelete = getIndicesToDelete();
-        listToDelete.sort(Comparator.reverseOrder());
-        listToMove.forEach(index -> commands.add(new DeleteTaskCommand(prevDay, index)));
+        for (int index : allIndices) {
+            if (indicesToMove.contains(index)) {
+                commands.add(new MoveTaskCommand(prevDay, index, currentDay));
+            } else {
+                commands.add(new DeleteTaskCommand(prevDay, index));
+            }
+        }
 
         runUserCommands(commands);
 
@@ -87,7 +94,7 @@ public class PushTasksWindow extends GuiComponent<AnchorPane> {
     private List<Integer> getIndicesToMove() {
         List<Integer> list = new ArrayList<>();
         for (int integer : originalIndexToPushIndexMap.keySet()) {
-            if (completedBlock.isIndexSelected(originalIndexToPushIndexMap.get(integer))) {
+            if (incompleteBlock.isIndexSelected(originalIndexToPushIndexMap.get(integer))) {
                 list.add(integer);
             }
         }
@@ -97,7 +104,7 @@ public class PushTasksWindow extends GuiComponent<AnchorPane> {
     private List<Integer> getIndicesToDelete() {
         List<Integer> list = new ArrayList<>();
         for (int integer : originalIndexToDeleteIndexMap.keySet()) {
-            if (incompleteBlock.isIndexSelected(originalIndexToDeleteIndexMap.get(integer))) {
+            if (completedBlock.isIndexSelected(originalIndexToDeleteIndexMap.get(integer))) {
                 list.add(integer);
             }
         }

@@ -51,6 +51,9 @@ public class MainApplication extends Application {
         String previousDay = DateUtil.getRealPreviousDay();
         String currentDay = DateUtil.getRealDay();
         List<Task> tasks = toDoList.getTaskList().getTasksInBlock(DateUtil.getRealPreviousDay());
+        if (tasks.size() == 0) {
+            return;
+        }
         PushTasksWindow pushTasksWindow = new PushTasksWindow(tasks, previousDay, currentDay);
         Scene scene = new Scene(pushTasksWindow.getRoot());
         Stage stage = new Stage();
