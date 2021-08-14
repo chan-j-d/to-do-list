@@ -4,10 +4,14 @@ import command.ExitCommand;
 import core.ToDoList;
 import io.IoInterface;
 import io.gui.GuiIO;
+
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import task.Task;
+import util.DateUtil;
 
 
 public class MainApplication extends Application {
@@ -27,6 +31,8 @@ public class MainApplication extends Application {
         stage.setMinHeight(400.0);
         stage.setMinWidth(400.0);
         stage.show();
+
+        runStartupRoutine(toDoList);
     }
 
     @Override
@@ -35,4 +41,16 @@ public class MainApplication extends Application {
         toDoListRunner.join();
     }
 
+    public void runStartupRoutine(ToDoList toDoList) {
+        runPushTasksFeature(toDoList);
+    }
+
+    public void runPushTasksFeature(ToDoList toDoList) {
+        List<Task> tasks = toDoList.getTaskList().getTasksInBlock(DateUtil.getRealPreviousDay());
+        PushTasksWindow pushTasksWindow = new PushTasksWindow(tasks);
+        Scene scene = new Scene(pushTasksWindow.getRoot());
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+    }
 }
