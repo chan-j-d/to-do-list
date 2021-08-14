@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import task.Task;
 import util.DateUtil;
@@ -51,6 +52,10 @@ public class MainApplication extends Application {
         Scene scene = new Scene(pushTasksWindow.getRoot());
         Stage stage = new Stage();
         stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setMinHeight(400.0);
+        stage.setMinWidth(400.0);
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
 }

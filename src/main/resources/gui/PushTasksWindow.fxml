@@ -8,19 +8,18 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="400.0" prefWidth="400.0">
     <fx:define>
         <Double fx:id="BORDER_SPACING" fx:value="5.0"/>
     </fx:define>
-    <ScrollPane fx:id="scrollPane" fitToWidth="true"
+    <VBox fx:id="prevDayTasksHolder" spacing="-2.0"
                 AnchorPane.topAnchor="$BORDER_SPACING" AnchorPane.bottomAnchor="$BORDER_SPACING"
-                AnchorPane.leftAnchor="$BORDER_SPACING" AnchorPane.rightAnchor="$BORDER_SPACING">
-        <VBox fx:id="prevDayTasksHolder" spacing="-2.0"
-                    alignment="CENTER">
-            <Region prefHeight="20.0" />
-            <Button text="Move to next day"
-                        focusTraversable="false"
-                        onMousePressed="#registerMove" />
-        </VBox>
-    </ScrollPane>
+                AnchorPane.leftAnchor="$BORDER_SPACING" AnchorPane.rightAnchor="$BORDER_SPACING"
+                alignment="CENTER">
+        <Region minHeight="10.0" />
+        <Button text="Move to next day"
+                    focusTraversable="false"
+                    onMousePressed="#registerMove" />
+        <Region minHeight="10.0" />
+    </VBox>
 </AnchorPane>
