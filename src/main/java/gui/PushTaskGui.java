@@ -1,5 +1,6 @@
 package gui;
 
+import javafx.beans.InvalidationListener;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableBooleanValue;
@@ -23,7 +24,7 @@ public class PushTaskGui extends GuiComponent<AnchorPane> {
 
     private boolean isSelected;
 
-    public PushTaskGui(boolean isSelected, Task task, ChangeListener<? super Boolean> listener) {
+    public PushTaskGui(boolean isSelected, Task task, InvalidationListener listener) {
         super(FXML_RESOURCE);
         this.isSelected = isSelected;
         taskDescriptionLabel.setText(task.getDescription());
@@ -32,8 +33,13 @@ public class PushTaskGui extends GuiComponent<AnchorPane> {
         selectButton.selectedProperty().addListener(listener);
     }
 
-    public void registerSelection() {
+    public void registerToggle() {
         isSelected = !isSelected;
+        selectButton.setSelected(isSelected);
+    }
+
+    public void select() {
+        isSelected = true;
         selectButton.setSelected(isSelected);
     }
 }
