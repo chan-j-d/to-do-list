@@ -37,11 +37,17 @@ public class PushTasksWindow extends GuiComponent<AnchorPane> {
                 incompleteTasks.add(task);
             }
         });
-        prevDayTasksHolder.getChildren().add(
-                new PushTaskBlockGui(STRING_COMPLETED_HEADER, completedTasks, DEFAULT_BOOLEAN)
-                        .getRoot());
-        prevDayTasksHolder.getChildren().add(
+        prevDayTasksHolder.getChildren().add(0,
                 new PushTaskBlockGui(STRING_INCOMPLETE_HEADER, incompleteTasks, DEFAULT_BOOLEAN)
                         .getRoot());
+        prevDayTasksHolder.getChildren().add(0,
+                new PushTaskBlockGui(STRING_COMPLETED_HEADER, completedTasks, DEFAULT_BOOLEAN)
+                        .getRoot());
+
+    }
+
+    @FXML
+    private void registerMove() {
+
     }
 }

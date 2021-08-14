@@ -15,7 +15,12 @@
     <ScrollPane fx:id="scrollPane" fitToWidth="true"
                 AnchorPane.topAnchor="$BORDER_SPACING" AnchorPane.bottomAnchor="$BORDER_SPACING"
                 AnchorPane.leftAnchor="$BORDER_SPACING" AnchorPane.rightAnchor="$BORDER_SPACING">
-        <VBox fx:id="prevDayTasksHolder" spacing="-2.0" />
+        <VBox fx:id="prevDayTasksHolder" spacing="-2.0"
+                    alignment="CENTER">
+            <Region prefHeight="20.0" />
+            <Button text="Move to next day"
+                        focusTraversable="false"
+                        onMousePressed="#registerMove" />
+        </VBox>
     </ScrollPane>
-
 </AnchorPane>
