@@ -32,6 +32,7 @@ public class Main {
             Application.launch(MainApplication.class, args);
         } catch (RuntimeException re) {
             LOGGER.log(Level.SEVERE, ERROR_LAUNCHING_GUI,re);
+            re.printStackTrace();
         }
     }
 }

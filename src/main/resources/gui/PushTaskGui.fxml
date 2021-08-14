@@ -27,7 +27,7 @@
         <ToggleButton fx:id="selectButton"
                     focusTraversable="false"
                     styleClass="checkbox"
-                    onMousePressed="registerToggle" />
+                    onMousePressed="#registerToggle" />
     </right>
 
 </BorderPane>

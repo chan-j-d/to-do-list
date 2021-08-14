@@ -17,7 +17,7 @@ public class PushTaskBlockGui extends GuiComponent<VBox> {
     @FXML
     private VBox block;
     @FXML
-    private Label blockLabelHeader;
+    private Label blockHeaderLabel;
     @FXML
     private ToggleButton selectButton;
 
@@ -29,7 +29,7 @@ public class PushTaskBlockGui extends GuiComponent<VBox> {
 
     public PushTaskBlockGui(String blockName, List<Task> tasks, boolean isSelectedByDefault) {
         super(FXML_RESOURCE);
-        blockLabelHeader.setText(blockName);
+        blockHeaderLabel.setText(blockName);
         this.tasks = tasks;
         isSelected = isSelectedByDefault;
         selectButton.setSelected(isSelected);
@@ -47,8 +47,13 @@ public class PushTaskBlockGui extends GuiComponent<VBox> {
 
     @FXML
     private void registerSelection() {
-        isSelected = true;
-        taskGuis.forEach(PushTaskGui::select);
+        if (!isSelected) {
+            isSelected = true;
+            taskGuis.forEach(PushTaskGui::select);
+        } else {
+            isSelected = false;
+            taskGuis.forEach(PushTaskGui::unselect);
+        }
     }
 
     private void registerUnselect() {
