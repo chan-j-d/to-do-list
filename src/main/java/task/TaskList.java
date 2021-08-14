@@ -1,6 +1,7 @@
 package task;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TaskList {
@@ -58,6 +59,10 @@ public class TaskList {
 
     public Task getTask(String blockName, int index) {
         return blocks.get(blockName).getTask(index);
+    }
+
+    public List<Task> getTasksInBlock(String blockName) {
+        return blocks.get(blockName).getTasks();
     }
 
     public Map<String, TaskBlock> getBlocksMap() {

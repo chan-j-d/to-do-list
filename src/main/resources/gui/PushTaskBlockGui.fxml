@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:id="block"
+            stylesheets="@TaskBlock.css"
+            styleClass="box-layout"
+            alignment="CENTER">
+    <BorderPane>
+        <left>
+            <Label fx:id="blockHeaderLabel" styleClass="label-header">
+                <BorderPane.margin>
+                    <Insets right="5.0"/>
+                </BorderPane.margin>
+            </Label>
+        </left>
+        <right>
+            <ToggleButton fx:id="selectButton"
+                          focusTraversable="false"
+                          stylesheets="@Checkbox.css"
+                          styleClass="larger-checkbox"
+                          onMousePressed="#registerSelection" />
+        </right>
+    </BorderPane>
+    <Region styleClass="horizontal-line" />
+</VBox>

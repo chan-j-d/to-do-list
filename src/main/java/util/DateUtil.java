@@ -1,5 +1,7 @@
 package util;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class DateUtil {
@@ -17,5 +19,13 @@ public class DateUtil {
         return currentIndex == NUM_DAYS_IN_WEEK - 1
                 ? DAY_NAMES.get(0)
                 : DAY_NAMES.get(currentIndex + 1);
+    }
+
+    public static String getRealPreviousDay() {
+        return LocalDate.now().getDayOfWeek().minus(1).toString().toLowerCase();
+    }
+
+    public static String getRealDay() {
+        return LocalDate.now().getDayOfWeek().toString().toLowerCase();
     }
 }

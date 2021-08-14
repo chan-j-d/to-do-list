@@ -3,6 +3,7 @@ package gui;
 import command.Command;
 import io.gui.CommandMessenger;
 import java.io.IOException;
+import java.util.List;
 import javafx.fxml.FXMLLoader;
 import task.TaskList;
 
@@ -34,6 +35,10 @@ public abstract class GuiComponent<T> {
 
     protected void runUserCommand(Command<TaskList> command) {
         COMMAND_MESSENGER.updateUserCommand(command);
+    }
+
+    protected void runUserCommands(List<Command<TaskList>> commands) {
+        COMMAND_MESSENGER.updateUserCommands(commands);
     }
 
 }
