@@ -1,6 +1,6 @@
 package gui;
 
-import javafx.beans.InvalidationListener;
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
@@ -23,42 +23,42 @@ public class PushTaskBlockGui extends GuiComponent<VBox> {
 
     private final List<Task> tasks;
     private final List<PushTaskGui> taskGuis;
-    private final InvalidationListener INVALIDATION_LISTENER =
-            x -> registerUnselect();
-    private boolean isSelected;
+    private final ChangeListener<Boolean> CHANGE_LISTENER =
+            (obs, oldBool, newBool) -> registerChange(newBool);
+
+    private boolean isSettingSubButtons;
 
     public PushTaskBlockGui(String blockName, List<Task> tasks, boolean isSelectedByDefault) {
         super(FXML_RESOURCE);
         blockHeaderLabel.setText(blockName);
         this.tasks = tasks;
-        isSelected = isSelectedByDefault;
-        selectButton.setSelected(isSelected);
+        selectButton.setSelected(isSelectedByDefault);
         taskGuis = new ArrayList<>();
+        isSettingSubButtons = false;
         init();
     }
 
     public void init() {
         tasks.forEach(task -> taskGuis.add(new PushTaskGui(
-                isSelected,
+                selectButton.isSelected(),
                 task,
-                INVALIDATION_LISTENER)));
+                CHANGE_LISTENER)));
         taskGuis.forEach(taskGui -> block.getChildren().add(taskGui.getRoot()));
     }
 
     @FXML
     private void registerSelection() {
-        if (!isSelected) {
-            isSelected = true;
+        isSettingSubButtons = true;
+        if (!selectButton.isSelected()) {
             taskGuis.forEach(PushTaskGui::select);
         } else {
-            isSelected = false;
             taskGuis.forEach(PushTaskGui::unselect);
         }
+        isSettingSubButtons = false;
     }
 
-    private void registerUnselect() {
-        if (isSelected) {
-            isSelected = false;
+    private void registerChange(boolean isSelected) {
+        if (!isSelected && !isSettingSubButtons) {
             selectButton.setSelected(isSelected);
         }
     }

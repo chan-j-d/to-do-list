@@ -16,35 +16,27 @@ public class PushTaskGui extends GuiComponent<AnchorPane> {
     private static final String FXML_RESOURCE = "PushTaskGui.fxml";
 
     @FXML
-    private ToggleButton doneButton;
-    @FXML
     private Label taskDescriptionLabel;
     @FXML
     private ToggleButton selectButton;
 
-    private boolean isSelected;
-
-    public PushTaskGui(boolean isSelected, Task task, InvalidationListener listener) {
+    public PushTaskGui(boolean isSelected, Task task, ChangeListener<? super Boolean> listener) {
         super(FXML_RESOURCE);
-        this.isSelected = isSelected;
         taskDescriptionLabel.setText(task.getDescription());
-        doneButton.setSelected(task.isDone());
         selectButton.setSelected(isSelected);
         selectButton.selectedProperty().addListener(listener);
     }
 
-    public void registerToggle() {
-        isSelected = !isSelected;
-        selectButton.setSelected(isSelected);
+    @FXML
+    private void registerToggle() {
+        selectButton.setSelected(selectButton.isSelected());
     }
 
     public void select() {
-        isSelected = true;
-        selectButton.setSelected(isSelected);
+        selectButton.setSelected(true);
     }
 
     public void unselect() {
-        isSelected = false;
-        selectButton.setSelected(isSelected);
+        selectButton.setSelected(false);
     }
 }

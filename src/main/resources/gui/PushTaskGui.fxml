@@ -4,25 +4,21 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
+<?import javafx.scene.image.ImageView?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:id="box"
             stylesheets="@Checkbox.css"
             prefHeight="30.0">
     <left>
-        <ToggleButton fx:id="doneButton"
-                    focusTraversable="false"
-                    styleClass="checkbox"/>
+        <Label fx:id="taskDescriptionLabel"
+               wrapText="true">
+            <BorderPane.margin>
+                <Insets top="5.0" bottom="5.0" left="5.0" right="5.0" />
+            </BorderPane.margin>
+        </Label>
     </left>
-    <center>
-            <Label fx:id="taskDescriptionLabel"
-                        wrapText="true"
-                        StackPane.alignment="CENTER_LEFT">
-                <BorderPane.margin>
-                    <Insets left="5.0" right="5.0" />
-                </BorderPane.margin>
-            </Label>
-    </center>
+
     <right>
         <ToggleButton fx:id="selectButton"
                     focusTraversable="false"
