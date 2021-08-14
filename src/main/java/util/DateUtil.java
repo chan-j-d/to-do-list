@@ -24,4 +24,8 @@ public class DateUtil {
     public static String getRealPreviousDay() {
         return LocalDate.now().getDayOfWeek().minus(1).toString().toLowerCase();
     }
+
+    public static String getRealDay() {
+        return LocalDate.now().getDayOfWeek().toString().toLowerCase();
+    }
 }

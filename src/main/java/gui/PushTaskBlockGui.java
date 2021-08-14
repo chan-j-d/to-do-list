@@ -62,4 +62,8 @@ public class PushTaskBlockGui extends GuiComponent<VBox> {
             selectButton.setSelected(isSelected);
         }
     }
+
+    public boolean isIndexSelected(int index) {
+        return taskGuis.get(index).isSelected();
+    }
 }

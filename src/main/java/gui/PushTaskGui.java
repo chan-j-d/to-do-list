@@ -39,4 +39,8 @@ public class PushTaskGui extends GuiComponent<AnchorPane> {
     public void unselect() {
         selectButton.setSelected(false);
     }
+
+    public boolean isSelected() {
+        return selectButton.isSelected();
+    }
 }

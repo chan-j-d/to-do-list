@@ -1,13 +1,21 @@
 package gui;
 
+import command.Command;
+import command.DeleteTaskCommand;
+import command.MoveTaskCommand;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import task.Task;
+import task.TaskList;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static task.TaskBlock.STARTING_COUNT;
 
 public class PushTasksWindow extends GuiComponent<AnchorPane> {
 
@@ -20,34 +28,79 @@ public class PushTasksWindow extends GuiComponent<AnchorPane> {
     private VBox prevDayTasksHolder;
 
     private final List<Task> tasks;
+    private final Map<Integer, Integer> originalIndexToPushIndexMap;
+    private final Map<Integer, Integer> originalIndexToDeleteIndexMap;
+    private final String prevDay;
+    private final String currentDay;
+    private PushTaskBlockGui incompleteBlock;
+    private PushTaskBlockGui completedBlock;
 
-    public PushTasksWindow(List<Task> tasks) {
+    public PushTasksWindow(List<Task> tasks, String prevDay, String currentDay) {
         super(FXML_RESOURCE);
         this.tasks = tasks;
+        this.prevDay = prevDay;
+        this.currentDay = currentDay;
+        originalIndexToPushIndexMap = new HashMap<>();
+        originalIndexToDeleteIndexMap = new HashMap<>();
         init();
     }
 
     private void init() {
         List<Task> completedTasks = new ArrayList<>();
         List<Task> incompleteTasks = new ArrayList<>();
-        tasks.forEach(task -> {
+        int originalListIndex = STARTING_COUNT;
+        int completedNewIndex = 0;
+        int incompleteNewIndex = 0;
+        for (Task task : tasks) {
             if (task.isDone()) {
                 completedTasks.add(task);
+                originalIndexToPushIndexMap.put(originalListIndex++, completedNewIndex++);
             } else {
                 incompleteTasks.add(task);
+                originalIndexToDeleteIndexMap.put(originalListIndex++, incompleteNewIndex++);
             }
-        });
-        prevDayTasksHolder.getChildren().add(0,
-                new PushTaskBlockGui(STRING_INCOMPLETE_HEADER, incompleteTasks, DEFAULT_BOOLEAN)
-                        .getRoot());
-        prevDayTasksHolder.getChildren().add(0,
-                new PushTaskBlockGui(STRING_COMPLETED_HEADER, completedTasks, DEFAULT_BOOLEAN)
-                        .getRoot());
+        }
 
+        incompleteBlock =  new PushTaskBlockGui(STRING_INCOMPLETE_HEADER, incompleteTasks, DEFAULT_BOOLEAN);
+        completedBlock = new PushTaskBlockGui(STRING_COMPLETED_HEADER, completedTasks, DEFAULT_BOOLEAN);
+        prevDayTasksHolder.getChildren().add(0, incompleteBlock.getRoot());
+        prevDayTasksHolder.getChildren().add(0, completedBlock.getRoot());
     }
 
     @FXML
     private void registerMove() {
+        List<Command<TaskList>> commands = new ArrayList<>();
 
+        List<Integer> listToMove = getIndicesToMove();
+        listToMove.sort(Comparator.reverseOrder());
+        listToMove.forEach(index -> commands.add(new MoveTaskCommand(prevDay, index, currentDay)));
+
+        List<Integer> listToDelete = getIndicesToDelete();
+        listToDelete.sort(Comparator.reverseOrder());
+        listToMove.forEach(index -> commands.add(new DeleteTaskCommand(prevDay, index)));
+
+        runUserCommands(commands);
+
+        getRoot().getScene().getWindow().hide();
+    }
+
+    private List<Integer> getIndicesToMove() {
+        List<Integer> list = new ArrayList<>();
+        for (int integer : originalIndexToPushIndexMap.keySet()) {
+            if (completedBlock.isIndexSelected(originalIndexToPushIndexMap.get(integer))) {
+                list.add(integer);
+            }
+        }
+        return list;
+    }
+
+    private List<Integer> getIndicesToDelete() {
+        List<Integer> list = new ArrayList<>();
+        for (int integer : originalIndexToDeleteIndexMap.keySet()) {
+            if (incompleteBlock.isIndexSelected(originalIndexToDeleteIndexMap.get(integer))) {
+                list.add(integer);
+            }
+        }
+        return list;
     }
 }

@@ -5,6 +5,7 @@ import core.ToDoList;
 import io.IoInterface;
 import io.gui.GuiIO;
 
+import java.time.DayOfWeek;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import javafx.application.Application;
@@ -47,14 +48,16 @@ public class MainApplication extends Application {
     }
 
     public void runPushTasksFeature(ToDoList toDoList) {
+        String previousDay = DateUtil.getRealPreviousDay();
+        String currentDay = DateUtil.getRealDay();
         List<Task> tasks = toDoList.getTaskList().getTasksInBlock(DateUtil.getRealPreviousDay());
-        PushTasksWindow pushTasksWindow = new PushTasksWindow(tasks);
+        PushTasksWindow pushTasksWindow = new PushTasksWindow(tasks, previousDay, currentDay);
         Scene scene = new Scene(pushTasksWindow.getRoot());
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.setMinHeight(400.0);
-        stage.setMinWidth(400.0);
+        stage.setMinHeight(100.0);
+        stage.setMinWidth(100.0);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
