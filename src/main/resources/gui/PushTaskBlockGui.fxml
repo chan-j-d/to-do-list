@@ -11,12 +11,17 @@
       fx:id="block"
       stylesheets="@TaskBlock.css"
       styleClass="box-layout">
-    <HBox>
-        <Label fx:id="blockHeaderLabel" styleClass="label-header" />
-        <ToggleButton fx:id="selectButton"
-                      focusTraversable="false"
-                      styleClass="checkbox"
-                      onMousePressed="#registerSelection" />
-    </HBox>
+    <BorderPane>
+        <left>
+            <Label fx:id="blockHeaderLabel" styleClass="label-header" />
+        </left>
+        <right>
+            <ToggleButton fx:id="selectButton"
+                          focusTraversable="false"
+                          stylesheets="@Checkbox.css"
+                          styleClass="larger-checkbox"
+                          onMousePressed="#registerSelection" />
+        </right>
+    </BorderPane>
     <Region styleClass="horizontal-line" />
 </VBox>
