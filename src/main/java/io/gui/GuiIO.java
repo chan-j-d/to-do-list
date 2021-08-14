@@ -4,9 +4,8 @@ import command.Command;
 import gui.MainWindow;
 import io.InputException;
 import io.IoInterface;
-import task.TaskList;
-
 import java.util.List;
+import task.TaskList;
 
 public class GuiIO implements IoInterface {
 

@@ -1,14 +1,13 @@
 package gui;
 
+import java.util.ArrayList;
+import java.util.List;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.VBox;
 import task.Task;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PushTaskBlockGui extends GuiComponent<VBox> {
 
@@ -24,11 +23,15 @@ public class PushTaskBlockGui extends GuiComponent<VBox> {
 
     private final List<Task> tasks;
     private final List<PushTaskGui> taskGuis;
-    private final ChangeListener<Boolean> CHANGE_LISTENER =
+    private final ChangeListener<Boolean> changeListener =
             (obs, oldBool, newBool) -> registerChange(newBool);
 
     private boolean isSettingSubButtons;
 
+    /**
+     * Creates an individual push block with the given {@code blockName} header.
+     * It contains the {@code tasks} marked by default as {@code isSelected}.
+     */
     public PushTaskBlockGui(String blockName, List<Task> tasks, boolean isSelectedByDefault) {
         super(FXML_RESOURCE);
         blockHeaderLabel.setText(blockName);
@@ -39,6 +42,9 @@ public class PushTaskBlockGui extends GuiComponent<VBox> {
         init();
     }
 
+    /**
+     * Initialises the taskGuis for this block.
+     */
     public void init() {
         if (tasks.size() == 0) {
             block.getChildren().add(new Label(NO_TASKS_MESSAGE));
@@ -48,7 +54,7 @@ public class PushTaskBlockGui extends GuiComponent<VBox> {
         tasks.forEach(task -> taskGuis.add(new PushTaskGui(
                 selectButton.isSelected(),
                 task,
-                CHANGE_LISTENER)));
+                changeListener)));
         taskGuis.forEach(taskGui -> block.getChildren().add(taskGui.getRoot()));
     }
 

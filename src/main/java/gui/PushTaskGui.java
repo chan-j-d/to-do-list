@@ -20,6 +20,10 @@ public class PushTaskGui extends GuiComponent<AnchorPane> {
     @FXML
     private ToggleButton selectButton;
 
+    /**
+     * Creates an individual push block for a single {@code task}.
+     * Adds the {@code listener} to the selection status of the button.
+     */
     public PushTaskGui(boolean isSelected, Task task, ChangeListener<? super Boolean> listener) {
         super(FXML_RESOURCE);
         taskDescriptionLabel.setText(task.getDescription());

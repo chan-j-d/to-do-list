@@ -1,7 +1,6 @@
 package io.gui;
 
 import command.Command;
-
 import java.util.List;
 import java.util.concurrent.Semaphore;
 import task.TaskList;

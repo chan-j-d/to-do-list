@@ -1,21 +1,20 @@
 package gui;
 
+import static task.TaskBlock.STARTING_COUNT;
+
 import command.Command;
 import command.DeleteTaskCommand;
 import command.MoveTaskCommand;
-import javafx.fxml.FXML;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import task.Task;
-import task.TaskList;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static task.TaskBlock.STARTING_COUNT;
+import javafx.fxml.FXML;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import task.Task;
+import task.TaskList;
 
 public class PushTasksWindow extends GuiComponent<AnchorPane> {
 
@@ -35,6 +34,10 @@ public class PushTasksWindow extends GuiComponent<AnchorPane> {
     private PushTaskBlockGui incompleteBlock;
     private PushTaskBlockGui completedBlock;
 
+    /**
+     * Creates a new window to suggests {@code tasks} to push and delete.
+     * Completed tasks are deleted from {@code prevDay} while incomplete tasks are pushed to {@code currentDay}.
+     */
     public PushTasksWindow(List<Task> tasks, String prevDay, String currentDay) {
         super(FXML_RESOURCE);
         this.tasks = tasks;

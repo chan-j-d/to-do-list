@@ -4,8 +4,6 @@ import command.ExitCommand;
 import core.ToDoList;
 import io.IoInterface;
 import io.gui.GuiIO;
-
-import java.time.DayOfWeek;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import javafx.application.Application;
@@ -43,10 +41,16 @@ public class MainApplication extends Application {
         toDoListRunner.join();
     }
 
+    /**
+     * Run any necessary startup features.
+     */
     public void runStartupRoutine(ToDoList toDoList) {
         runPushTasksFeature(toDoList);
     }
 
+    /**
+     * Runs a suggestion to push incomplete tasks and delete completed tasks from previous day.
+     */
     public void runPushTasksFeature(ToDoList toDoList) {
         String previousDay = DateUtil.getRealPreviousDay();
         String currentDay = DateUtil.getRealDay();

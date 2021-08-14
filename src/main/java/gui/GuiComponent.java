@@ -4,7 +4,6 @@ import command.Command;
 import io.gui.CommandMessenger;
 import java.io.IOException;
 import java.util.List;
-
 import javafx.fxml.FXMLLoader;
 import task.TaskList;
 

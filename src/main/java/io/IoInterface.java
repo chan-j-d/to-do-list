@@ -1,9 +1,8 @@
 package io;
 
 import command.Command;
-import task.TaskList;
-
 import java.util.List;
+import task.TaskList;
 
 public interface IoInterface {
 
