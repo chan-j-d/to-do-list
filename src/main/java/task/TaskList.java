@@ -1,29 +1,40 @@
 package task;
 
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class TaskList {
 
+    private static final String MESSAGE_INVALID_BLOCK_NAME = "%s is not a valid block name. " +
+            "Avoid using days of the week.";
+
     private final Map<String, TaskBlock> blocks;
+    private final List<String> keyOrder;
 
     /**
      * Creates a new empty {@code TaskList}.
      */
     public TaskList() {
-        blocks = new LinkedHashMap<>();
+        blocks = new HashMap<>();
         for (String blockName : BlockNames.BLOCK_NAMES) {
             blocks.put(blockName, new TaskBlock(blockName));
         }
+
+        keyOrder = new ArrayList<>();
+        keyOrder.addAll(BlockNames.BLOCK_NAMES);
     }
 
     /**
      * Creates a new {@code TaskList} object with the given {@code blocks} mapping
      * of blocknames to {@code TaskBlock}s.
      */
-    public TaskList(Map<String, TaskBlock> blocks) {
-        this.blocks = new LinkedHashMap<>();
+    public TaskList(List<String> keys, Map<String, TaskBlock> blocks) {
+        keyOrder = new ArrayList<>();
+        keyOrder.addAll(keys);
+
+        this.blocks = new HashMap<>();
         for (String key : blocks.keySet()) {
             this.blocks.put(key, blocks.get(key));
         }
@@ -71,6 +82,24 @@ public class TaskList {
 
     public int getNumTasksInBlock(String blockName) {
         return blocks.get(blockName).getNumTasks();
+    }
+
+    public void addBlock(String blockName) {
+        if (!BlockNames.isValidBlockName(blockName)) {
+            throw new IllegalArgumentException(String.format(MESSAGE_INVALID_BLOCK_NAME, blockName));
+        }
+
+        keyOrder.add(blockName);
+        blocks.put(blockName, new TaskBlock(blockName));
+    }
+
+    public void addBlock(int index, String blockName) {
+        if (!BlockNames.isValidBlockName(blockName)) {
+            throw new IllegalArgumentException(String.format(MESSAGE_INVALID_BLOCK_NAME, blockName));
+        }
+
+        keyOrder.add(index, blockName);
+        blocks.put(blockName, new TaskBlock(blockName));
     }
 
     @Override
