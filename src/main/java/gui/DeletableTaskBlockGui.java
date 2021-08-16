@@ -1,6 +1,7 @@
 package gui;
 
 import command.DeleteBlockCommand;
+import command.EditBlockCommand;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -76,7 +77,7 @@ public class DeletableTaskBlockGui extends GuiComponent<VBox> {
     }
 
     private void handleEnterKey() {
-        EditBlockCommand editBlockCommand = new EditBlockCommand(blockHeader, index, editField.getText());
+        EditBlockCommand editBlockCommand = new EditBlockCommand(index, editField.getText());
         runUserCommand(editBlockCommand);
         removeFocus();
         switchToLabel();
