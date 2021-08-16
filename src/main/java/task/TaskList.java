@@ -9,6 +9,7 @@ public class TaskList {
 
     private static final String MESSAGE_INVALID_BLOCK_NAME = "%s is not a valid block name. " +
             "Avoid using days of the week.";
+    private static final String MESSAGE_INVALID_BLOCK_INDEX = "%d is not a valid index as it is a day-of-week block.";
 
     private final Map<String, TaskBlock> blocks;
     private final List<String> keyOrder;
@@ -18,12 +19,12 @@ public class TaskList {
      */
     public TaskList() {
         blocks = new HashMap<>();
-        for (String blockName : BlockNames.BLOCK_NAMES) {
+        for (String blockName : BlockNames.DAYS) {
             blocks.put(blockName, new TaskBlock(blockName));
         }
 
         keyOrder = new ArrayList<>();
-        keyOrder.addAll(BlockNames.BLOCK_NAMES);
+        keyOrder.addAll(BlockNames.DAYS);
     }
 
     /**
@@ -118,9 +119,20 @@ public class TaskList {
         blocks.put(blockName, new TaskBlock(blockName));
     }
 
+    public void deleteBlock(int index) {
+        String key = keyOrder.get(index); // Checks IndexOutOfBoundsException before deleting
+        String blockName = blocks.get(key).getBlockName();
+        if (BlockNames.DAYS.contains(blockName.toLowerCase())) {
+            throw new IllegalArgumentException(String.format(MESSAGE_INVALID_BLOCK_INDEX, index));
+        }
+        blocks.remove(blockName);
+        keyOrder.remove(index);
+    }
+
     @Override
     public String toString() {
-        return blocks.values().stream().reduce("", (x, y) -> x + "\n\n" + y, (x, y) -> x + "\n\n" + y);
+        return keyOrder.stream().reduce("", (x, y) -> x + "\n\n" + blocks.get(y),
+                (x, y) -> x + "\n\n" + blocks.get(y));
     }
 
     @Override
@@ -130,7 +142,8 @@ public class TaskList {
         }
 
         TaskList list = (TaskList) o;
-        return blocks.equals(list.blocks);
+        return blocks.equals(list.blocks)
+                && keyOrder.equals(list.keyOrder);
     }
 
 }
