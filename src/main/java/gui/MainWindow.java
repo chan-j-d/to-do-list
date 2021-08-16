@@ -19,6 +19,7 @@ import task.TaskList;
 public class MainWindow extends GuiComponent<AnchorPane> {
 
     private static final String FXML_RESOURCE = "MainWindow.fxml";
+    private static final int ADD_BLOCK_UPPER_INDEX = 1;
 
     @FXML
     private AnchorPane mainPane;
@@ -36,7 +37,6 @@ public class MainWindow extends GuiComponent<AnchorPane> {
      */
     public void updateWindow(TaskList taskList) {
         double currentVValue = scrollPane.getVvalue();
-        Map<String, TaskBlock> blockMap = taskList.getBlocksMap();
         List<Node> nodeList = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
             String blockName = taskList.getBlock(i).getBlockName();
@@ -48,6 +48,9 @@ public class MainWindow extends GuiComponent<AnchorPane> {
             }
             nodeList.add(node);
         }
+
+        nodeList.add(0, new AddTaskBlockGui(ADD_BLOCK_UPPER_INDEX).getRoot());
+        nodeList.add(new AddTaskBlockGui(nodeList.size()).getRoot());
 
         Platform.runLater(() -> {
             // Replaces current nodes
