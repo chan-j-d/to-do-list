@@ -48,7 +48,7 @@ public class DeletableTaskBlockGui extends GuiComponent<VBox> {
         for (Task task : taskBlock.getTasks()) {
             block.getChildren().add(new TaskGui(blockHeader, index++, task).getRoot());
         }
-        block.getChildren().add(new AddTaskBlockGui(blockHeader).getRoot());
+        block.getChildren().add(new AddTaskGui(blockHeader).getRoot());
     }
 
     @FXML
