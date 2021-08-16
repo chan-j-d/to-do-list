@@ -76,6 +76,10 @@ public class TaskList {
         return blocks.get(blockName).getTasks();
     }
 
+    public List<String> getKeyOrder() {
+        return keyOrder;
+    }
+
     public Map<String, TaskBlock> getBlocksMap() {
         return this.blocks;
     }
