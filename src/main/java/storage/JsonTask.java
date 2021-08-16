@@ -3,7 +3,7 @@ package storage;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import task.Task;
 
-public class JsonTask {
+public class JsonTask implements JsonStorer<Task> {
 
     private final String description;
     private final boolean isDone;
@@ -14,6 +14,7 @@ public class JsonTask {
         this.isDone = isDone;
     }
 
+    @Override
     public Task toJavaType() {
         return new Task(description, isDone);
     }

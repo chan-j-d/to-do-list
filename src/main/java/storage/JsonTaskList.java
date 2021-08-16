@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import task.TaskBlock;
 import task.TaskList;
 
-public class JsonTaskList {
+public class JsonTaskList implements JsonStorer<TaskList> {
 
     private final Map<String, JsonTaskBlock> blocks;
 
@@ -24,9 +24,7 @@ public class JsonTaskList {
         }
     }
 
-    /**
-     * Returns the Java equivalent {@code TaskList} of itself.
-     */
+    @Override
     public TaskList toJavaType() {
         Map<String, TaskBlock> nonJsonBlocks = new LinkedHashMap<>();
         for (String day : BLOCK_NAMES) {
