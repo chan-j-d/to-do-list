@@ -120,13 +120,33 @@ public class TaskList {
     }
 
     public void deleteBlock(int index) {
-        String key = keyOrder.get(index); // Checks IndexOutOfBoundsException before deleting
-        String blockName = blocks.get(key).getBlockName();
-        if (BlockNames.DAYS.contains(blockName.toLowerCase())) {
+        String blockName = getBlock(index).getBlockName();
+        if (isDayBlock(blockName)) {
             throw new IllegalArgumentException(String.format(MESSAGE_INVALID_BLOCK_INDEX, index));
         }
         blocks.remove(blockName);
         keyOrder.remove(index);
+    }
+
+    public void editBlock(int index, String newBlockName) {
+        if (!BlockNames.isValidBlockName(newBlockName)) {
+            throw new IllegalArgumentException(String.format(MESSAGE_INVALID_BLOCK_NAME, newBlockName));
+        }
+
+        TaskBlock oldBlock = getBlock(index);
+        String blockName = oldBlock.getBlockName();
+        if (isDayBlock(blockName)) {
+            throw new IllegalArgumentException(String.format(MESSAGE_INVALID_BLOCK_NAME, blockName));
+        }
+
+        TaskBlock newBlock = new TaskBlock(newBlockName, oldBlock.getTasks());
+
+        keyOrder.add(index, newBlockName);
+        keyOrder.remove(index + 1);
+
+        String olderHeader = oldBlock.getBlockName();
+        blocks.remove(olderHeader);
+        blocks.put(newBlockName, newBlock);
     }
 
     @Override
@@ -144,6 +164,10 @@ public class TaskList {
         TaskList list = (TaskList) o;
         return blocks.equals(list.blocks)
                 && keyOrder.equals(list.keyOrder);
+    }
+
+    private boolean isDayBlock(String blockName) {
+        return BlockNames.DAYS.contains(blockName.toLowerCase());
     }
 
 }

@@ -4,8 +4,7 @@ import task.TaskList;
 
 public class DeleteBlockCommand implements Command<TaskList> {
 
-    private static final String MESSAGE_INVALID_DELETE_BLOCK_NAME = "%s is not a valid block name to delete."
-            + "Days of the week cannot be deleted.";
+    private static final String MESSAGE_INVALID_DELETE_BLOCK_INDEX = "%s is not a valid index to delete.";
 
     private final int index;
 
@@ -18,7 +17,7 @@ public class DeleteBlockCommand implements Command<TaskList> {
         try {
             taskList.deleteBlock(index);
         } catch (IndexOutOfBoundsException ioobe) {
-            throw new CommandException(String.format(MESSAGE_INVALID_DELETE_BLOCK_NAME, ioobe.getMessage()));
+            throw new CommandException(String.format(MESSAGE_INVALID_DELETE_BLOCK_INDEX, ioobe.getMessage()));
         } catch (IllegalArgumentException iae) {
             throw new CommandException(iae.getMessage());
         }
