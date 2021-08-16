@@ -7,9 +7,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 
-public class AddTaskBlockGui extends GuiComponent<HBox> {
+public class AddTaskGui extends GuiComponent<HBox> {
 
-    private static final String FXML_RESOURCE = "AddTaskBlock.fxml";
+    private static final String FXML_RESOURCE = "AddTaskGui.fxml";
     private static boolean HAS_EXISTING_DISPLAYED_TEXTFIELD = false;
     private static TextField EXISTING_DISPLAYED_TEXTFIELD = null;
 
@@ -20,7 +20,7 @@ public class AddTaskBlockGui extends GuiComponent<HBox> {
 
     private final String blockName;
 
-    public AddTaskBlockGui(String blockName) {
+    public AddTaskGui(String blockName) {
         super(FXML_RESOURCE);
         this.blockName = blockName;
     }
