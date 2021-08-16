@@ -13,8 +13,8 @@ public class TaskList {
      */
     public TaskList() {
         blocks = new LinkedHashMap<>();
-        for (String day : BlockNames.BLOCK_NAMES) {
-            blocks.put(day, new TaskBlock(day));
+        for (String blockName : BlockNames.BLOCK_NAMES) {
+            blocks.put(blockName, new TaskBlock(blockName));
         }
     }
 
@@ -29,20 +29,20 @@ public class TaskList {
         }
     }
 
-    public void addTask(String day, String task) {
-        blocks.get(day).addTask(task);
+    public void addTask(String blockName, String task) {
+        blocks.get(blockName).addTask(task);
     }
 
-    public void addTask(String day, String task, boolean isDone) {
-        blocks.get(day).addTask(task, isDone);
+    public void addTask(String blockName, String task, boolean isDone) {
+        blocks.get(blockName).addTask(task, isDone);
     }
 
-    public void addTask(String day, String task, int index) {
-        blocks.get(day).addTask(task, index);
+    public void addTask(String blockName, String task, int index) {
+        blocks.get(blockName).addTask(task, index);
     }
 
-    public void addTask(String day, String task, boolean isDone, int index) {
-        blocks.get(day).addTask(task, isDone, index);
+    public void addTask(String blockName, String task, boolean isDone, int index) {
+        blocks.get(blockName).addTask(task, isDone, index);
     }
 
     public void completeTask(String blockName, int index) {
