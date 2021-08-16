@@ -76,6 +76,14 @@ public class TaskList {
         return blocks.get(blockName).getTasks();
     }
 
+    public TaskBlock getBlock(int index) {
+        return blocks.get(keyOrder.get(index));
+    }
+
+    public TaskBlock getBlock(String blockName) {
+        return blocks.get(blockName);
+    }
+
     public List<String> getKeyOrder() {
         return keyOrder;
     }
@@ -86,6 +94,10 @@ public class TaskList {
 
     public int getNumTasksInBlock(String blockName) {
         return blocks.get(blockName).getNumTasks();
+    }
+
+    public int size() {
+        return keyOrder.size();
     }
 
     public void addBlock(String blockName) {
