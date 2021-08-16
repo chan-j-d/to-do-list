@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import task.TaskBlock;
 
-public class JsonTaskBlock {
+public class JsonTaskBlock implements JsonStorer<TaskBlock> {
 
     private final String blockHeader;
     private final List<JsonTask> tasks;
