@@ -1,6 +1,6 @@
 package gui;
 
-import static task.BlockNames.BLOCK_NAMES;
+import static task.BlockNames.DAYS;
 
 import java.util.List;
 import java.util.Map;
@@ -35,7 +35,7 @@ public class MainWindow extends GuiComponent<AnchorPane> {
     public void updateWindow(TaskList taskList) {
         double currentVValue = scrollPane.getVvalue();
         Map<String, TaskBlock> blockMap = taskList.getBlocksMap();
-        List<Node> nodeList = BLOCK_NAMES.stream()
+        List<Node> nodeList = DAYS.stream()
                 .map(blockMap::get)
                 .map(TaskBlockGui::new)
                 .map(GuiComponent::getRoot)
