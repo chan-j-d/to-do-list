@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 import task.TaskBlock;
 import task.TaskList;
 
+import static task.BlockNames.DAYS;
+
 public class JsonTaskList {
 
     private final Map<String, JsonTaskBlock> blocks;
