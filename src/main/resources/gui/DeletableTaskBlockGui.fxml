@@ -14,7 +14,7 @@
     <BorderPane>
         <left>
             <StackPane>
-                <Label fx:id="blockHeaderLabel" styleClass="label-header"
+                <Label fx:id="label" styleClass="label-header"
                             wrapText="true"
                             onMousePressed="#registerEditSignal"/>
                 <TextField fx:id="editField"

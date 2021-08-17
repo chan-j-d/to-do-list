@@ -19,7 +19,7 @@ import task.TaskList;
 public class MainWindow extends GuiComponent<AnchorPane> {
 
     private static final String FXML_RESOURCE = "MainWindow.fxml";
-    private static final int ADD_BLOCK_UPPER_INDEX = 1;
+    private static final int ADD_BLOCK_UPPER_INDEX = 0;
 
     @FXML
     private AnchorPane mainPane;
@@ -50,7 +50,7 @@ public class MainWindow extends GuiComponent<AnchorPane> {
         }
 
         nodeList.add(0, new AddTaskBlockGui(ADD_BLOCK_UPPER_INDEX).getRoot());
-        nodeList.add(new AddTaskBlockGui(nodeList.size()).getRoot());
+        nodeList.add(new AddTaskBlockGui(nodeList.size() - 1).getRoot());
 
         Platform.runLater(() -> {
             // Replaces current nodes
