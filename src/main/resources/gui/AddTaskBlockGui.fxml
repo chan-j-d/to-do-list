@@ -3,19 +3,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.geometry.Insets?>
 <HBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:id="block"
       prefHeight="30.0"
       stylesheets="@AddButton.css"
       spacing="5.0">
+    <padding>
+        <Insets topRightBottomLeft="5.0" />
+    </padding>
     <Button styleClass="add-button"
-            onMousePressed="#createTextField" />
+                onMousePressed="#createTextField" />
     <TextField fx:id="textField"
-               visible="false"
-               stylesheets="@TextBox.css"
-               styleClass="text-field"
-               HBox.hgrow="ALWAYS"
-               onKeyPressed="#respondToKeyPress" />
-
+                visible="false"
+                stylesheets="@TextBox.css"
+                styleClass="text-field"
+                HBox.hgrow="ALWAYS"
+                onKeyPressed="#respondToKeyPress" />
 </HBox>
