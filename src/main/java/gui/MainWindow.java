@@ -1,7 +1,8 @@
 package gui;
 
-import static task.BlockNames.BLOCK_NAMES;
+import static task.BlockNames.DAYS;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -11,12 +12,14 @@ import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import task.BlockNames;
 import task.TaskBlock;
 import task.TaskList;
 
 public class MainWindow extends GuiComponent<AnchorPane> {
 
     private static final String FXML_RESOURCE = "MainWindow.fxml";
+    private static final int ADD_BLOCK_UPPER_INDEX = 0;
 
     @FXML
     private AnchorPane mainPane;
@@ -33,13 +36,22 @@ public class MainWindow extends GuiComponent<AnchorPane> {
      * Updates the current window view with the provided {@code taskList}.
      */
     public void updateWindow(TaskList taskList) {
-        double currentVValue = scrollPane.getVvalue();
-        Map<String, TaskBlock> blockMap = taskList.getBlocksMap();
-        List<Node> nodeList = BLOCK_NAMES.stream()
-                .map(blockMap::get)
-                .map(TaskBlockGui::new)
-                .map(GuiComponent::getRoot)
-                .collect(Collectors.toList());
+        final double currentVValue = scrollPane.getVvalue();
+        List<Node> nodeList = new ArrayList<>();
+        for (int i = 0; i < taskList.size(); i++) {
+            String blockName = taskList.getBlock(i).getBlockName();
+            Node node;
+            if (DAYS.contains(blockName)) {
+                node = new TaskBlockGui(taskList.getBlock(i)).getRoot();
+            } else {
+                node = new DeletableTaskBlockGui(taskList.getBlock(i), i).getRoot();
+            }
+            nodeList.add(node);
+        }
+
+        nodeList.add(0, new AddTaskBlockGui(ADD_BLOCK_UPPER_INDEX).getRoot());
+        nodeList.add(new AddTaskBlockGui(nodeList.size() - 1).getRoot());
+
         Platform.runLater(() -> {
             // Replaces current nodes
             taskListGui.getChildren().clear();

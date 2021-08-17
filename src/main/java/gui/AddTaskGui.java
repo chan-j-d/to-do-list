@@ -1,6 +1,5 @@
 package gui;
 
-import command.AddBlockCommand;
 import command.AddTaskCommand;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -8,12 +7,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 
-public class AddTaskBlockGui extends GuiComponent<HBox> {
+public class AddTaskGui extends GuiComponent<HBox> {
 
-    private static final String FXML_RESOURCE = "AddTaskBlockGui.fxml";
-    private static final String TEXT_FIELD_DEFAULT_MESSAGE = "Header of new block";
-
-
+    private static final String FXML_RESOURCE = "AddTaskGui.fxml";
     private static boolean HAS_EXISTING_DISPLAYED_TEXTFIELD = false;
     private static TextField EXISTING_DISPLAYED_TEXTFIELD = null;
 
@@ -22,11 +18,11 @@ public class AddTaskBlockGui extends GuiComponent<HBox> {
     @FXML
     private TextField textField;
 
-    private final int index;
+    private final String blockName;
 
-    public AddTaskBlockGui(int index) {
+    public AddTaskGui(String blockName) {
         super(FXML_RESOURCE);
-        this.index = index;
+        this.blockName = blockName;
     }
 
     @FXML
@@ -34,8 +30,6 @@ public class AddTaskBlockGui extends GuiComponent<HBox> {
         if (HAS_EXISTING_DISPLAYED_TEXTFIELD) {
             EXISTING_DISPLAYED_TEXTFIELD.setVisible(false);
         }
-        textField.setText(TEXT_FIELD_DEFAULT_MESSAGE);
-        textField.positionCaret(TEXT_FIELD_DEFAULT_MESSAGE.length());
         textField.setVisible(true);
         EXISTING_DISPLAYED_TEXTFIELD = textField;
         HAS_EXISTING_DISPLAYED_TEXTFIELD = true;
@@ -53,8 +47,8 @@ public class AddTaskBlockGui extends GuiComponent<HBox> {
     }
 
     private void handleEnterKey() {
-        AddBlockCommand addBlockCommand = new AddBlockCommand(index, textField.getText());
-        runUserCommand(addBlockCommand);
+        AddTaskCommand addTaskCommand = new AddTaskCommand(blockName, textField.getText());
+        runUserCommand(addTaskCommand);
         getRoot().getParent().requestFocus();
         textField.setVisible(false);
         HAS_EXISTING_DISPLAYED_TEXTFIELD = false;
@@ -67,4 +61,5 @@ public class AddTaskBlockGui extends GuiComponent<HBox> {
         HAS_EXISTING_DISPLAYED_TEXTFIELD = false;
         textField.clear();
     }
+
 }

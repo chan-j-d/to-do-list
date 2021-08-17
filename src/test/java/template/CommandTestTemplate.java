@@ -12,4 +12,7 @@ public class CommandTestTemplate {
         modelTaskList = TaskListTemplate.buildTaskListTemplate();
     }
 
+    protected void reset() {
+        modelTaskList = TaskListTemplate.buildTaskListTemplate();
+    }
 }
