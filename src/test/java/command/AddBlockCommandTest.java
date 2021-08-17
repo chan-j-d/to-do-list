@@ -1,12 +1,12 @@
 package command;
 
+import static template.TaskListTemplate.buildTaskListTemplate;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import task.TaskBlock;
 import task.TaskList;
 import template.CommandTestTemplate;
-
-import static template.TaskListTemplate.buildTaskListTemplate;
 
 public class AddBlockCommandTest extends CommandTestTemplate {
 
