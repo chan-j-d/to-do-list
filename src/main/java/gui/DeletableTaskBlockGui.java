@@ -1,5 +1,7 @@
 package gui;
 
+import static task.TaskBlock.STARTING_COUNT;
+
 import command.DeleteBlockCommand;
 import command.EditBlockCommand;
 import javafx.application.Platform;
@@ -9,12 +11,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import task.Task;
 import task.TaskBlock;
-
-import static task.TaskBlock.STARTING_COUNT;
 
 public class DeletableTaskBlockGui extends GuiComponent<VBox> {
 
@@ -35,6 +34,10 @@ public class DeletableTaskBlockGui extends GuiComponent<VBox> {
     private final String blockHeader;
     private final int index;
 
+    /**
+     * Creates a new deletable {@code TaskBlockGui} with the given header.
+     * It is also required to know its own {@code index} (starting at 0).
+     */
     public DeletableTaskBlockGui(TaskBlock taskBlock, int index) {
         super(FXML_RESOURCE);
         this.taskBlock = taskBlock;
@@ -43,6 +46,10 @@ public class DeletableTaskBlockGui extends GuiComponent<VBox> {
         init();
     }
 
+    /**
+     * Initialises the individual tasks within the task block.
+     * To note, these individual tasks do not have the push button.
+     */
     public void init() {
         label.setText(blockHeader);
         int index = STARTING_COUNT;

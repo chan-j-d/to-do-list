@@ -36,7 +36,7 @@ public class MainWindow extends GuiComponent<AnchorPane> {
      * Updates the current window view with the provided {@code taskList}.
      */
     public void updateWindow(TaskList taskList) {
-        double currentVValue = scrollPane.getVvalue();
+        final double currentVValue = scrollPane.getVvalue();
         List<Node> nodeList = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
             String blockName = taskList.getBlock(i).getBlockName();

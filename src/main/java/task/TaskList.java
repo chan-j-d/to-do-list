@@ -7,8 +7,8 @@ import java.util.Map;
 
 public class TaskList {
 
-    private static final String MESSAGE_INVALID_BLOCK_NAME = "%s is not a valid block name. " +
-            "Avoid using days of the week.";
+    private static final String MESSAGE_INVALID_BLOCK_NAME = "%s is not a valid block name. "
+            + "Avoid using days of the week.";
     private static final String MESSAGE_INVALID_BLOCK_INDEX = "%d is not a valid index as it is a day-of-week block.";
 
     private final Map<String, TaskBlock> blocks;
@@ -101,6 +101,10 @@ public class TaskList {
         return keyOrder.size();
     }
 
+    /**
+     * Adds a new block with the header {@code blockName} at the end of the list of blocks.
+     * Throws an {@code IllegalArgumentException} if the name is a day of week.
+     */
     public void addBlock(String blockName) {
         if (!BlockNames.isValidBlockName(blockName)) {
             throw new IllegalArgumentException(String.format(MESSAGE_INVALID_BLOCK_NAME, blockName));
@@ -110,6 +114,10 @@ public class TaskList {
         blocks.put(blockName, new TaskBlock(blockName));
     }
 
+    /**
+     * Adds a new block with the header {@code blockName} at the designated index.
+     * Throws an {@code IllegalArgumentException} if the name is a day of week.
+     */
     public void addBlock(int index, String blockName) {
         if (!BlockNames.isValidBlockName(blockName)) {
             throw new IllegalArgumentException(String.format(MESSAGE_INVALID_BLOCK_NAME, blockName));
@@ -119,6 +127,10 @@ public class TaskList {
         blocks.put(blockName, new TaskBlock(blockName));
     }
 
+    /**
+     * Deletes the block at block index {@code index}.
+     * Throws an {@code IllegalArgumentException} if the attempted deletion is a day of week.
+     */
     public void deleteBlock(int index) {
         String blockName = getBlock(index).getBlockName();
         if (isDayBlock(blockName)) {
@@ -128,6 +140,10 @@ public class TaskList {
         keyOrder.remove(index);
     }
 
+    /**
+     * Edits the block at block index {@code index} to the new header {@code newBlockName}.
+     * Throws an {@code IllegalArgumentException} if the new name is a day of week.
+     */
     public void editBlock(int index, String newBlockName) {
         if (!BlockNames.isValidBlockName(newBlockName)) {
             throw new IllegalArgumentException(String.format(MESSAGE_INVALID_BLOCK_NAME, newBlockName));
@@ -139,13 +155,12 @@ public class TaskList {
             throw new IllegalArgumentException(String.format(MESSAGE_INVALID_BLOCK_NAME, blockName));
         }
 
-        TaskBlock newBlock = new TaskBlock(newBlockName, oldBlock.getTasks());
-
         keyOrder.add(index, newBlockName);
         keyOrder.remove(index + 1);
 
         String olderHeader = oldBlock.getBlockName();
         blocks.remove(olderHeader);
+        TaskBlock newBlock = new TaskBlock(newBlockName, oldBlock.getTasks());
         blocks.put(newBlockName, newBlock);
     }
 

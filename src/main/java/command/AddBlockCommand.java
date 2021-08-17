@@ -1,8 +1,7 @@
 package command;
 
-import task.TaskList;
-
 import java.util.Optional;
+import task.TaskList;
 
 public class AddBlockCommand implements Command<TaskList> {
 

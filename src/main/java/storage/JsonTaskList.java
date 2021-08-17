@@ -1,7 +1,6 @@
 package storage;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +8,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import task.TaskBlock;
 import task.TaskList;
-import static task.BlockNames.DAYS;
 
 public class JsonTaskList implements JsonStorer<TaskList> {
 
@@ -36,6 +34,9 @@ public class JsonTaskList implements JsonStorer<TaskList> {
         return new TaskList(keyOrder, map);
     }
 
+    /**
+     * Converts the given {@code taskList} into the type {@code JsonTaskList} for storage.
+     */
     public static JsonTaskList convertToJson(TaskList taskList) {
         return new JsonTaskList(taskList.getKeyOrder(),
                 taskList.getBlocksMap().entrySet().stream()
