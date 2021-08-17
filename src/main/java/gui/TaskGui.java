@@ -53,6 +53,10 @@ public class TaskGui extends GuiComponent<BorderPane> {
         doneButton.setSelected(task.isDone());
     }
 
+    protected void removePushButton() {
+        pushNextDayButton.setVisible(false);
+    }
+
     @FXML
     private void registerToggle() {
         if (!doneButton.isSelected()) {
