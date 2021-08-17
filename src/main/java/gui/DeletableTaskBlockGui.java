@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import task.Task;
 import task.TaskBlock;
@@ -46,7 +47,9 @@ public class DeletableTaskBlockGui extends GuiComponent<VBox> {
         label.setText(blockHeader);
         int index = STARTING_COUNT;
         for (Task task : taskBlock.getTasks()) {
-            block.getChildren().add(new TaskGui(blockHeader, index++, task).getRoot());
+            TaskGui newTaskGui = new TaskGui(blockHeader, index++, task);
+            newTaskGui.removePushButton();
+            block.getChildren().add(newTaskGui.getRoot());
         }
         block.getChildren().add(new AddTaskGui(blockHeader).getRoot());
     }
