@@ -38,6 +38,11 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
 }
 
+checkstyle {
+    ignoreFailures = false
+    maxWarnings = 0
+}
+
 shadowJar {
     setArchivesBaseName('ToDoList')
 }
