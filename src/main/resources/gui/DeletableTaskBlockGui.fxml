@@ -12,8 +12,8 @@
       stylesheets="@TaskBlock.css"
       styleClass="box-layout">
     <BorderPane>
-        <left>
-            <StackPane>
+        <center>
+            <StackPane alignment="BASELINE_LEFT">
                 <Label fx:id="label" styleClass="label-header"
                             wrapText="true"
                             onMousePressed="#registerEditSignal"/>
@@ -23,10 +23,10 @@
                             visible="false"
                             onKeyPressed="#registerEdit"/>
                 <BorderPane.margin>
-                    <Insets left="5.0" right="5.0" />
+                    <Insets right="5.0" />
                 </BorderPane.margin>
             </StackPane>
-        </left>
+        </center>
         <right>
             <Button fx:id="deleteButton"
                         focusTraversable="false"
