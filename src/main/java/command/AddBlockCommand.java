@@ -9,7 +9,7 @@ public class AddBlockCommand implements Command<TaskList> {
     private final Optional<Integer> optionalInteger;
 
     public AddBlockCommand(String blockName) {
-        this.blockName = blockName;
+        this.blockName = blockName.strip();
         optionalInteger = Optional.empty();
     }
 

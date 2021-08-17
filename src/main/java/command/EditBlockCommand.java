@@ -11,7 +11,7 @@ public class EditBlockCommand implements Command<TaskList> {
 
     public EditBlockCommand(int index, String newHeader) {
         this.index = index;
-        this.newHeader = newHeader;
+        this.newHeader = newHeader.strip();
     }
 
     @Override
