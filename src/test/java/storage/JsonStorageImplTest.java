@@ -18,7 +18,7 @@ public class JsonStorageImplTest {
     private final Storage<TaskList> storage = new JsonStorageImpl();
 
     @Test
-    public void saveAndLost_normalTaskList_success() throws IOException {
+    public void saveAndLoad_normalTaskList_success() throws IOException {
         TaskList expectedList = TaskListTemplate.buildTaskListTemplate();
         // directory already exists
         storage.save(expectedList, TEST_FILE_PATH_WITH_DIRECTORY);

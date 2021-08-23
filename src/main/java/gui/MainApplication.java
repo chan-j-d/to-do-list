@@ -60,15 +60,14 @@ public class MainApplication extends Application {
         settingsStorage = new JsonSettingsStorageImpl();
         windowsSettingPath = saveFileDirectory.resolve(WINDOW_SETTING_FILENAME);
 
-        double height = DEFAULT_HEIGHT;
-        double width = DEFAULT_WIDTH;
+        WindowSettings settings = getDefaultWindowSettings();
         try {
-            WindowSettings settings = settingsStorage.load(windowsSettingPath);
-            height = settings.getPrefHeight();
-            width = settings.getPrefWidth();
+            settings = settingsStorage.load(windowsSettingPath);
         } catch (IOException ioe) {
             LOGGER.log(Level.INFO, MESSAGE_NO_SETTINGS_FOUND, ioe);
         }
+        double height = settings.getPrefHeight();
+        double width = settings.getPrefWidth();
 
         Scene scene = new Scene(mainWindow.getRoot());
         stage.setScene(scene);
@@ -116,6 +115,10 @@ public class MainApplication extends Application {
         stage.setTitle("Yesterday's tasks");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
+    }
+
+    public static WindowSettings getDefaultWindowSettings() {
+        return new WindowSettings(DEFAULT_HEIGHT, DEFAULT_WIDTH);
     }
 
     private void saveWindowSettings() {
