@@ -17,4 +17,8 @@ public class JsonWindowSettings implements JsonStorer<WindowSettings> {
     public WindowSettings toJavaType() {
         return new WindowSettings(prefHeight, prefWidth);
     }
+
+    public static JsonWindowSettings convertToJson(WindowSettings windowSettings) {
+        return new JsonWindowSettings(windowSettings.getPrefHeight(), windowSettings.getPrefWidth());
+    }
 }
