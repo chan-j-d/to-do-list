@@ -7,7 +7,6 @@ import io.InputException;
 import io.IoInterface;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -21,7 +20,7 @@ import task.TaskList;
 public class ToDoList {
 
     private static final String SAVEFILE_NAME = "todolist-save";
-    private static final String MESSAGE_NOT_SAVED = "Not saved properly.";
+    private static final String MESSAGE_NOT_LOADED_PROPERLY = "ToDoList was not loaded properly. Using a blank one.";
 
     private static final String ERROR_GETTING_INPUT = "Error encountered when retrieving user input.";
     private static final String ERROR_COMMAND_RUN = "Unable to run command: %s";
@@ -29,7 +28,7 @@ public class ToDoList {
     private static final String ERROR_UNEXPECTED_EXCEPTION =
             "Unexpected error encountered. Command was not run properly.";
 
-    private final Storage storage;
+    private final Storage<TaskList> storage;
     private final IoInterface ioInterface;
     private final TaskList taskList;
     private final Logger logger;
@@ -52,8 +51,8 @@ public class ToDoList {
         try {
             return Optional.of(storage.load(path));
         } catch (IOException ie) {
-            logger.log(Level.WARNING, MESSAGE_NOT_SAVED, ie);
-            ioInterface.displayErrorMessage(MESSAGE_NOT_SAVED);
+            logger.log(Level.WARNING, MESSAGE_NOT_LOADED_PROPERLY, ie);
+            ioInterface.displayErrorMessage(MESSAGE_NOT_LOADED_PROPERLY);
         }
         return Optional.empty();
     }
