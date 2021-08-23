@@ -1,16 +1,12 @@
 package storage;
 
-import gui.MainApplication;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import settings.WindowSettings;
-import task.TaskList;
-import template.TaskListTemplate;
-import util.FileUtil;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import settings.WindowSettings;
+import util.FileUtil;
 
 public class JsonSettingsStorageImplTest {
 
