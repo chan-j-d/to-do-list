@@ -1,11 +1,9 @@
 package gui;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import command.ExitCommand;
 import core.ToDoList;
 import io.IoInterface;
 import io.gui.GuiIO;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,7 +11,6 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Modality;

@@ -3,12 +3,11 @@ package storage;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import settings.WindowSettings;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import settings.WindowSettings;
 
 public class JsonSettingsStorageImpl implements Storage<WindowSettings> {
 
