@@ -4,7 +4,6 @@ import command.ExitCommand;
 import core.ToDoList;
 import io.IoInterface;
 import io.gui.GuiIO;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
