@@ -29,7 +29,7 @@ public class Main {
         LOGGER = LogsManager.getLogger(Main.class);
 
         try {
-            Application.launch(MainApplication.class, args);
+            Application.launch(MainApplication.class, SAVEFILE_DIRECTORY);
         } catch (RuntimeException re) {
             LOGGER.log(Level.SEVERE, ERROR_LAUNCHING_GUI,re);
             re.printStackTrace();

@@ -20,9 +20,7 @@ import task.TaskList;
 
 public class ToDoList {
 
-    private static final String SAVEFILE_DIRECTORY = "to-do-list";
     private static final String SAVEFILE_NAME = "todolist-save";
-    private static final Path DEFAULT_SAVE_PATH = Paths.get(SAVEFILE_DIRECTORY, SAVEFILE_NAME);
     private static final String MESSAGE_NOT_SAVED = "Not saved properly.";
 
     private static final String ERROR_GETTING_INPUT = "Error encountered when retrieving user input.";
@@ -41,12 +39,12 @@ public class ToDoList {
      * Creates a new {@code ToDoList} instance which utilizes the provided
      * {@code ioInterface} to communicate with the user.
      */
-    public ToDoList(IoInterface ioInterface) {
+    public ToDoList(IoInterface ioInterface, Path savePath) {
         storage = new JsonStorageImpl();
         this.ioInterface = ioInterface;
         logger = LogsManager.getLogger(this.getClass());
-        saveDirectory = DEFAULT_SAVE_PATH;
-        taskList = loadTaskList(DEFAULT_SAVE_PATH)
+        saveDirectory = savePath.resolve(SAVEFILE_NAME);
+        taskList = loadTaskList(saveDirectory)
                 .orElse(new TaskList());
     }
 

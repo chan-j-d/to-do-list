@@ -4,6 +4,9 @@ import command.ExitCommand;
 import core.ToDoList;
 import io.IoInterface;
 import io.gui.GuiIO;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import javafx.application.Application;
@@ -21,9 +24,13 @@ public class MainApplication extends Application {
 
     @Override
     public void start(Stage stage) {
+        Parameters parameters = getParameters();
+        List<String> args = parameters.getRaw();
+        Path saveFileDirectory = Paths.get(args.get(0));
+
         mainWindow = new MainWindow();
         IoInterface ioInterface = new GuiIO(mainWindow);
-        ToDoList toDoList = new ToDoList(ioInterface);
+        ToDoList toDoList = new ToDoList(ioInterface, saveFileDirectory);
         toDoListRunner = CompletableFuture.runAsync(toDoList::run);
         Scene scene = new Scene(mainWindow.getRoot());
         stage.setScene(scene);
