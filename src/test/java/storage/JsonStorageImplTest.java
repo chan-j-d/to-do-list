@@ -15,10 +15,10 @@ public class JsonStorageImplTest {
     private static final Path TEST_FILE_PATH_NO_DIRECTORY = Paths.get("build/test-save-directory/test-save");
     private static final Path TEST_FILE_PATH_WITH_DIRECTORY = Paths.get("build/test-save");
 
-    private final Storage storage = new JsonStorageImpl();
+    private final Storage<TaskList> storage = new JsonStorageImpl();
 
     @Test
-    public void saveAndLost_normalTaskList_success() throws IOException {
+    public void saveAndLoad_normalTaskList_success() throws IOException {
         TaskList expectedList = TaskListTemplate.buildTaskListTemplate();
         // directory already exists
         storage.save(expectedList, TEST_FILE_PATH_WITH_DIRECTORY);

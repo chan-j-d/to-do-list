@@ -7,20 +7,20 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import task.TaskList;
+import settings.WindowSettings;
 
-public class JsonStorageImpl implements Storage<TaskList> {
+public class JsonSettingsStorageImpl implements Storage<WindowSettings> {
 
     private final ObjectMapper objectMapper;
 
-    public JsonStorageImpl() {
+    public JsonSettingsStorageImpl() {
         objectMapper = new ObjectMapper();
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
     }
 
     @Override
-    public boolean save(TaskList list, Path path) throws IOException {
-        JsonTaskList jsonTaskList = JsonTaskList.convertToJson(list);
+    public boolean save(WindowSettings windowSettings, Path path) throws IOException {
+        JsonWindowSettings jsonTaskList = JsonWindowSettings.convertToJson(windowSettings);
 
         boolean doesFileExist = Files.exists(path);
         Path parentDirectory = path.getParent();
@@ -34,9 +34,9 @@ public class JsonStorageImpl implements Storage<TaskList> {
     }
 
     @Override
-    public TaskList load(Path path) throws IOException {
-        JsonTaskList jsonTaskList = objectMapper.readValue(Paths.get(path.toString()).toFile(), JsonTaskList.class);
-        return jsonTaskList.toJavaType();
+    public WindowSettings load(Path path) throws IOException {
+        JsonWindowSettings jsonWindowSettings = objectMapper.readValue(Paths.get(path.toString()).toFile(),
+                JsonWindowSettings.class);
+        return jsonWindowSettings.toJavaType();
     }
-
 }

@@ -18,6 +18,9 @@ public class LogFormatter extends Formatter {
     }
 
     private String formatStackTrace(LogRecord record) {
+        if (record.getThrown() == null) {
+            return "";
+        }
         StringBuilder sb = new StringBuilder();
         sb.append("\n[ERROR MESSAGE] " + record.getThrown().getMessage());
         Arrays.stream(record.getThrown().getStackTrace())
