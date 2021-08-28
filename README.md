@@ -1,4 +1,4 @@
-#To-Do-List
+# To-Do-List
 
 ---
 A simple and intuitive desktop application using Java 11 and JavaFX to keep track of daily tasks.
