@@ -3,16 +3,13 @@ package storage;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import task.TaskList;
 import template.TaskListTemplate;
 import util.FileUtil;
-import util.TestUtil;
 
-public class JsonStorageImplTest {
+public class JsonStorageImplTest extends StorageTest {
 
     private static final Path TEST_FILE_PATH_NO_DIRECTORY = Paths.get("build/test-save-directory/test-save");
     private static final Path TEST_FILE_PATH_WITH_DIRECTORY = Paths.get("build/test-save");
@@ -22,11 +19,6 @@ public class JsonStorageImplTest {
             Paths.get("build/resources/test/test-save-missing-block");
 
     private final Storage<TaskList> storage = new JsonStorageImpl();
-
-    @BeforeAll
-    public static void setLogsDirectory() {
-        TestUtil.setLogsDirectory();
-    }
 
     @Test
     public void saveAndLoad_normalTaskList_success() throws IOException {
