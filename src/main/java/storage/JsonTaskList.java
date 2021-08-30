@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import task.TaskBlock;
 import task.TaskList;
@@ -24,6 +25,8 @@ public class JsonTaskList implements JsonStorer<TaskList> {
 
         this.blocks = new HashMap<>();
         this.blocks.putAll(blocks);
+
+        fixBlockMapping();
     }
 
     @Override
@@ -49,4 +52,18 @@ public class JsonTaskList implements JsonStorer<TaskList> {
         return "Json Task List: \n" + blocks;
     }
 
+    private void fixBlockMapping() {
+        Set<String> keySet = Set.copyOf(blocks.keySet());
+        for (String key : keySet) {
+            if (!keyOrder.contains(key)) {
+                keyOrder.add(key);
+            }
+        }
+
+        for (String keyOrdering : keyOrder) {
+            if (!keySet.contains(keyOrdering)) {
+                blocks.put(keyOrdering, new JsonTaskBlock(keyOrdering, new ArrayList<>()));
+            }
+        }
+    }
 }

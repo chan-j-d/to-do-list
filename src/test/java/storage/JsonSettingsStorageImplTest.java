@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import settings.WindowSettings;
 import util.FileUtil;
 
-public class JsonSettingsStorageImplTest {
+public class JsonSettingsStorageImplTest extends StorageTest {
 
     private static final Path TEST_FILE_PATH_NO_DIRECTORY = Paths.get("build/test-save-directory/test-save");
     private static final Path TEST_FILE_PATH_WITH_DIRECTORY = Paths.get("build/test-save");
