@@ -4,16 +4,12 @@ import static task.BlockNames.DAYS;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import task.BlockNames;
-import task.TaskBlock;
 import task.TaskList;
 
 public class MainWindow extends GuiComponent<AnchorPane> {
@@ -39,14 +35,8 @@ public class MainWindow extends GuiComponent<AnchorPane> {
         final double currentVValue = scrollPane.getVvalue();
         List<Node> nodeList = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
-            String blockName = taskList.getBlock(i).getBlockName();
-            Node node;
-            if (DAYS.contains(blockName)) {
-                node = new TaskBlockGui(taskList.getBlock(i)).getRoot();
-            } else {
-                node = new DeletableTaskBlockGui(taskList.getBlock(i), i).getRoot();
-            }
-            nodeList.add(node);
+            Node nodeToAdd = createTaskBlock(taskList, i);
+            nodeList.add(nodeToAdd);
         }
 
         nodeList.add(0, new AddTaskBlockGui(ADD_BLOCK_UPPER_INDEX).getRoot());
@@ -61,5 +51,28 @@ public class MainWindow extends GuiComponent<AnchorPane> {
             scrollPane.setVvalue(currentVValue);
             scrollPane.requestFocus();
         });
+    }
+
+    public void updateUserBlock(TaskList taskList, int index) {
+        Node nodeToAdd = createTaskBlock(taskList, index);
+        taskListGui.getChildren().set(index, nodeToAdd);
+    }
+
+    public void removeBlock(TaskList taskList, int index) {
+        taskListGui.getChildren().remove(index);
+    }
+
+    public void addBlock(TaskList taskList, int index) {
+        Node nodeToAdd = createTaskBlock(taskList, index);
+        taskListGui.getChildren().add(nodeToAdd);
+    }
+
+    private Node createTaskBlock(TaskList taskList, int index) {
+        String blockName = taskList.getBlock(index).getBlockName();
+        if (DAYS.contains(blockName)) {
+            return new TaskBlockGui(taskList.getBlock(index)).getRoot();
+        } else {
+            return new DeletableTaskBlockGui(taskList.getBlock(index), index).getRoot();
+        }
     }
 }

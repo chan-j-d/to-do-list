@@ -27,8 +27,18 @@ public class GuiIO implements IoInterface {
     }
 
     @Override
-    public void updateUser(TaskList taskList) {
-        mainWindow.updateWindow(taskList);
+    public void updateUserBlock(TaskList taskList, int index) {
+
+    }
+
+    @Override
+    public void removeBlock(TaskList taskList, int index) {
+
+    }
+
+    @Override
+    public void addBlock(TaskList taskList, int index) {
+
     }
 
     @Override
