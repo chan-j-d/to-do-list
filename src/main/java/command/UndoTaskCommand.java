@@ -1,5 +1,8 @@
 package command;
 
+import command.result.CommandResult;
+import command.result.EditedBlocksResult;
+import command.result.EmptyCommandResult;
 import task.TaskList;
 
 public class UndoTaskCommand implements Command<TaskList> {
@@ -13,9 +16,10 @@ public class UndoTaskCommand implements Command<TaskList> {
     }
 
     @Override
-    public void run(TaskList taskList) throws CommandException {
+    public CommandResult run(TaskList taskList) throws CommandException {
         try {
             taskList.uncompleteTask(day, index);
+            return new EditedBlocksResult(taskList, taskList.indexOf(day));
         } catch (IndexOutOfBoundsException ioobe) {
             throw new CommandException(ioobe.getMessage());
         }

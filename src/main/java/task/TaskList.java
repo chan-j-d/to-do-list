@@ -101,6 +101,10 @@ public class TaskList {
         return keyOrder.size();
     }
 
+    public int indexOf(String blockName) {
+        return keyOrder.indexOf(blockName);
+    }
+
     /**
      * Adds a new block with the header {@code blockName} at the end of the list of blocks.
      * Throws an {@code IllegalArgumentException} if the name is a day of week.

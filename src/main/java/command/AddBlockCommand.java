@@ -1,6 +1,9 @@
 package command;
 
 import java.util.Optional;
+
+import command.result.AddedBlockResult;
+import command.result.CommandResult;
 import task.TaskList;
 
 public class AddBlockCommand implements Command<TaskList> {
@@ -19,10 +22,13 @@ public class AddBlockCommand implements Command<TaskList> {
     }
 
     @Override
-    public void run(TaskList taskList) throws CommandException {
+    public CommandResult run(TaskList taskList) throws CommandException {
         try {
             optionalInteger.ifPresentOrElse(index -> taskList.addBlock(index, blockName),
                     () -> taskList.addBlock(blockName));
+            int lastIndex = taskList.size();
+            return optionalInteger.map(i -> new AddedBlockResult(taskList, i))
+                    .orElse(new AddedBlockResult(taskList, lastIndex));
         } catch (IllegalArgumentException iae) {
             throw new CommandException(iae.getMessage());
         }

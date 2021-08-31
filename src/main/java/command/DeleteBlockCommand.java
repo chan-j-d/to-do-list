@@ -1,5 +1,7 @@
 package command;
 
+import command.result.CommandResult;
+import command.result.DeletedBlockResult;
 import task.TaskList;
 
 public class DeleteBlockCommand implements Command<TaskList> {
@@ -13,9 +15,10 @@ public class DeleteBlockCommand implements Command<TaskList> {
     }
 
     @Override
-    public void run(TaskList taskList) throws CommandException {
+    public CommandResult run(TaskList taskList) throws CommandException {
         try {
             taskList.deleteBlock(index);
+            return new DeletedBlockResult(taskList, index);
         } catch (IndexOutOfBoundsException ioobe) {
             throw new CommandException(String.format(MESSAGE_INVALID_DELETE_BLOCK_INDEX, ioobe.getMessage()));
         } catch (IllegalArgumentException iae) {

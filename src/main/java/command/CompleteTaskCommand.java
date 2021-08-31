@@ -1,5 +1,7 @@
 package command;
 
+import command.result.CommandResult;
+import command.result.EditedBlocksResult;
 import task.TaskList;
 
 public class CompleteTaskCommand implements Command<TaskList> {
@@ -13,9 +15,10 @@ public class CompleteTaskCommand implements Command<TaskList> {
     }
 
     @Override
-    public void run(TaskList list) throws CommandException {
+    public CommandResult run(TaskList list) throws CommandException {
         try {
             list.completeTask(day, index);
+            return new EditedBlocksResult(list, list.indexOf(day));
         } catch (IndexOutOfBoundsException ioobe) {
             throw new CommandException(ioobe.getMessage());
         }

@@ -1,5 +1,7 @@
 package command;
 
+import command.result.CommandResult;
+import command.result.EditedBlocksResult;
 import task.TaskList;
 
 public class EditBlockCommand implements Command<TaskList> {
@@ -15,9 +17,10 @@ public class EditBlockCommand implements Command<TaskList> {
     }
 
     @Override
-    public void run(TaskList taskList) throws CommandException {
+    public CommandResult run(TaskList taskList) throws CommandException {
         try {
             taskList.editBlock(index, newHeader);
+            return new EditedBlocksResult(taskList, index);
         } catch (IllegalArgumentException iae) {
             throw new CommandException(iae.getMessage());
         } catch (IndexOutOfBoundsException ioobe) {
