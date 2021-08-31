@@ -28,17 +28,17 @@ public class GuiIO implements IoInterface {
 
     @Override
     public void updateUserBlock(TaskList taskList, int index) {
-
+        mainWindow.updateUserBlock(taskList, index);
     }
 
     @Override
     public void removeBlock(TaskList taskList, int index) {
-
+        mainWindow.removeBlock(taskList, index);
     }
 
     @Override
     public void addBlock(TaskList taskList, int index) {
-
+        mainWindow.addBlock(taskList, index);
     }
 
     @Override
