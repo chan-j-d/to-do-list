@@ -18,7 +18,7 @@ public class AddBlockCommand implements Command<TaskList> {
 
     public AddBlockCommand(int index, String blockName) {
         optionalInteger = Optional.of(index);
-        this.blockName = blockName;
+        this.blockName = blockName.strip();
     }
 
     @Override
