@@ -29,7 +29,7 @@ public class EditTaskCommand implements Command<TaskList> {
             taskList.addTask(blockName, newDescription, isDone, index);
             taskList.deleteTask(blockName, index + 1);
 
-            return new EditedBlocksResult(taskList, taskList.indexOf(blockName));
+            return new EditedBlocksResult(taskList, blockName);
         } catch (IndexOutOfBoundsException ioobe) {
             throw new CommandException(ioobe.getMessage());
         }

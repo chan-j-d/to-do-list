@@ -32,17 +32,15 @@ public class DeletableTaskBlockGui extends GuiComponent<VBox> {
 
     private final TaskBlock taskBlock;
     private final String blockHeader;
-    private final int index;
 
     /**
      * Creates a new deletable {@code TaskBlockGui} with the given header.
      * It is also required to know its own {@code index} (starting at 0).
      */
-    public DeletableTaskBlockGui(TaskBlock taskBlock, int index) {
+    public DeletableTaskBlockGui(TaskBlock taskBlock) {
         super(FXML_RESOURCE);
         this.taskBlock = taskBlock;
         this.blockHeader = taskBlock.getBlockName();
-        this.index = index;
         init();
     }
 
@@ -87,7 +85,7 @@ public class DeletableTaskBlockGui extends GuiComponent<VBox> {
     }
 
     private void handleEnterKey() {
-        EditBlockCommand editBlockCommand = new EditBlockCommand(index, editField.getText());
+        EditBlockCommand editBlockCommand = new EditBlockCommand(blockHeader, editField.getText());
         runUserCommand(editBlockCommand);
         removeFocus();
         switchToLabel();
@@ -118,7 +116,7 @@ public class DeletableTaskBlockGui extends GuiComponent<VBox> {
 
     @FXML
     private void registerDelete() {
-        DeleteBlockCommand deleteBlockCommand = new DeleteBlockCommand(index);
+        DeleteBlockCommand deleteBlockCommand = new DeleteBlockCommand(blockHeader);
         runUserCommand(deleteBlockCommand);
     }
 }

@@ -6,19 +6,19 @@ import task.TaskList;
 
 public class DeleteBlockCommand implements Command<TaskList> {
 
-    private static final String MESSAGE_INVALID_DELETE_BLOCK_INDEX = "%s is not a valid index to delete.";
+    private static final String MESSAGE_INVALID_DELETE_BLOCK_INDEX = "%s is not a valid block to delete.";
 
-    private final int index;
+    private final String blockName;
 
-    public DeleteBlockCommand(int index) {
-        this.index = index;
+    public DeleteBlockCommand(String blockName) {
+        this.blockName = blockName;
     }
 
     @Override
     public CommandResult run(TaskList taskList) throws CommandException {
         try {
-            taskList.deleteBlock(index);
-            return new DeletedBlockResult(taskList, index);
+            taskList.deleteBlock(blockName);
+            return new DeletedBlockResult(taskList, blockName);
         } catch (IndexOutOfBoundsException ioobe) {
             throw new CommandException(String.format(MESSAGE_INVALID_DELETE_BLOCK_INDEX, ioobe.getMessage()));
         } catch (IllegalArgumentException iae) {

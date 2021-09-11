@@ -16,7 +16,7 @@ public class AddTaskCommand implements Command<TaskList> {
 
     public CommandResult run(TaskList list) {
         list.addTask(day, taskDescription);
-        return new EditedBlocksResult(list, list.indexOf(day));
+        return new EditedBlocksResult(list, day);
     }
 
     @Override

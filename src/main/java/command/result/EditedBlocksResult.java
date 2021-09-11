@@ -6,17 +6,17 @@ import task.TaskList;
 public class EditedBlocksResult implements CommandResult {
 
     private final TaskList taskList;
-    private final int[] indicesToEdit;
+    private final String[] editedBlockNames;
 
-    public EditedBlocksResult(TaskList taskList, int... indices) {
+    public EditedBlocksResult(TaskList taskList, String... blockNames) {
         this.taskList = taskList;
-        indicesToEdit = indices;
+        editedBlockNames = blockNames;
     }
 
     @Override
     public void updateInterface(IoInterface ioInterface) {
-        for (int i : indicesToEdit) {
-            ioInterface.updateUserBlock(taskList, i);
+        for (String s : editedBlockNames) {
+            ioInterface.updateUserBlock(taskList, s);
         }
     }
 }

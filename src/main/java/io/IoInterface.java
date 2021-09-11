@@ -14,9 +14,9 @@ public interface IoInterface {
     /**
      * Updates the user's view with the change in {@code taskList}.
      */
-    public void updateUserBlock(TaskList taskList, int index);
+    public void updateUserBlock(TaskList taskList, String blockName);
 
-    public void removeBlock(TaskList taskList, int index);
+    public void removeBlock(TaskList taskList, String blockName);
 
     public void addBlock(TaskList taskList, int index);
 

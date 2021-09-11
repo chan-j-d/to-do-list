@@ -18,7 +18,7 @@ public class CompleteTaskCommand implements Command<TaskList> {
     public CommandResult run(TaskList list) throws CommandException {
         try {
             list.completeTask(day, index);
-            return new EditedBlocksResult(list, list.indexOf(day));
+            return new EditedBlocksResult(list, day);
         } catch (IndexOutOfBoundsException ioobe) {
             throw new CommandException(ioobe.getMessage());
         }

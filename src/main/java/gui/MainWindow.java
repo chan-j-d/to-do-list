@@ -3,7 +3,10 @@ package gui;
 import static task.BlockNames.DAYS;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -28,9 +31,11 @@ public class MainWindow extends GuiComponent<AnchorPane> {
     private ScrollPane scrollPane;
 
     private AddTaskBlockGui lowerAddTaskBlock;
+    private Map<String, GuiComponent<VBox>> nameToBlockMap;
 
     public MainWindow() {
         super(FXML_RESOURCE);
+        nameToBlockMap = new HashMap<>();
     }
 
     /**
@@ -59,17 +64,19 @@ public class MainWindow extends GuiComponent<AnchorPane> {
         });
     }
 
-    public void updateUserBlock(TaskList taskList, int index) {
-        Node nodeToAdd = createTaskBlock(taskList, index);
+    public void updateUserBlock(TaskList taskList, String blockName) {
+        Node nodeToAdd = createTaskBlock(taskList, blockName);
+        int index = taskList.indexOf(blockName);
         Platform.runLater(() -> {
             taskListGui.getChildren().set(index, nodeToAdd);
             taskListGui.requestFocus();
         });
     }
 
-    public void removeBlock(TaskList taskList, int index) {
+    public void removeBlock(TaskList taskList, String blockName) {
         Platform.runLater(() -> {
-            taskListGui.getChildren().remove(index);
+            GuiComponent<VBox> block = nameToBlockMap.remove(blockName);
+            taskListGui.getChildren().remove(block.getRoot());
             lowerAddTaskBlock.setIndex(taskListGui.getChildren().size());
         });
     }
@@ -84,10 +91,24 @@ public class MainWindow extends GuiComponent<AnchorPane> {
 
     private Node createTaskBlock(TaskList taskList, int index) {
         String blockName = taskList.getBlock(index).getBlockName();
+        GuiComponent<VBox> block;
         if (DAYS.contains(blockName)) {
-            return new TaskBlockGui(taskList.getBlock(index)).getRoot();
+            block = new TaskBlockGui(taskList.getBlock(index));
         } else {
-            return new DeletableTaskBlockGui(taskList.getBlock(index), index).getRoot();
+            block = new DeletableTaskBlockGui(taskList.getBlock(index));
         }
+        nameToBlockMap.put(blockName, block);
+        return block.getRoot();
+    }
+
+    private Node createTaskBlock(TaskList taskList, String blockName) {
+        GuiComponent<VBox> block;
+        if (DAYS.contains(blockName)) {
+            block = new TaskBlockGui(taskList.getBlock(blockName));
+        } else {
+            block = new DeletableTaskBlockGui(taskList.getBlock(blockName));
+        }
+        nameToBlockMap.put(blockName, block);
+        return block.getRoot();
     }
 }

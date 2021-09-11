@@ -27,9 +27,7 @@ public class MoveTaskCommand implements Command<TaskList> {
             Task taskToMove = taskList.deleteTask(fromBlockName, index);
             taskList.addTask(toBlockName, taskToMove.getDescription(), taskToMove.isDone());
 
-            int indexOfFromBlock = taskList.indexOf(fromBlockName);
-            int indexOfToBlock = taskList.indexOf(toBlockName);
-            return new EditedBlocksResult(taskList, indexOfFromBlock, indexOfToBlock);
+            return new EditedBlocksResult(taskList, fromBlockName, toBlockName);
         } catch (IndexOutOfBoundsException ioobe) {
             throw new CommandException(ioobe.getMessage());
         }

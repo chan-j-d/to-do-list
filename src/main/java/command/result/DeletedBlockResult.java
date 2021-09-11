@@ -5,16 +5,16 @@ import task.TaskList;
 
 public class DeletedBlockResult implements CommandResult {
 
-    private final int deletedIndex;
+    private final String deletedBlockName;
     private final TaskList taskList;
 
-    public DeletedBlockResult(TaskList taskList, int deletedIndex) {
+    public DeletedBlockResult(TaskList taskList, String deletedBlockName) {
         this.taskList = taskList;
-        this.deletedIndex = deletedIndex;
+        this.deletedBlockName = deletedBlockName;
     }
 
     @Override
     public void updateInterface(IoInterface ioInterface) {
-        ioInterface.removeBlock(taskList, deletedIndex);
+        ioInterface.removeBlock(taskList, deletedBlockName);
     }
 }
