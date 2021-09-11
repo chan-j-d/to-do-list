@@ -9,7 +9,8 @@ public class TaskList {
 
     private static final String MESSAGE_INVALID_BLOCK_NAME = "%s is not a valid block name. "
             + "Avoid repeated block names or using days of the week.";
-    private static final String MESSAGE_INVALID_BLOCK_INDEX = "%d is not a valid index as it is a day-of-week block.";
+    private static final String MESSAGE_INVALID_DELETE_BLOCK = "%s is not a valid block name"
+            + " as it is a day-of-week block.";
 
     private final Map<String, TaskBlock> blocks;
     private final List<String> keyOrder;
@@ -137,7 +138,7 @@ public class TaskList {
      */
     public void deleteBlock(String blockName) {
         if (isDayBlock(blockName)) {
-            throw new IllegalArgumentException(String.format(MESSAGE_INVALID_BLOCK_INDEX, blockName));
+            throw new IllegalArgumentException(String.format(MESSAGE_INVALID_DELETE_BLOCK, blockName));
         }
         blocks.remove(blockName);
         keyOrder.remove(blockName);
@@ -183,7 +184,7 @@ public class TaskList {
     }
 
     private boolean isDayBlock(String blockName) {
-        return BlockNames.isValidBlockName(blockName.toLowerCase());
+        return !BlockNames.isValidBlockName(blockName.toLowerCase());
     }
 
     private boolean isValidBlockName(String blockName) {
