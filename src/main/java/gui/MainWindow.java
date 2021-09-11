@@ -74,10 +74,15 @@ public class MainWindow extends GuiComponent<AnchorPane> {
     }
 
     public void removeBlock(TaskList taskList, String blockName) {
+        final double currentVValue = scrollPane.getVvalue();
         Platform.runLater(() -> {
             GuiComponent<VBox> block = nameToBlockMap.remove(blockName);
             taskListGui.getChildren().remove(block.getRoot());
             lowerAddTaskBlock.setIndex(taskListGui.getChildren().size());
+
+            // Changes scrollPane height to value before update
+            scrollPane.setVvalue(currentVValue);
+            scrollPane.requestFocus();
         });
     }
 
@@ -85,6 +90,7 @@ public class MainWindow extends GuiComponent<AnchorPane> {
         Node nodeToAdd = createTaskBlock(taskList, index);
         Platform.runLater(() -> {
             taskListGui.getChildren().add(index, nodeToAdd);
+            nodeToAdd.requestFocus();
             lowerAddTaskBlock.setIndex(taskListGui.getChildren().size());
         });
     }
