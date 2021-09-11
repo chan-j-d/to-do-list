@@ -61,7 +61,10 @@ public class MainWindow extends GuiComponent<AnchorPane> {
 
     public void updateUserBlock(TaskList taskList, int index) {
         Node nodeToAdd = createTaskBlock(taskList, index);
-        Platform.runLater(() -> taskListGui.getChildren().set(index, nodeToAdd));
+        Platform.runLater(() -> {
+            taskListGui.getChildren().set(index, nodeToAdd);
+            taskListGui.requestFocus();
+        });
     }
 
     public void removeBlock(TaskList taskList, int index) {
