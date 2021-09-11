@@ -5,6 +5,7 @@ import static task.BlockNames.DAYS;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
@@ -20,9 +21,13 @@ public class MainWindow extends GuiComponent<AnchorPane> {
     @FXML
     private AnchorPane mainPane;
     @FXML
+    private VBox wrapperBox;
+    @FXML
     private VBox taskListGui;
     @FXML
     private ScrollPane scrollPane;
+
+    private AddTaskBlockGui lowerAddTaskBlock;
 
     public MainWindow() {
         super(FXML_RESOURCE);
@@ -39,8 +44,9 @@ public class MainWindow extends GuiComponent<AnchorPane> {
             nodeList.add(nodeToAdd);
         }
 
-        nodeList.add(0, new AddTaskBlockGui(ADD_BLOCK_UPPER_INDEX).getRoot());
-        nodeList.add(new AddTaskBlockGui(nodeList.size() - 1).getRoot());
+        wrapperBox.getChildren().add(0, new AddTaskBlockGui(ADD_BLOCK_UPPER_INDEX).getRoot());
+        lowerAddTaskBlock = new AddTaskBlockGui(nodeList.size());
+        wrapperBox.getChildren().add(lowerAddTaskBlock.getRoot());
 
         Platform.runLater(() -> {
             // Replaces current nodes
@@ -55,16 +61,22 @@ public class MainWindow extends GuiComponent<AnchorPane> {
 
     public void updateUserBlock(TaskList taskList, int index) {
         Node nodeToAdd = createTaskBlock(taskList, index);
-        taskListGui.getChildren().set(index, nodeToAdd);
+        Platform.runLater(() -> taskListGui.getChildren().set(index, nodeToAdd));
     }
 
     public void removeBlock(TaskList taskList, int index) {
-        taskListGui.getChildren().remove(index);
+        Platform.runLater(() -> {
+            taskListGui.getChildren().remove(index);
+            lowerAddTaskBlock.setIndex(taskListGui.getChildren().size());
+        });
     }
 
     public void addBlock(TaskList taskList, int index) {
         Node nodeToAdd = createTaskBlock(taskList, index);
-        taskListGui.getChildren().add(nodeToAdd);
+        Platform.runLater(() -> {
+            taskListGui.getChildren().add(index, nodeToAdd);
+            lowerAddTaskBlock.setIndex(taskListGui.getChildren().size());
+        });
     }
 
     private Node createTaskBlock(TaskList taskList, int index) {
