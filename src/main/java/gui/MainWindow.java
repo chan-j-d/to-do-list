@@ -35,7 +35,6 @@ public class MainWindow extends GuiComponent<AnchorPane> {
 
     public MainWindow() {
         super(FXML_RESOURCE);
-        nameToBlockMap = new HashMap<>();
     }
 
     /**
@@ -44,6 +43,7 @@ public class MainWindow extends GuiComponent<AnchorPane> {
     public void updateWindow(TaskList taskList) {
         final double currentVValue = scrollPane.getVvalue();
         List<Node> nodeList = new ArrayList<>();
+        nameToBlockMap = new HashMap<>();
         for (int i = 0; i < taskList.size(); i++) {
             Node nodeToAdd = createTaskBlock(taskList, i);
             nodeList.add(nodeToAdd);
