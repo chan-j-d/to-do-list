@@ -48,11 +48,11 @@ public class MainWindow extends GuiComponent<AnchorPane> {
             nodeList.add(nodeToAdd);
         }
 
-        wrapperBox.getChildren().add(0, new AddTaskBlockGui(ADD_BLOCK_UPPER_INDEX).getRoot());
-        lowerAddTaskBlock = new AddTaskBlockGui(nodeList.size());
-        wrapperBox.getChildren().add(lowerAddTaskBlock.getRoot());
-
         Platform.runLater(() -> {
+            wrapperBox.getChildren().add(0, new AddTaskBlockGui(ADD_BLOCK_UPPER_INDEX).getRoot());
+            lowerAddTaskBlock = new AddTaskBlockGui(nodeList.size());
+            wrapperBox.getChildren().add(lowerAddTaskBlock.getRoot());
+
             // Replaces current nodes
             taskListGui.getChildren().clear();
             taskListGui.getChildren().addAll(nodeList);

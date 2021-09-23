@@ -28,6 +28,7 @@ public class MainApplication extends Application {
     private static final String WINDOW_SETTING_FILENAME = "window-settings";
     private static final String MESSAGE_NO_SETTINGS_FOUND = "No settings were found. Using default.";
     private static final String MESSAGE_SETTINGS_NOT_SAVED = "Settings were not saved properly.";
+    private static final String UNCAUGHT_EXCEPTION_FOUND = "Uncaught exception found!";
     private static final double DEFAULT_HEIGHT = 400.0;
     private static final double DEFAULT_WIDTH = 400.0;
     private static final double MIN_HEIGHT = 400.0;
@@ -83,9 +84,14 @@ public class MainApplication extends Application {
 
     @Override
     public void stop() {
-        saveWindowSettings();
-        mainWindow.runUserCommand(new ExitCommand());
-        toDoListRunner.join();
+        try {
+            saveWindowSettings();
+            mainWindow.runUserCommand(new ExitCommand());
+            toDoListRunner.join();
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, UNCAUGHT_EXCEPTION_FOUND, e);
+            LOGGER.log(Level.SEVERE, UNCAUGHT_EXCEPTION_FOUND, e.getCause());
+        }
     }
 
     /**
