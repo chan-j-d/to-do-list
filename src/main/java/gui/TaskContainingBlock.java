@@ -1,9 +1,8 @@
 package gui;
 
+import java.util.List;
 import javafx.scene.layout.VBox;
 import task.Task;
-
-import java.util.List;
 
 public abstract class TaskContainingBlock extends GuiComponent<VBox> {
 
@@ -14,6 +13,13 @@ public abstract class TaskContainingBlock extends GuiComponent<VBox> {
         super(resource);
     }
 
+    /**
+     * Replaces existing tasks with that in {@code tasks}.
+     */
     public abstract void replaceExistingTasks(List<Task> tasks);
+
+    /**
+     * Requests focus on the text field.
+     */
     public abstract void requestTextFieldFocus();
 }

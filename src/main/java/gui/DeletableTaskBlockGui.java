@@ -4,6 +4,7 @@ import static task.TaskBlock.STARTING_COUNT;
 
 import command.DeleteBlockCommand;
 import command.EditBlockCommand;
+import java.util.List;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -15,8 +16,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import task.Task;
 import task.TaskBlock;
-
-import java.util.List;
 
 public class DeletableTaskBlockGui extends TaskContainingBlock {
 

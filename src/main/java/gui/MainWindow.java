@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -64,6 +63,9 @@ public class MainWindow extends GuiComponent<AnchorPane> {
         });
     }
 
+    /**
+     * Updates the block {@code blockName} with its new tasks.
+     */
     public void updateUserBlock(TaskList taskList, String blockName) {
         List<Task> tasks = taskList.getTasksInBlock(blockName);
         Platform.runLater(() -> {
@@ -71,10 +73,16 @@ public class MainWindow extends GuiComponent<AnchorPane> {
         });
     }
 
+    /**
+     * Requests focus to the text field of the {@code blockName}.
+     */
     public void requestTextFieldFocus(String blockName) {
         Platform.runLater(() -> nameToBlockMap.get(blockName).requestTextFieldFocus());
     }
 
+    /**
+     * Removes {@code blockName} block from the GUI.
+     */
     public void removeBlock(TaskList taskList, String blockName) {
         final double currentVValue = scrollPane.getVvalue();
         Platform.runLater(() -> {
@@ -88,6 +96,9 @@ public class MainWindow extends GuiComponent<AnchorPane> {
         });
     }
 
+    /**
+     * Adds the block at {@code index} in {@code taskList} to the GUI.
+     */
     public void addBlock(TaskList taskList, int index) {
         Node nodeToAdd = createTaskBlock(taskList, index);
         Platform.runLater(() -> {
