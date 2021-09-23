@@ -19,8 +19,6 @@ public class DeleteBlockCommand implements Command<TaskList> {
         try {
             taskList.deleteBlock(blockName);
             return new DeletedBlockResult(taskList, blockName);
-        } catch (IndexOutOfBoundsException ioobe) {
-            throw new CommandException(String.format(MESSAGE_INVALID_DELETE_BLOCK_INDEX, ioobe.getMessage()));
         } catch (IllegalArgumentException iae) {
             throw new CommandException(iae.getMessage());
         }

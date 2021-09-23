@@ -12,7 +12,7 @@ public class EditBlockCommandTest extends CommandTestTemplate {
 
     private static final String BLOCK_NAME_TEST_ONE = "block one";
     private static final String BLOCK_NAME_TEST_TWO = "block two";
-    private static final String EDITED_BLOCK_NAME_TEST_ONE = "edited block two";
+    private static final String EDITED_BLOCK_NAME_TEST_ONE = "edited block one";
     private static final String EDITED_BLOCK_NAME_TEST_TWO = "edited block two";
 
     @BeforeEach

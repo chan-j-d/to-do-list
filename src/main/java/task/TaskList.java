@@ -11,6 +11,7 @@ public class TaskList {
             + "Avoid repeated block names or using days of the week.";
     private static final String MESSAGE_INVALID_DELETE_BLOCK = "%s is not a valid block name"
             + " as it is a day-of-week block.";
+    private static final String MESSAGE_NON_EXISTENT_BLOCK = "%s is not a current block name.";
 
     private final Map<String, TaskBlock> blocks;
     private final List<String> keyOrder;
@@ -139,6 +140,8 @@ public class TaskList {
     public void deleteBlock(String blockName) {
         if (isDayBlock(blockName)) {
             throw new IllegalArgumentException(String.format(MESSAGE_INVALID_DELETE_BLOCK, blockName));
+        } else if (!keyOrder.contains(blockName)) {
+            throw new IllegalArgumentException(String.format(MESSAGE_NON_EXISTENT_BLOCK, blockName));
         }
         blocks.remove(blockName);
         keyOrder.remove(blockName);
