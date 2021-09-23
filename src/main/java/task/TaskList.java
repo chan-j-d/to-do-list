@@ -188,6 +188,11 @@ public class TaskList {
     }
 
     private boolean isValidBlockName(String blockName) {
-        return !keyOrder.contains(blockName);
+        for (String s : keyOrder) {
+            if (s.equalsIgnoreCase(blockName)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
