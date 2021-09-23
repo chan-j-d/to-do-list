@@ -56,4 +56,9 @@ public class GuiIO implements IoInterface {
     public void exit() {
         //TODO
     }
+
+    @Override
+    public void requestTextFieldFocus(String blockName) {
+        mainWindow.requestTextFieldFocus(blockName);
+    }
 }

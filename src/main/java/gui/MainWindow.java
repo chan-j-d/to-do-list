@@ -71,6 +71,10 @@ public class MainWindow extends GuiComponent<AnchorPane> {
         });
     }
 
+    public void requestTextFieldFocus(String blockName) {
+        Platform.runLater(() -> nameToBlockMap.get(blockName).requestTextFieldFocus());
+    }
+
     public void removeBlock(TaskList taskList, String blockName) {
         final double currentVValue = scrollPane.getVvalue();
         Platform.runLater(() -> {

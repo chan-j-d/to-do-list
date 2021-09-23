@@ -35,4 +35,5 @@ public interface IoInterface {
      */
     public void exit();
 
+    public void requestTextFieldFocus(String blockName);
 }

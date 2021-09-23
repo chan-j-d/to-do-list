@@ -56,7 +56,6 @@ public class TaskBlockGui extends TaskContainingBlock {
 
     @Override
     public void replaceExistingTasks(List<Task> tasks) {
-        boolean isAdd = block.getChildren().size() - 3 < tasks.size();
         int index = STARTING_COUNT;
         block.getChildren().clear();
         block.getChildren().addAll(blockHeaderLabel, line);
@@ -65,9 +64,10 @@ public class TaskBlockGui extends TaskContainingBlock {
             block.getChildren().add(newTaskGui.getRoot());
         }
         block.getChildren().add(addTaskGui.getRoot());
+    }
 
-        if (isAdd) {
-            addTaskGui.createTextField();
-        }
+    @Override
+    public void requestTextFieldFocus() {
+        addTaskGui.createTextField();
     }
 }

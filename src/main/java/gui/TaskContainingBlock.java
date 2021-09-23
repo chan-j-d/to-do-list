@@ -15,4 +15,5 @@ public abstract class TaskContainingBlock extends GuiComponent<VBox> {
     }
 
     public abstract void replaceExistingTasks(List<Task> tasks);
+    public abstract void requestTextFieldFocus();
 }
