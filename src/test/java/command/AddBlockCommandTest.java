@@ -45,7 +45,6 @@ public class AddBlockCommandTest extends CommandTestTemplate {
 
         Assertions.assertThrows(CommandException.class, () -> invalidAddBlockCommand1.run(modelTaskList));
         Assertions.assertThrows(CommandException.class, () -> invalidAddBlockCommand2.run(modelTaskList));
-        System.out.println(modelTaskList);
     }
 
 }
