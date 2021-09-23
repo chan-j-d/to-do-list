@@ -8,7 +8,9 @@ import javafx.scene.layout.VBox;
 import task.Task;
 import task.TaskBlock;
 
-public class TaskBlockGui extends GuiComponent<VBox> {
+import java.util.List;
+
+public class TaskBlockGui extends TaskContainingBlock {
 
     private static final String FXML_RESOURCE = "TaskBlockGui.fxml";
 
@@ -19,6 +21,7 @@ public class TaskBlockGui extends GuiComponent<VBox> {
 
     private String blockHeader;
     private final TaskBlock taskBlock;
+    private final AddTaskGui addTaskGui;
 
     /**
      * Creates a singular task block gui from the given {@code taskBlock}.
@@ -27,6 +30,7 @@ public class TaskBlockGui extends GuiComponent<VBox> {
         super(FXML_RESOURCE);
         blockHeader = taskBlock.getBlockName();
         this.taskBlock = taskBlock;
+        this.addTaskGui = new AddTaskGui(blockHeader);
         init();
     }
 
@@ -40,11 +44,22 @@ public class TaskBlockGui extends GuiComponent<VBox> {
         for (Task task : taskBlock.getTasks()) {
             block.getChildren().add(new TaskGui(blockHeader, index++, task).getRoot());
         }
-        block.getChildren().add(new AddTaskGui(blockHeader).getRoot());
+        block.getChildren().add(addTaskGui.getRoot());
     }
 
     private String capitalizeString(String string) {
         return string.substring(0, 1).toUpperCase() + string.substring(1);
     }
 
+    @Override
+    public void replaceExistingTasks(List<Task> tasks) {
+        int index = STARTING_COUNT;
+        block.getChildren().clear();
+        for (Task task : taskBlock.getTasks()) {
+            TaskGui newTaskGui = new TaskGui(blockHeader, index++, task);
+            newTaskGui.removePushButton();
+            block.getChildren().add(newTaskGui.getRoot());
+        }
+        block.getChildren().add(addTaskGui.getRoot());
+    }
 }

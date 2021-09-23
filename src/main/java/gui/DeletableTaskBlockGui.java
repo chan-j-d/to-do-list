@@ -15,7 +15,9 @@ import javafx.scene.layout.VBox;
 import task.Task;
 import task.TaskBlock;
 
-public class DeletableTaskBlockGui extends GuiComponent<VBox> {
+import java.util.List;
+
+public class DeletableTaskBlockGui extends TaskContainingBlock {
 
     private static final String FXML_RESOURCE = "DeletableTaskBlockGui.fxml";
     private static boolean HAS_EXISTING_DISPLAYED_TEXTFIELD = false;
@@ -32,6 +34,7 @@ public class DeletableTaskBlockGui extends GuiComponent<VBox> {
 
     private final TaskBlock taskBlock;
     private final String blockHeader;
+    private final AddTaskGui addTaskGui;
 
     /**
      * Creates a new deletable {@code TaskBlockGui} with the given header.
@@ -41,6 +44,7 @@ public class DeletableTaskBlockGui extends GuiComponent<VBox> {
         super(FXML_RESOURCE);
         this.taskBlock = taskBlock;
         this.blockHeader = taskBlock.getBlockName();
+        this.addTaskGui = new AddTaskGui(blockHeader);
         init();
     }
 
@@ -56,7 +60,7 @@ public class DeletableTaskBlockGui extends GuiComponent<VBox> {
             newTaskGui.removePushButton();
             block.getChildren().add(newTaskGui.getRoot());
         }
-        block.getChildren().add(new AddTaskGui(blockHeader).getRoot());
+        block.getChildren().add(addTaskGui.getRoot());
     }
 
     @FXML
@@ -118,5 +122,17 @@ public class DeletableTaskBlockGui extends GuiComponent<VBox> {
     private void registerDelete() {
         DeleteBlockCommand deleteBlockCommand = new DeleteBlockCommand(blockHeader);
         runUserCommand(deleteBlockCommand);
+    }
+
+    @Override
+    public void replaceExistingTasks(List<Task> tasks) {
+        int index = STARTING_COUNT;
+        block.getChildren().clear();
+        for (Task task : taskBlock.getTasks()) {
+            TaskGui newTaskGui = new TaskGui(blockHeader, index++, task);
+            newTaskGui.removePushButton();
+            block.getChildren().add(newTaskGui.getRoot());
+        }
+        block.getChildren().add(addTaskGui.getRoot());
     }
 }
