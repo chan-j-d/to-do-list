@@ -35,5 +35,5 @@
                         onMousePressed="#registerDelete" />
         </right>
     </BorderPane>
-    <Region styleClass="horizontal-line" />
+    <Region fx:id="line" styleClass="horizontal-line" />
 </VBox>

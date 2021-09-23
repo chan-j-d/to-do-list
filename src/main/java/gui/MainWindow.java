@@ -68,7 +68,6 @@ public class MainWindow extends GuiComponent<AnchorPane> {
         List<Task> tasks = taskList.getTasksInBlock(blockName);
         Platform.runLater(() -> {
             nameToBlockMap.get(blockName).replaceExistingTasks(tasks);
-            taskListGui.requestFocus();
         });
     }
 

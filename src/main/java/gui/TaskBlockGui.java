@@ -4,6 +4,7 @@ import static task.TaskBlock.STARTING_COUNT;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import task.Task;
 import task.TaskBlock;
@@ -18,6 +19,8 @@ public class TaskBlockGui extends TaskContainingBlock {
     private VBox block;
     @FXML
     private Label blockHeaderLabel;
+    @FXML
+    private Region line;
 
     private String blockHeader;
     private final TaskBlock taskBlock;
@@ -53,13 +56,18 @@ public class TaskBlockGui extends TaskContainingBlock {
 
     @Override
     public void replaceExistingTasks(List<Task> tasks) {
+        boolean isAdd = block.getChildren().size() - 3 < tasks.size();
         int index = STARTING_COUNT;
         block.getChildren().clear();
+        block.getChildren().addAll(blockHeaderLabel, line);
         for (Task task : taskBlock.getTasks()) {
             TaskGui newTaskGui = new TaskGui(blockHeader, index++, task);
-            newTaskGui.removePushButton();
             block.getChildren().add(newTaskGui.getRoot());
         }
         block.getChildren().add(addTaskGui.getRoot());
+
+        if (isAdd) {
+            addTaskGui.createTextField();
+        }
     }
 }

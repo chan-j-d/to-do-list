@@ -26,7 +26,7 @@ public class AddTaskGui extends GuiComponent<HBox> {
     }
 
     @FXML
-    private void createTextField() {
+    protected void createTextField() {
         if (HAS_EXISTING_DISPLAYED_TEXTFIELD) {
             EXISTING_DISPLAYED_TEXTFIELD.setVisible(false);
         }

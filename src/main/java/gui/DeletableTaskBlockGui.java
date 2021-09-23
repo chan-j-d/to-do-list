@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import task.Task;
 import task.TaskBlock;
@@ -31,6 +32,8 @@ public class DeletableTaskBlockGui extends TaskContainingBlock {
     private Button deleteButton;
     @FXML
     private TextField editField;
+    @FXML
+    private Region line;
 
     private final TaskBlock taskBlock;
     private final String blockHeader;
@@ -126,13 +129,19 @@ public class DeletableTaskBlockGui extends TaskContainingBlock {
 
     @Override
     public void replaceExistingTasks(List<Task> tasks) {
+        boolean isAdd = block.getChildren().size() - 3 < tasks.size();
         int index = STARTING_COUNT;
         block.getChildren().clear();
+        block.getChildren().addAll(label, line);
         for (Task task : taskBlock.getTasks()) {
             TaskGui newTaskGui = new TaskGui(blockHeader, index++, task);
             newTaskGui.removePushButton();
             block.getChildren().add(newTaskGui.getRoot());
         }
         block.getChildren().add(addTaskGui.getRoot());
+
+        if (isAdd) {
+            addTaskGui.createTextField();
+        }
     }
 }
