@@ -24,28 +24,28 @@ public class DeleteBlockCommandTest extends CommandTestTemplate {
         TaskList expectedTaskList = buildTaskListTemplate();
         expectedTaskList.addBlock(0, BLOCK_NAME_TEST_ONE);
 
-        DeleteBlockCommand deleteBlockCommand1 = new DeleteBlockCommand(modelTaskList.size() - 1);
+        DeleteBlockCommand deleteBlockCommand1 = new DeleteBlockCommand(BLOCK_NAME_TEST_TWO);
         deleteBlockCommand1.run(modelTaskList);
         Assertions.assertEquals(expectedTaskList, modelTaskList);
 
-        expectedTaskList.deleteBlock(0);
-        DeleteBlockCommand deleteBlockCommand2 = new DeleteBlockCommand(0);
+        expectedTaskList.deleteBlock(BLOCK_NAME_TEST_ONE);
+        DeleteBlockCommand deleteBlockCommand2 = new DeleteBlockCommand(BLOCK_NAME_TEST_ONE);
         deleteBlockCommand2.run(modelTaskList);
         Assertions.assertEquals(expectedTaskList, modelTaskList);
     }
 
     @Test
-    public void run_indexOutOfBounds_commandExceptionThrown() {
-        DeleteBlockCommand deleteBlockCommand1 = new DeleteBlockCommand(modelTaskList.size());
-        DeleteBlockCommand deleteBlockCommand2 = new DeleteBlockCommand(-1);
+    public void run_missingBlockNameToDelete_commandExceptionThrown() {
+        DeleteBlockCommand deleteBlockCommand1 = new DeleteBlockCommand("12345");
+        DeleteBlockCommand deleteBlockCommand2 = new DeleteBlockCommand("fRi"); // Deletes Frida
         Assertions.assertThrows(CommandException.class, () -> deleteBlockCommand1.run(modelTaskList));
         Assertions.assertThrows(CommandException.class, () -> deleteBlockCommand2.run(modelTaskList));
     }
 
     @Test
     public void run_deleteDayOfWeekBlock_commandExceptionThrown() {
-        DeleteBlockCommand deleteBlockCommand1 = new DeleteBlockCommand(2); // Deletes Monday
-        DeleteBlockCommand deleteBlockCommand2 = new DeleteBlockCommand(6); // Deletes Friday
+        DeleteBlockCommand deleteBlockCommand1 = new DeleteBlockCommand("monDaY"); // Deletes Monday
+        DeleteBlockCommand deleteBlockCommand2 = new DeleteBlockCommand("fRiDaY"); // Deletes Friday
         Assertions.assertThrows(CommandException.class, () -> deleteBlockCommand1.run(modelTaskList));
         Assertions.assertThrows(CommandException.class, () -> deleteBlockCommand2.run(modelTaskList));
     }

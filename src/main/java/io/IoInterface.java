@@ -14,7 +14,11 @@ public interface IoInterface {
     /**
      * Updates the user's view with the change in {@code taskList}.
      */
-    public void updateUser(TaskList taskList);
+    public void updateUserBlock(TaskList taskList, String blockName);
+
+    public void removeBlock(TaskList taskList, String blockName);
+
+    public void addBlock(TaskList taskList, int index);
 
     /**
      * Displays view of {@code taskList} on startup.
@@ -31,4 +35,5 @@ public interface IoInterface {
      */
     public void exit();
 
+    public void requestTextFieldFocus(String blockName);
 }

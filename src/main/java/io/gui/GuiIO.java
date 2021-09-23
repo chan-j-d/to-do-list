@@ -27,8 +27,18 @@ public class GuiIO implements IoInterface {
     }
 
     @Override
-    public void updateUser(TaskList taskList) {
-        mainWindow.updateWindow(taskList);
+    public void updateUserBlock(TaskList taskList, String blockName) {
+        mainWindow.updateUserBlock(taskList, blockName);
+    }
+
+    @Override
+    public void removeBlock(TaskList taskList, String blockName) {
+        mainWindow.removeBlock(taskList, blockName);
+    }
+
+    @Override
+    public void addBlock(TaskList taskList, int index) {
+        mainWindow.addBlock(taskList, index);
     }
 
     @Override
@@ -45,5 +55,10 @@ public class GuiIO implements IoInterface {
     @Override
     public void exit() {
         //TODO
+    }
+
+    @Override
+    public void requestTextFieldFocus(String blockName) {
+        mainWindow.requestTextFieldFocus(blockName);
     }
 }

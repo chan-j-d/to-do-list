@@ -3,6 +3,8 @@ package core;
 import command.Command;
 import command.CommandException;
 import command.ExitCommand;
+import command.result.CommandResult;
+import command.result.EmptyCommandResult;
 import io.InputException;
 import io.IoInterface;
 import java.io.IOException;
@@ -71,9 +73,10 @@ public class ToDoList {
     /**
      * Runs the given {@code command} on its {@code taskList}.
      */
-    public void runCommand(Command<TaskList> command) {
+    public CommandResult runCommand(Command<TaskList> command) {
+        CommandResult commandResult = new EmptyCommandResult();
         try {
-            command.run(taskList);
+            commandResult = command.run(taskList);
             storage.save(taskList, saveDirectory);
         } catch (IOException ie) {
             logger.log(Level.WARNING, ERROR_SAVING, ie);
@@ -85,6 +88,7 @@ public class ToDoList {
             logger.log(Level.SEVERE, ERROR_UNEXPECTED_EXCEPTION, e);
             ioInterface.displayErrorMessage(ERROR_UNEXPECTED_EXCEPTION);
         }
+        return commandResult;
     }
 
     /**
@@ -105,8 +109,8 @@ public class ToDoList {
             }
 
             for (Command<TaskList> command : commands) {
-                runCommand(command);
-                ioInterface.updateUser(taskList);
+                CommandResult commandResult = runCommand(command);
+                commandResult.updateInterface(ioInterface);
                 if (isExitCommand(command)) {
                     isExitCommand = true;
                 }

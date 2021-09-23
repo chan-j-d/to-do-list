@@ -1,7 +1,6 @@
 package gui;
 
 import command.AddBlockCommand;
-import command.AddTaskCommand;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -22,10 +21,14 @@ public class AddTaskBlockGui extends GuiComponent<HBox> {
     @FXML
     private TextField textField;
 
-    private final int index;
+    private int index;
 
     public AddTaskBlockGui(int index) {
         super(FXML_RESOURCE);
+        this.index = index;
+    }
+
+    public void setIndex(int index) {
         this.index = index;
     }
 

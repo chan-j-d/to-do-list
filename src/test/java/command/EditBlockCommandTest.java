@@ -12,7 +12,7 @@ public class EditBlockCommandTest extends CommandTestTemplate {
 
     private static final String BLOCK_NAME_TEST_ONE = "block one";
     private static final String BLOCK_NAME_TEST_TWO = "block two";
-    private static final String EDITED_BLOCK_NAME_TEST_ONE = "edited block two";
+    private static final String EDITED_BLOCK_NAME_TEST_ONE = "edited block one";
     private static final String EDITED_BLOCK_NAME_TEST_TWO = "edited block two";
 
     @BeforeEach
@@ -27,7 +27,7 @@ public class EditBlockCommandTest extends CommandTestTemplate {
         expectedTaskList.addBlock(0, BLOCK_NAME_TEST_ONE);
         expectedTaskList.addBlock(EDITED_BLOCK_NAME_TEST_TWO);
 
-        EditBlockCommand editBlockCommand1 = new EditBlockCommand(modelTaskList.size() - 1,
+        EditBlockCommand editBlockCommand1 = new EditBlockCommand(BLOCK_NAME_TEST_TWO,
                 EDITED_BLOCK_NAME_TEST_TWO);
         editBlockCommand1.run(modelTaskList);
         Assertions.assertEquals(expectedTaskList, modelTaskList);
@@ -35,15 +35,15 @@ public class EditBlockCommandTest extends CommandTestTemplate {
         expectedTaskList = buildTaskListTemplate();
         expectedTaskList.addBlock(EDITED_BLOCK_NAME_TEST_TWO);
         expectedTaskList.addBlock(0, EDITED_BLOCK_NAME_TEST_ONE);
-        EditBlockCommand editBlockCommand2 = new EditBlockCommand(0, EDITED_BLOCK_NAME_TEST_ONE);
+        EditBlockCommand editBlockCommand2 = new EditBlockCommand(BLOCK_NAME_TEST_ONE, EDITED_BLOCK_NAME_TEST_ONE);
         editBlockCommand2.run(modelTaskList);
         Assertions.assertEquals(expectedTaskList, modelTaskList);
     }
 
     @Test
-    public void run_indexOutOfBounds_commandExceptionThrown() {
-        EditBlockCommand editBlockCommand1 = new EditBlockCommand(modelTaskList.size(), EDITED_BLOCK_NAME_TEST_ONE);
-        EditBlockCommand editBlockCommand2 = new EditBlockCommand(-1, EDITED_BLOCK_NAME_TEST_TWO);
+    public void run_invalidBlockName_commandExceptionThrown() {
+        EditBlockCommand editBlockCommand1 = new EditBlockCommand("1234", EDITED_BLOCK_NAME_TEST_ONE);
+        EditBlockCommand editBlockCommand2 = new EditBlockCommand("frI", EDITED_BLOCK_NAME_TEST_TWO);
         Assertions.assertThrows(CommandException.class, () -> editBlockCommand1.run(modelTaskList));
         Assertions.assertThrows(CommandException.class, () -> editBlockCommand2.run(modelTaskList));
     }
@@ -51,9 +51,9 @@ public class EditBlockCommandTest extends CommandTestTemplate {
     @Test
     public void run_editDayOfWeekBlock_commandExceptionThrown() {
         // Edits monday
-        EditBlockCommand editBlockCommand1 = new EditBlockCommand(2, EDITED_BLOCK_NAME_TEST_ONE);
+        EditBlockCommand editBlockCommand1 = new EditBlockCommand("mOndaY", EDITED_BLOCK_NAME_TEST_ONE);
         // Edits friday
-        EditBlockCommand editBlockCommand2 = new EditBlockCommand(6, EDITED_BLOCK_NAME_TEST_TWO);
+        EditBlockCommand editBlockCommand2 = new EditBlockCommand("fRIDAY", EDITED_BLOCK_NAME_TEST_TWO);
         Assertions.assertThrows(CommandException.class, () -> editBlockCommand1.run(modelTaskList));
         Assertions.assertThrows(CommandException.class, () -> editBlockCommand2.run(modelTaskList));
     }

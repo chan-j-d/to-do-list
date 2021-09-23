@@ -1,5 +1,7 @@
 package command;
 
+import command.result.CommandResult;
+import command.result.EditedBlocksResult;
 import task.Task;
 import task.TaskList;
 
@@ -20,10 +22,12 @@ public class MoveTaskCommand implements Command<TaskList> {
     }
 
     @Override
-    public void run(TaskList taskList) throws CommandException {
+    public CommandResult run(TaskList taskList) throws CommandException {
         try {
             Task taskToMove = taskList.deleteTask(fromBlockName, index);
             taskList.addTask(toBlockName, taskToMove.getDescription(), taskToMove.isDone());
+
+            return new EditedBlocksResult(taskList, fromBlockName, toBlockName);
         } catch (IndexOutOfBoundsException ioobe) {
             throw new CommandException(ioobe.getMessage());
         }

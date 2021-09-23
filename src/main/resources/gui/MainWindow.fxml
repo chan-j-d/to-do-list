@@ -14,7 +14,9 @@
     <ScrollPane fx:id="scrollPane" fitToWidth="true"
             AnchorPane.topAnchor="$BORDER_SPACING" AnchorPane.bottomAnchor="$BORDER_SPACING"
             AnchorPane.leftAnchor="$BORDER_SPACING" AnchorPane.rightAnchor="$BORDER_SPACING">
-        <VBox fx:id="taskListGui" spacing="-2.0" />
+        <VBox fx:id="wrapperBox" spacing="-2.0">
+                <VBox fx:id="taskListGui" spacing="-2.0" />
+        </VBox>
     </ScrollPane>
 
 </AnchorPane>

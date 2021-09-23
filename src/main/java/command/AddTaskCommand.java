@@ -1,5 +1,8 @@
 package command;
 
+import command.result.AddedTaskResult;
+import command.result.CommandResult;
+import command.result.EditedBlocksResult;
 import task.TaskList;
 
 public class AddTaskCommand implements Command<TaskList> {
@@ -12,8 +15,9 @@ public class AddTaskCommand implements Command<TaskList> {
         this.taskDescription = taskDescription;
     }
 
-    public void run(TaskList list) {
+    public CommandResult run(TaskList list) {
         list.addTask(day, taskDescription);
+        return new AddedTaskResult(list, day);
     }
 
     @Override

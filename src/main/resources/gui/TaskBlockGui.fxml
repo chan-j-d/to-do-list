@@ -9,5 +9,5 @@
             stylesheets="@TaskBlock.css"
             styleClass="box-layout">
     <Label fx:id="blockHeaderLabel" styleClass="label-header" />
-    <Region styleClass="horizontal-line" />
+    <Region fx:id="line" styleClass="horizontal-line" />
 </VBox>
