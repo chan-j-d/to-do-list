@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import task.Task;
 import task.TaskList;
 
 public class MainWindow extends GuiComponent<AnchorPane> {
@@ -31,7 +31,7 @@ public class MainWindow extends GuiComponent<AnchorPane> {
     private ScrollPane scrollPane;
 
     private AddTaskBlockGui lowerAddTaskBlock;
-    private Map<String, GuiComponent<VBox>> nameToBlockMap;
+    private Map<String, TaskContainingBlock> nameToBlockMap;
 
     public MainWindow() {
         super(FXML_RESOURCE);
@@ -65,10 +65,9 @@ public class MainWindow extends GuiComponent<AnchorPane> {
     }
 
     public void updateUserBlock(TaskList taskList, String blockName) {
-        Node nodeToAdd = createTaskBlock(taskList, blockName);
-        int index = taskList.indexOf(blockName);
+        List<Task> tasks = taskList.getTasksInBlock(blockName);
         Platform.runLater(() -> {
-            taskListGui.getChildren().set(index, nodeToAdd);
+            nameToBlockMap.get(blockName).replaceExistingTasks(tasks);
             taskListGui.requestFocus();
         });
     }
@@ -97,7 +96,7 @@ public class MainWindow extends GuiComponent<AnchorPane> {
 
     private Node createTaskBlock(TaskList taskList, int index) {
         String blockName = taskList.getBlock(index).getBlockName();
-        GuiComponent<VBox> block;
+        TaskContainingBlock block;
         if (DAYS.contains(blockName)) {
             block = new TaskBlockGui(taskList.getBlock(index));
         } else {
@@ -108,7 +107,7 @@ public class MainWindow extends GuiComponent<AnchorPane> {
     }
 
     private Node createTaskBlock(TaskList taskList, String blockName) {
-        GuiComponent<VBox> block;
+        TaskContainingBlock block;
         if (DAYS.contains(blockName)) {
             block = new TaskBlockGui(taskList.getBlock(blockName));
         } else {
